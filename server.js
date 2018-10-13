@@ -185,11 +185,11 @@ app.post("/api/users/superadmin-delete/:id", function(req, res)
 			console.log(superadmin.rows)
 			if(superadmin.rows.length < 1)
 			{
-				res.status(201).json("SuperAdmin not found")
+				res.status(201).json("SuperAdmin deleted")
 			}
 			else
 			{
-				res.status(201).json("Success")
+				res.status(201).json("Didn't delete superadmin")
 			}
 		}
 	})

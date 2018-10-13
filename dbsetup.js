@@ -18,3 +18,7 @@ client.query('CREATE TABLE superadmin (name VARCHAR(20), uid SERIAL PRIMARY KEY,
 .then(res => console.log("created table!"))
 .catch(e => console.log(e.stack))
 
+client.query('CREATE TABLE admin (name VARCHAR(20), uid SERIAL PRIMARY KEY, email VARCHAR(80), password VARCHAR(100), university VARCHAR(60))')
+.then(res => console.log("created table!"))
+.catch(e => console.log(e.stack))
+

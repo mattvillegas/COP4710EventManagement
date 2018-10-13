@@ -59,6 +59,15 @@ app.post("/api/users/student-login", function(req, res) {
    }) 
 });
 
+/*
+*   Endpoint for user login
+*   
+*   Expected JSON: 
+*   { "name" : "username", "email" : "useremail", "password" : "userpassword", "university" : "useruniversity"}
+*
+*   Return string "Success" if student is created, "couldn't create user" otherwise
+*/
+
 app.post("/api/users/student-create", function(req,res)
 {
 	req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
@@ -80,6 +89,15 @@ app.post("/api/users/student-create", function(req,res)
 		}
 	})
 })
+
+/*
+*   Endpoint for creating a superadmin
+*   
+*   Expected JSON: 
+*   {"name" : "username", "email" : "useremail", "password" : "userpassword", "university" : "useruniversity", "accesskey" : "accesskey"}
+*
+*   Return string "Success" if superadmin is created, "couldn't approve admin" otherwise
+*/
 
 app.post("/api/users/superadmin-create", function(req,res)
 {
@@ -119,6 +137,15 @@ app.post("/api/users/superadmin-create", function(req,res)
     })
 })
 
+/*
+*   Endpoint for superadmin login
+*   
+*   Expected JSON: 
+*   {"email" : "useremail", "password" : "userpassword"}
+*
+*   Return string "Success" if superadmin is found, "SuperAdmin not found" otherwise
+*/
+
 app.post("/api/users/superadmin-login", function(req, res) {
     req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
     var queryString = 'SELECT * FROM superadmin S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';
@@ -141,4 +168,30 @@ app.post("/api/users/superadmin-login", function(req, res) {
         }
     }
    }) 
+});
+
+app.post("/api/users/superadmin-delete", function(req, res)
+{
+	var queryString = 'DELETE FROM superadmin WHERE superadmin.email = \'' + req.body.email + '\'';
+	
+	client.query(queryString, (err, superadmin) =>
+	{
+		if(err)
+		{
+			handleError(res, "Didn't delete superadmin")
+		}
+		else
+		{
+			console.log(superadmin.rows)
+			if(superadmin.rows.length < 1)
+			{
+
+				res.status(201).json("SuperAdmin not found")
+			}
+			else
+			{
+				res.status(201).json("Success")
+			}
+		}
+	})
 });

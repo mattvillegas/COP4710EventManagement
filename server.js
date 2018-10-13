@@ -63,8 +63,9 @@ app.post("/api/users/student-create", function(req,res)
 {
 	req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
 	
+	
 	var queryString = 'INSERT INTO student(name, email, password, university) VALUES($1, $2, $3, $4)'
-	var queryValues = [req.body.name, req.body.email, req.body.password, req.body.university]
+	var queryValues = [JSON.stringify(req.body.name), JSON.stringify(req.body.email), JSON.stringify(req.body.password), JSON.stringify(req.body.university)]
 	
 	client.query(queryString, queryValues, (err, res) =>
 	{

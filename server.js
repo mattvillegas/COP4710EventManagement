@@ -80,3 +80,42 @@ app.post("/api/users/student-create", function(req,res)
 		}
 	})
 })
+
+app.post("/api/users/superadmin-create", function(req,res)
+{
+	req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
+	
+	var checkAdmin = 'SELECT * FROM accesskeys WHERE accesskeys.accesskey = req.body.accesskey AND accesskeys.university = req.body.university'
+	var queryString = 'INSERT INTO student(name, email, password, university) VALUES($1, $2, $3, $4)'
+	var queryValues = [req.body.name, req.body.email, req.body.password, req.body.university]
+	
+	client.query(checkAdmin, (err, admin)) =>
+	{
+		if(err)
+		{
+			handleError(res, "couldn't approve admin")
+		}
+		
+		if(admin.rows.length < 1)
+		{
+			res.status(201).json("Admin not found")
+		}
+		else
+		{
+			client.query(queryString, queryValues, (err, student) =>
+			{
+				if(err)
+				{
+					handleError(res, "couldn't create user")
+				}
+				else
+				{
+					res.status(201).json("Success")
+					console.log(student)
+				}
+			})
+			
+			res.status(201).json("Success")
+		}
+	}
+})

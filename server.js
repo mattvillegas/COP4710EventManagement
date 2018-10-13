@@ -170,9 +170,9 @@ app.post("/api/users/superadmin-login", function(req, res) {
    }) 
 });
 
-app.post("/api/users/superadmin-delete", function(req, res)
+app.post("/api/users/superadmin-delete/:id", function(req, res)
 {
-	var queryString = 'DELETE FROM superadmin WHERE superadmin.email = \'' + req.body.email + '\'';
+	var queryString = 'DELETE FROM superadmin WHERE superadmin.uid = \'' + req.params.id + '\'';
 	
 	client.query(queryString, (err, superadmin) =>
 	{

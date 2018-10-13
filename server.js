@@ -25,6 +25,16 @@ var server = app.listen(8080, function () {
     console.log("App now running on port", port);
 });
 
+
+/*
+*   Endpoint for verifying user credentials
+*   
+*   Expected JSON: 
+*   {"email" : "useremail", "password" : "userpassword"}
+*
+*   Return string "Success" if user is found, "Student not found" otherwise
+*/
+
 app.post("/api/users/student-login", function(req, res) {
     req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
     var queryString = 'SELECT * FROM student S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';

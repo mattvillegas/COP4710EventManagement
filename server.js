@@ -26,22 +26,25 @@ var server = app.listen(8080, function () {
 });
 
 app.post("/api/users/student-login", function(req, res) {
-	req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
-	client.query('SELECT student FROM Student S WHERE student.email =', req.email, 'AND student.password =', req.password, (err, res) => {
-		if(err) {
-			handleError(res, "Database error");
-		}
-		else {
-			if(!user) {
-				res.status(201).json("Failed");
-			}
-			else {
-				res.json({
-					student:{
-						
-					}
-				});
-			}
-		}
-	})
+    req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
+    var queryString = 'SELECT * FROM student S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';
+   client.query(queryString, (err, student) => {
+    if(err)
+    {
+        handleError(res, "couldn't fetch from database");
+    }
+    else 
+    {
+        console.log(student.rows)
+        if(student.rows.length < 1)
+        {
+
+            res.status(201).json("Student not found")
+        }
+        else
+        {
+            res.status(201).json("Success")
+        }
+    }
+   }) 
 });

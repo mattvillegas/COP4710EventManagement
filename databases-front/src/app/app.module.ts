@@ -6,9 +6,11 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login-comp/login-comp.component';
+import { RegisterComponent } from './register-comp/register-comp.component';
 
 const appRoutes: Routes = [
-  { path: 'login-comp', component: LoginComponent }
+  { path: 'login-comp', component: LoginComponent },
+  { path: 'register-comp', component: RegisterComponent }
 ];
 
 @NgModule({
@@ -23,7 +25,8 @@ const appRoutes: Routes = [
   ],
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   bootstrap: [AppComponent]
 })

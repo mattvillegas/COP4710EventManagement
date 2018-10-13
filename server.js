@@ -118,3 +118,27 @@ app.post("/api/users/superadmin-create", function(req,res)
 		}
     })
 })
+
+app.post("/api/users/superadmin-login", function(req, res) {
+    req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
+    var queryString = 'SELECT * FROM superadmin S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';
+   client.query(queryString, (err, superadmin) => {
+    if(err)
+    {
+        handleError(res, "couldn't fetch from database");
+    }
+    else 
+    {
+        console.log(superadmin.rows)
+        if(superadmin.rows.length < 1)
+        {
+
+            res.status(201).json("SuperAdmin not found")
+        }
+        else
+        {
+            res.status(201).json("Success")
+        }
+    }
+   }) 
+});

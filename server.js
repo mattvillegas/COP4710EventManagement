@@ -65,9 +65,9 @@ app.post("/api/users/student-create", function(req,res)
 	
 	
 	var queryString = 'INSERT INTO student(name, email, password, university) VALUES($1, $2, $3, $4)'
-	var queryValues = [JSON.stringify(req.body.name), JSON.stringify(req.body.email), JSON.stringify(req.body.password), JSON.stringify(req.body.university)]
+	var queryValues = [req.body.name, req.body.email, req.body.password, req.body.university]
 	
-	client.query(queryString, queryValues, (err, res) =>
+	client.query(queryString, queryValues, (err, student) =>
 	{
 		if(err)
 		{
@@ -75,7 +75,8 @@ app.post("/api/users/student-create", function(req,res)
 		}
 		else
 		{
-			res.status(201).json("Success")
+            res.status(201).json("Success")
+            console.log(student)
 		}
 	})
 })

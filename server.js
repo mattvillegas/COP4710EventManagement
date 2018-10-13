@@ -173,7 +173,7 @@ app.post("/api/users/superadmin-login", function(req, res) {
 app.post("/api/users/superadmin-delete/:id", function(req, res)
 {
 	var queryString = 'DELETE FROM superadmin WHERE superadmin.uid = \'' + req.params.id + '\'';
-	
+	console.log(req.params.id)
 	client.query(queryString, (err, superadmin) =>
 	{
 		if(err)
@@ -198,7 +198,7 @@ app.post("/api/users/superadmin-delete/:id", function(req, res)
 app.post("/api/users/student-delete/:id", function(req, res)
 {
 	var queryString = 'DELETE FROM student WHERE student.uid = \'' + req.params.id + '\'';
-	
+	console.log(req.params.id)
 	client.query(queryString, (err, student) =>
 	{
 		if(err)

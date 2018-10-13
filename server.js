@@ -164,7 +164,7 @@ app.post("/api/users/superadmin-login", function(req, res) {
         }
         else
         {
-            res.status(201).json("Success")
+            res.status(201).json(superadmin.row[0].uid)
         }
     }
    }) 

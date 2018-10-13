@@ -185,8 +185,32 @@ app.post("/api/users/superadmin-delete/:id", function(req, res)
 			console.log(superadmin.rows)
 			if(superadmin.rows.length < 1)
 			{
-
 				res.status(201).json("SuperAdmin not found")
+			}
+			else
+			{
+				res.status(201).json("Success")
+			}
+		}
+	})
+});
+
+app.post("/api/users/student-delete/:id", function(req, res)
+{
+	var queryString = 'DELETE FROM student WHERE student.uid = \'' + req.params.id + '\'';
+	
+	client.query(queryString, (err, student) =>
+	{
+		if(err)
+		{
+			handleError(res, "Didn't delete student")
+		}
+		else
+		{
+			console.log(student.rows)
+			if(student.rows.length < 1)
+			{
+				res.status(201).json("student not found")
 			}
 			else
 			{

@@ -58,3 +58,23 @@ app.post("/api/users/student-login", function(req, res) {
     }
    }) 
 });
+
+app.post("/api/users/student-create", function(req,res)
+{
+	req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
+	
+	var queryString = 'INSERT INTO student(name, email, password, university) VALUES($1, $2, $3, $4)'
+	var queryValues = [req.body.name, req.body.email, req.body.password, req.body.university]
+	
+	client.query(queryString, queryValues, (err, res) =>
+	{
+		if(err)
+		{
+			handleError(res, "couldn't create user")
+		}
+		else
+		{
+			res.status(201).json("Success")
+		}
+	})
+})

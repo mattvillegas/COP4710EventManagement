@@ -22,3 +22,7 @@ client.query('CREATE TABLE admin (name VARCHAR(20), uid SERIAL PRIMARY KEY, emai
 .then(res => console.log("created table!"))
 .catch(e => console.log(e.stack))
 
+client.query('CREATE TABLE event (time timestamp, location VARCHAR(300), description VARCHAR(1000), PRIMARY KEY (time, location))')
+.then(res => console.log("created table!"))
+.catch(e => console.log(e.stack))
+

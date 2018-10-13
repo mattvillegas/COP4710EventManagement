@@ -53,7 +53,7 @@ app.post("/api/users/student-login", function(req, res) {
         }
         else
         {
-            res.status(201).json("Success")
+            res.status(201).json(student.rows[0].uid)
         }
     }
    }) 

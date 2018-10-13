@@ -85,8 +85,8 @@ app.post("/api/users/superadmin-create", function(req,res)
 {
 	req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
 	
-	var checkAdmin = 'SELECT * FROM accesskeys WHERE accesskeys.accesskey = req.body.accesskey AND accesskeys.university = req.body.university'
-	var queryString = 'INSERT INTO student(name, email, password, university) VALUES($1, $2, $3, $4)'
+	var checkAdmin = 'SELECT * FROM accesskeys WHERE accesskeys.accesskey = \'' + req.body.accesskey + '\' AND accesskeys.university = \'' +  req.body.university +'\'';
+	var queryString = 'INSERT INTO superadmin(name, email, password, university) VALUES($1, $2, $3, $4)'
 	var queryValues = [req.body.name, req.body.email, req.body.password, req.body.university]
 	
 	client.query(checkAdmin, (err, admin) =>
@@ -115,7 +115,6 @@ app.post("/api/users/superadmin-create", function(req,res)
 				}
 			})
 			
-			res.status(201).json("Success")
 		}
     })
 })

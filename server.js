@@ -45,7 +45,7 @@ app.post("/api/users/student-login", function(req, res) {
     }
     else 
     {
-        console.log(student.rows)
+        console.log(student)
         if(student.rows.length < 1)
         {
 
@@ -170,6 +170,15 @@ app.post("/api/users/superadmin-login", function(req, res) {
    }) 
 });
 
+/*
+*   Endpoint for superadmin deletion
+*   
+*    
+*   
+*
+*   Return string "Success" if superadmin is found, "SuperAdmin not found" otherwise
+*/
+
 app.post("/api/users/superadmin-delete/:id", function(req, res)
 {
 	var queryString = 'DELETE FROM superadmin WHERE superadmin.uid = \'' + req.params.id + '\'';
@@ -182,8 +191,8 @@ app.post("/api/users/superadmin-delete/:id", function(req, res)
 		}
 		else
 		{
-			console.log(superadmin.rows)
-			if(superadmin.rows.length < 1)
+			console.log(superadmin)
+			if(superadmin.rows.length > 1)
 			{
 				res.status(201).json("SuperAdmin deleted")
 			}

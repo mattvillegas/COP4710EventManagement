@@ -19,6 +19,13 @@ export class AuthenticationService {
         return this.http.post('http://localhost:8080/api/users/student-login', user, {headers:this.headers});
     }
 
+    registerStudent(user){
+        return this.http.post('http://localhost:8080/api/users/student-create', user, {headers:this.headers});
+    }
+
+    registerSuper(user){
+        return this.http.post('http://localhost:8080/api/users/superadmin-create', user, {headers:this.headers});
+    }
 
     login(username: string, password: string) {
         return this.http.post<any>('/api/authenticate', { username: username, password: password })

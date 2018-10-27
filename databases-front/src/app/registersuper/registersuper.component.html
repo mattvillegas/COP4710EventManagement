@@ -1,4 +1,4 @@
-// Registering student
+// Registering super admin 
 
 <!DOCTYPE html>
 <html>
@@ -42,8 +42,15 @@
                         <input type="text" name="university" id="university" class="form-control" [(ngModel)]="university" placeholder="university">
                     </div>
 
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="text" name="accesskey" id="accesskey" class="form-control" [(ngModel)]="accesskey" placeholder="accesskey">
+                    </div>
+
                     <div class="form-group">
-                        <input type="submit" value="Register" class="btn float-right login_btn" (click)="onStudentRegister()">
+                        <input type="submit" value="Register" class="btn float-right login_btn" (click)="onSuperRegister()">
                     </div>
                 </form>
             </div>

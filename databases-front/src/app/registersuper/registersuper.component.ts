@@ -3,37 +3,39 @@ import { Router, Route } from '@angular/router';
 import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-registersuper',
+  templateUrl: './registersuper.component.html',
+  styleUrls: ['./registersuper.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegistersuperComponent implements OnInit {
 
   name: String;
   email: String;
   password: String;
   university: String;
+  accesskey: String; 
 
   constructor(private router: Router, public authService: AuthenticationService) { }
 
   ngOnInit() {
   }
 
-  onStudentRegister(){
-  	const student = { 
+  onSuperRegister(){
+  	const superadmin = { 
   		name: this.name;
   		email: this.email;
   		password : this.password;
   		university : this.university;
+  		accesskey : this.accesskey;
   	};
 
-  	this.authService.registerStudent(student).subscribe( data => {
-      if (data == "couldn't create user") {
-        alert('Couldn't create student account, please try again');
-        this.router.navigate(['/register']);
+  	this.authService.registerSuper(superadmin).subscribe( data => {
+      if (data == "couldn't approve admin") {
+        alert('Couldn't create super admin account, please try again');
+        this.router.navigate(['/registersuper']);
       }
       else {
-        const student = data['student'];
+        const superadmin = data['superadmin'];
         //this.authService.storeUser(user)
         this.router.navigate(['/dashboard'])// TO DO success
       }
@@ -41,7 +43,6 @@ export class RegisterComponent implements OnInit {
       }
 
       );
-     } //onStudentRegister
-  }
+     } //onSuperRegister
 
 }

@@ -19,7 +19,10 @@ export class LoginComponent implements OnInit {
       };
 
     onGetStudents() {
-    	this.authService.getUsers()
+    	this.authService.getUsers().subscribe(result => {
+        console.log(result);
+
+      });
    		this.router.navigate(['dashboard'])
       };
 

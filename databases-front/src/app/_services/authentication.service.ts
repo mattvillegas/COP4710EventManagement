@@ -26,7 +26,7 @@ export class AuthenticationService {
     }
 
     getUsers() {
-        return this.http.get('/api/students', {headers:this.headers}); 
+        return this.http.get('http://localhost:8080/api/students');
     }
 
     logout() {

@@ -15,12 +15,14 @@ const client = new pg.Client(connectionString);
 client.connect();
 
 // Generic error handler used by all endpoints.
-function handleError(res, reason, message, code) {
+function handleError(res, reason, message, code) 
+{
   console.log("ERROR: " + reason);
   res.status(code || 500).json({"error": message});
 }
 
-var server = app.listen(8080, function () {
+var server = app.listen(8080, function () 
+{
     var port = server.address().port;
     console.log("App now running on port", port);
 });
@@ -35,7 +37,8 @@ var server = app.listen(8080, function () {
 *   Return string "Success" if user is found, "Student not found" otherwise
 */
 
-app.post("/api/users/student-login", function(req, res) {
+app.post("/api/users/student-login", function(req, res) 
+{
     req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
     var queryString = 'SELECT * FROM student S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';
    client.query(queryString, (err, student) => {
@@ -146,7 +149,8 @@ app.post("/api/users/superadmin-create", function(req,res)
 *   Return string "Success" if superadmin is found, "SuperAdmin not found" otherwise
 */
 
-app.post("/api/users/superadmin-login", function(req, res) {
+app.post("/api/users/superadmin-login", function(req, res) 
+{
     req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
     var queryString = 'SELECT * FROM superadmin S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';
    client.query(queryString, (err, superadmin) => {
@@ -227,4 +231,12 @@ app.post("/api/users/student-delete/:id", function(req, res)
 			}
 		}
 	})
+});
+
+app.get("/api/users/:id/fetchevents", function(req,res)
+{
+	var queryString = 'SELECT RSO_EVENT.time, RSO_EVENT.description, RSO_event.name, RSO_event. FROM STUDENT, IS_IN, RSO, RSO_EVENT WHERE student.uid = \'' + req.params.id + '\' AND student.uid = is_in.uid and is_in.rso_id = rso.rso_id'
+	
+
+
 });

@@ -8,10 +8,17 @@ import 'rxjs/add/operator/map'
 })
 
 export class AuthenticationService {
+
+    user: any;
     
     private headers = new HttpHeaders().set('Content-Type', 'application/json'); 
 
     constructor(private http: HttpClient) { }
+
+    loginUser(user){
+        return this.http.post('http://localhost:8080/api/users/student-login', user, {headers:this.headers});
+    }
+
 
     login(username: string, password: string) {
         return this.http.post<any>('/api/authenticate', { username: username, password: password })

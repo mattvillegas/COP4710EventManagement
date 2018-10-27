@@ -10,6 +10,9 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegistersuperComponent } from './registersuper/registersuper.component';
+import { DashboardsuperComponent } from './dashboardsuper/dashboardsuper.component';
+import { DashboarduserComponent } from './dashboarduser/dashboarduser.component';
+import { DashboardadminComponent } from './dashboardadmin/dashboardadmin.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -25,7 +28,10 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
-    RegistersuperComponent
+    RegistersuperComponent,
+    DashboardsuperComponent,
+    DashboarduserComponent,
+    DashboardadminComponent
   ],
   imports: [
     BrowserModule,

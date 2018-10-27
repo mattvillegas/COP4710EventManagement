@@ -142,6 +142,28 @@ app.post("/api/users/superadmin-create", function(req,res)
     })
 })
 
+app.post("/api/users/admin-create", function(req,res)
+{
+	req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
+	
+	//var checkAdmin = 'SELECT * FROM accesskeys WHERE accesskeys.accesskey = \'' + req.body.accesskey + '\' AND accesskeys.university = \'' +  req.body.university +'\'';
+	var queryString = 'INSERT INTO admin(name, email, password, university) VALUES($1, $2, $3, $4)'
+	var queryValues = [req.body.name, req.body.email, req.body.password, req.body.university]
+	
+	client.query(queryString, (err, admin) =>
+	{
+		if(err)
+		{
+			handleError(res, "couldn't create admin")
+		}
+		else
+		{
+			res.status(201).json("Success")
+			console.log(admin)
+		}
+    })
+})
+
 /*
 *   Endpoint for superadmin login
 *   
@@ -154,9 +176,11 @@ app.post("/api/users/superadmin-create", function(req,res)
 app.post("/api/users/superadmin-login", function(req, res) 
 {
     req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
-	var queryString = 'SELECT * FROM superadmin S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'' + 'UNION SELECT * FROM student S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';// +
-						//'union SELECT * FROM student S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';
-   client.query(queryString, (err, superadmin) => {
+	var superadminQueryString = 'SELECT * FROM superadmin S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\''
+	var studentQueryString = 'SELECT * FROM student S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';
+    var adminQueryString = 'SELECT * FROM admin S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';
+	
+	client.query(superadminQueryString, (err, superadmin) => {
     if(err)
     {
         handleError(res, "couldn't fetch from database");
@@ -166,15 +190,55 @@ app.post("/api/users/superadmin-login", function(req, res)
         console.log(superadmin.rows)
         if(superadmin.rows.length < 1)
         {
-
             res.status(201).json("SuperAdmin not found")
         }
         else
         {
-            res.status(201).json(superadmin.rows[0].uid)
+			var resString = "uid:" + superadmin.rows[0].uid + "accountType:superadmin"
+			res.status(201).json(resString)
         }
     }
-   }) 
+   })
+   
+   client.query(adminQueryString, (err, admin) => {
+    if(err)
+    {
+        handleError(res, "couldn't fetch from database");
+    }
+    else 
+    {
+        console.log(admin.rows)
+        if(admin.rows.length < 1)
+        {
+            res.status(201).json("Admin not found")
+        }
+        else
+        {
+			var resString = "uid:" + admin.rows[0].uid + " accountType:admin"
+            res.status(201).json(resString)
+        }
+    }
+   })
+   
+   client.query(studentQueryString, (err, student) => {
+    if(err)
+    {
+        handleError(res, "couldn't fetch from database");
+    }
+    else 
+    {
+        console.log(student.rows)
+        if(student.rows.length < 1)
+        {
+            res.status(201).json("Student not found")
+        }
+        else
+        {
+			var resString = "uid:" + student.rows[0].uid + " accountType:student"
+            res.status(201).json(resString)
+        }
+    }
+   })
 });
 
 /*

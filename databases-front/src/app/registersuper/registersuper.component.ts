@@ -35,8 +35,9 @@ export class RegistersuperComponent implements OnInit {
         this.router.navigate(['/registersuper']);
       }
       else {
-        const superadmin = data['superadmin'];
+        //const superadmin = data['superadmin'];
         //this.authService.storeUser(user)
+        alert('You are registered as a super admin and can now log in');
         this.router.navigate(['/dashboard'])// TO DO success
       }
 

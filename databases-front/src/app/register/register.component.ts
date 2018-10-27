@@ -33,8 +33,9 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['/register']);
       }
       else {
-        const student = data['student'];
+        //const student = data['student'];
         //this.authService.storeUser(user)
+        alert('You are registered as a student and can now log in');
         this.router.navigate(['/dashboard'])// TO DO success
       }
 

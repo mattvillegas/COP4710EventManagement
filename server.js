@@ -300,6 +300,34 @@ app.post("/api/users/student-delete/:id", function(req, res)
 	})
 });
 
+app.get("/api/:id/get-events", function(req, res)
+{
+	var isInQueryString = 'SELECT rso_id FROM is_in i WHERE i.uid = \'' + req.params.id + '\'';
+	var findRSOQueryString = 'SELECT * FROM rso_event r WHERE r.rso_id = \'' + isIn.rows[0] + '\''
+	
+	client.query(isInQueryString, (err, isIn) =>
+	{
+		if(err)
+		{
+			handleError(res, "Didn't find student in RSO")
+		}
+		else
+		{
+			client.query(findRSOQueryString, (err, events) =>
+			{
+				if(err)
+				{
+					handleError(res, "Something went wrong")
+				}
+				else
+				{
+					res.status(201).json(events)
+				}
+			}
+		}
+	})
+})
+
 /*app.get("/api/users/:id/fetchevents", function(req,res)
 {
 	var queryString = 'SELECT RSO_EVENT.time, RSO_EVENT.description, RSO_event.name, RSO_event. FROM STUDENT, IS_IN, RSO, RSO_EVENT WHERE student.uid = \'' + req.params.id + '\' AND student.uid = is_in.uid and is_in.rso_id = rso.rso_id'

@@ -233,10 +233,11 @@ app.post("/api/users/student-delete/:id", function(req, res)
 	})
 });
 
-app.get("/api/users/:id/fetchevents", function(req,res)
+/*app.get("/api/users/:id/fetchevents", function(req,res)
 {
 	var queryString = 'SELECT RSO_EVENT.time, RSO_EVENT.description, RSO_event.name, RSO_event. FROM STUDENT, IS_IN, RSO, RSO_EVENT WHERE student.uid = \'' + req.params.id + '\' AND student.uid = is_in.uid and is_in.rso_id = rso.rso_id'
 	
 
 
 });
+*/

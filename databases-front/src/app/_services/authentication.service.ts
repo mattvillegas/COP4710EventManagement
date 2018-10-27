@@ -3,7 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 
-@Injectable()
+@Injectable({
+	providedIn: 'root'
+})
+
 export class AuthenticationService {
     
     private headers = new HttpHeaders().set('Content-Type', 'application/json'); 
@@ -23,7 +26,7 @@ export class AuthenticationService {
     }
 
     getUsers() {
-        return this.http.get('/api/students'); 
+        return this.http.get('/api/students', {headers:this.headers}); 
     }
 
     logout() {

@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const pg = require('pg');
 const crypto = require("crypto");
-const cors = require("cors");
+const cors = require('cors');
+
 
 var app = express();
 
@@ -154,7 +155,8 @@ app.post("/api/users/superadmin-create", function(req,res)
 app.post("/api/users/superadmin-login", function(req, res) 
 {
     req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
-    var queryString = 'SELECT * FROM superadmin S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';
+	var queryString = 'SELECT * FROM superadmin S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'' + 'UNION SELECT * FROM student S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';// +
+						//'union SELECT * FROM student S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';
    client.query(queryString, (err, superadmin) => {
     if(err)
     {
@@ -170,7 +172,7 @@ app.post("/api/users/superadmin-login", function(req, res)
         }
         else
         {
-            res.status(201).json(superadmin.row[0].uid)
+            res.status(201).json(superadmin.rows[0].uid)
         }
     }
    }) 

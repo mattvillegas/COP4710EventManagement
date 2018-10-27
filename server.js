@@ -3,11 +3,13 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const pg = require('pg');
 const crypto = require("crypto");
+const cors = require('cors');
 
 var app = express();
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 const connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/eventmanagement?username=postgres&password=postgres';
 
@@ -241,3 +243,23 @@ app.post("/api/users/student-delete/:id", function(req, res)
 
 });
 */
+
+app.get("/api/students", function(req,res)
+{
+	var queryString = "SELECT * FROM Student";
+	console.log("Api was hit");
+	client.query(queryString, (err, students) => 
+	{
+		if(err)
+		{
+			handleError(res, "Failed to hit database", "Failed database call")
+		}
+		else
+		{
+			console.log(students.rows)
+			res.status(201).json(students.rows)
+		}
+
+	})
+
+});

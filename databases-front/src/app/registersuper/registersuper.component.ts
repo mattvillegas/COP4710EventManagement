@@ -22,28 +22,21 @@ export class RegistersuperComponent implements OnInit {
 
   onSuperRegister(){
   	const superadmin = { 
-  		name: this.name;
-  		email: this.email;
-  		password : this.password;
-  		university : this.university;
-  		accesskey : this.accesskey;
+  		name: this.name,
+  		email: this.email,
+  		password : this.password,
+  		university : this.university,
+  		accesskey : this.accesskey
   	};
 
-  	this.authService.registerSuper(superadmin).subscribe( data => {
-      if (data == "couldn't approve admin") {
-        alert('Couldn't create super admin account, please try again');
+  	this.authService.registerSuper(superadmin).subscribe( 
+  	  data => {
+        //alert('You are registered as a super admin and can now log in');
+        this.router.navigate(['/login']); 
+      }, error => {
+        //alert('Couldn't create super admin account, please try again');
         this.router.navigate(['/registersuper']);
-      }
-      else {
-        //const superadmin = data['superadmin'];
-        //this.authService.storeUser(user)
-        alert('You are registered as a super admin and can now log in');
-        this.router.navigate(['/dashboard'])// TO DO success
-      }
-
-      }
-
-      );
-     } //onSuperRegister
+      });
+     } 
 
 }

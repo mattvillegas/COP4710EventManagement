@@ -328,7 +328,7 @@ app.get("/api/:id/get-events", function(req, res)
 				{
 					res.status(201).json(events)
 				}
-			}
+			})
 		}
 	})
 });

@@ -359,7 +359,7 @@ app.post("/api/:id/create-rso", function(req, res)
 	})
 });
 
-app.post("/api/create-rso-event", function(req, res)
+app.post("/api/:id/create-rso-event", function(req, res)
 {
 	var checkMembers = 'SELECT COUNT(uid) FROM is_in WHERE rso_id = VALUES($1)'
 	var queryValues = [req.params.id]

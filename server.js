@@ -189,14 +189,14 @@ app.post("/api/users/superadmin-login", function(req, res)
     else 
     {
         console.log(superadmin.rows)
-        if(superadmin.rows.length < 1)
-        {
-            res.status(201).json("SuperAdmin not found")
-        }
-        else
+        if(superadmin.rows.length > 0)
         {
 			var resString = "uid:" + superadmin.rows[0].uid + "accountType:superadmin"
 			res.status(201).json(resString)
+        }
+        else
+        {
+			//res.status(201).json("Logged in")
         }
     }
    })
@@ -209,14 +209,14 @@ app.post("/api/users/superadmin-login", function(req, res)
     else 
     {
         console.log(admin.rows)
-        if(admin.rows.length < 1)
-        {
-            res.status(201).json("Admin not found")
+        if(admin.rows.length > 0)
+        { 
+			var resString = "uid:" + admin.rows[0].uid + " accountType:admin"
+            res.status(201).json(resString)
         }
         else
         {
-			var resString = "uid:" + admin.rows[0].uid + " accountType:admin"
-            res.status(201).json(resString)
+			//res.status(201).json("Admin not found")
         }
     }
    })
@@ -229,16 +229,20 @@ app.post("/api/users/superadmin-login", function(req, res)
     else 
     {
         console.log(student.rows)
-        if(student.rows.length < 1)
-        {
-            res.status(201).json("Student not found")
-        }
-        else
+        if(student.rows.length > 0)
         {
 			var resString = "uid:" + student.rows[0].uid + " accountType:student"
             res.status(201).json(resString)
         }
+        else
+        {
+			//res.status(201).json("Student not found")
+        }
     }
+	
+	// Only reach here if none of the account types could be found.
+	res.status(201).json("Account not found")
+	
    })
 });
 

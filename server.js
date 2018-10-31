@@ -105,7 +105,7 @@ app.post("/api/users/student-create", function(req,res)
 *   Return string "Success" if superadmin is created, "couldn't approve admin" otherwise
 */
 
-app.post("/api/users/superadmin-create", function(req,res)
+app.post("/api/users/login", function(req,res)
 {
 	req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
 	
@@ -176,11 +176,13 @@ app.post("/api/users/admin-create", function(req,res)
 
 app.post("/api/users/superadmin-login", function(req, res) 
 {
+	console.log("req body = ", req.body)
     req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
 	var superadminQueryString = 'SELECT * FROM superadmin S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\''
 	var studentQueryString = 'SELECT * FROM student S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';
     var adminQueryString = 'SELECT * FROM admin S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';
 	
+	found = false 
 	client.query(superadminQueryString, (err, superadmin) => {
     if(err)
     {
@@ -192,6 +194,7 @@ app.post("/api/users/superadmin-login", function(req, res)
         if(superadmin.rows.length > 0)
         {
 			var resString = "uid:" + superadmin.rows[0].uid + "accountType:superadmin"
+			found = true
 			res.status(201).json(resString)
         }
         else
@@ -212,6 +215,7 @@ app.post("/api/users/superadmin-login", function(req, res)
         if(admin.rows.length > 0)
         { 
 			var resString = "uid:" + admin.rows[0].uid + " accountType:admin"
+			found = true
             res.status(201).json(resString)
         }
         else
@@ -232,6 +236,7 @@ app.post("/api/users/superadmin-login", function(req, res)
         if(student.rows.length > 0)
         {
 			var resString = "uid:" + student.rows[0].uid + " accountType:student"
+			found = true
             res.status(201).json(resString)
         }
         else
@@ -241,7 +246,10 @@ app.post("/api/users/superadmin-login", function(req, res)
     }
 	
 	// Only reach here if none of the account types could be found.
-	res.status(201).json("Account not found")
+	if(!found) 
+	{
+		res.status(201).json("Account not found")
+	}
 	
    })
 });
@@ -336,9 +344,9 @@ app.get("/api/:id/get-events", function(req, res)
 app.post("/api/:id/create-rso", function(req, res)
 {
 	var queryString = "INSERT INTO rso(name, adminid) VALUES($1, $2)"
-	var queryValues = [req.body.name, req.body.id]
+	var queryValues = [req.body.name, req.params.id]
 	
-	client.query(queryString, (err, insert) =>
+	client.query(queryString, queryValues, (err, insert) =>
 	{
 		if(err)
 		{

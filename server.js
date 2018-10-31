@@ -143,6 +143,28 @@ app.post("/api/users/superadmin-create", function(req,res)
     })
 })
 
+app.post("/api/users/admin-create", function(req,res)
+{
+	req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
+	
+	//var checkAdmin = 'SELECT * FROM accesskeys WHERE accesskeys.accesskey = \'' + req.body.accesskey + '\' AND accesskeys.university = \'' +  req.body.university +'\'';
+	var queryString = 'INSERT INTO admin(name, email, password, university) VALUES($1, $2, $3, $4)'
+	var queryValues = [req.body.name, req.body.email, req.body.password, req.body.university]
+	
+	client.query(queryString, queryValues, (err, admin) =>
+	{
+		if(err)
+		{
+			handleError(res, "couldn't create admin")
+		}
+		else
+		{
+			res.status(201).json("Success")
+			console.log(admin)
+		}
+    })
+})
+
 /*
 *   Endpoint for superadmin login
 *   
@@ -155,9 +177,11 @@ app.post("/api/users/superadmin-create", function(req,res)
 app.post("/api/users/superadmin-login", function(req, res) 
 {
     req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
-	var queryString = 'SELECT * FROM superadmin S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'' + 'UNION SELECT * FROM student S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';// +
-						//'union SELECT * FROM student S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';
-   client.query(queryString, (err, superadmin) => {
+	var superadminQueryString = 'SELECT * FROM superadmin S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\''
+	var studentQueryString = 'SELECT * FROM student S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';
+    var adminQueryString = 'SELECT * FROM admin S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';
+	
+	client.query(superadminQueryString, (err, superadmin) => {
     if(err)
     {
         handleError(res, "couldn't fetch from database");
@@ -167,15 +191,55 @@ app.post("/api/users/superadmin-login", function(req, res)
         console.log(superadmin.rows)
         if(superadmin.rows.length < 1)
         {
-
             res.status(201).json("SuperAdmin not found")
         }
         else
         {
-            res.status(201).json(superadmin.rows[0].uid)
+			var resString = "uid:" + superadmin.rows[0].uid + "accountType:superadmin"
+			res.status(201).json(resString)
         }
     }
-   }) 
+   })
+   
+   client.query(adminQueryString, (err, admin) => {
+    if(err)
+    {
+        handleError(res, "couldn't fetch from database");
+    }
+    else 
+    {
+        console.log(admin.rows)
+        if(admin.rows.length < 1)
+        {
+            res.status(201).json("Admin not found")
+        }
+        else
+        {
+			var resString = "uid:" + admin.rows[0].uid + " accountType:admin"
+            res.status(201).json(resString)
+        }
+    }
+   })
+   
+   client.query(studentQueryString, (err, student) => {
+    if(err)
+    {
+        handleError(res, "couldn't fetch from database");
+    }
+    else 
+    {
+        console.log(student.rows)
+        if(student.rows.length < 1)
+        {
+            res.status(201).json("Student not found")
+        }
+        else
+        {
+			var resString = "uid:" + student.rows[0].uid + " accountType:student"
+            res.status(201).json(resString)
+        }
+    }
+   })
 });
 
 /*
@@ -233,6 +297,52 @@ app.post("/api/users/student-delete/:id", function(req, res)
 			{
 				res.status(201).json("Didn't delete student")
 			}
+		}
+	})
+});
+
+app.get("/api/:id/get-events", function(req, res)
+{
+	var isInQueryString = 'SELECT rso_id FROM is_in i WHERE i.uid = \'' + req.params.id + '\'';
+	var findRSOQueryString = 'SELECT * FROM rso_event r WHERE r.rso_id = \'' + isIn.rows[0] + '\''
+	
+	client.query(isInQueryString, (err, isIn) =>
+	{
+		if(err)
+		{
+			handleError(res, "Didn't find student in RSO")
+		}
+		else
+		{
+			client.query(findRSOQueryString, (err, events) =>
+			{
+				if(err)
+				{
+					handleError(res, "Something went wrong")
+				}
+				else
+				{
+					res.status(201).json(events)
+				}
+			})
+		}
+	})
+});
+
+app.post("/api/:id/create-rso", function(req, res)
+{
+	var queryString = "INSERT INTO rso(name, adminid) VALUES($1, $2)"
+	var queryValues = [req.body.name, req.body.id]
+	
+	client.query(queryString, (err, insert) =>
+	{
+		if(err)
+		{
+			handleError(res, "Couldn't create rso")
+		}
+		else
+		{
+			res.status(201).json(insert)
 		}
 	})
 });

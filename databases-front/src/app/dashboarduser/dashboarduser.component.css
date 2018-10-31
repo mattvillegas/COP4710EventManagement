@@ -16,15 +16,65 @@ align-content: center;
 }
 
 .card{
-height: 250px;
+height: 850px;
 margin-top: auto;
 margin-bottom: auto;
-width: 400px;
+width: 1700px;
 background-color: rgba(0,0,0,0.5) !important;
+}
+
+.card-body p {
+	color: white;
+}
+
+.card-body h2 {
+	text-align: center;
+	color: white;
+}
+
+.card-body h3 {
+	color: white;
+	padding-top: 20px;
+	text-align: center;
 }
 
 .card-header h3{
 color: white;
+}
+
+.card-header h2{
+color: white;
+text-align: center; 
+}
+
+.event-calendar {
+	padding-top: 20px;
+	display: block; 
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.event-calendar table { 
+    width: 100%;
+}
+
+.event-calendar th{
+	color: white;
+	font-size: .8em;
+	border-style: solid; 
+	border-color: gold; 
+	border-width: 1px;
+	padding: 5px;
+	text-align: center;
+}
+
+.event-calendar td {
+	color: white;
+	font-size: 0.7em;
+	border-style: solid; 
+	border-color: gold; 
+	border-width: 1px;
+	padding: 5px;
 }
 
 .input-group-prepend span{

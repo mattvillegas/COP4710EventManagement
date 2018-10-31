@@ -326,7 +326,25 @@ app.get("/api/:id/get-events", function(req, res)
 			}
 		}
 	})
-})
+});
+
+app.post("/api/:id/create-rso", function(req, res)
+{
+	var queryString = "INSERT INTO rso(name, adminid) VALUES($1, $2)"
+	var queryValues = [req.body.name, req.body.id]
+	
+	client.query(queryString, (err, insert) =>
+	{
+		if(err)
+		{
+			handleError(res, "Couldn't create rso")
+		}
+		else
+		{
+			res.status(201).json(insert)
+		}
+	})
+});
 
 /*app.get("/api/users/:id/fetchevents", function(req,res)
 {

@@ -13,13 +13,15 @@ import { RegistersuperComponent } from './registersuper/registersuper.component'
 import { DashboardsuperComponent } from './dashboardsuper/dashboardsuper.component';
 import { DashboarduserComponent } from './dashboarduser/dashboarduser.component';
 import { DashboardadminComponent } from './dashboardadmin/dashboardadmin.component';
+import { RegisteradminComponent } from './registeradmin/registeradmin.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'registersuper', component: RegistersuperComponent }
+  { path: 'registersuper', component: RegistersuperComponent },
+  { path: 'registeradmin', component: RegisteradminComponent }
 ];
 
 @NgModule({
@@ -31,7 +33,8 @@ const appRoutes: Routes = [
     RegistersuperComponent,
     DashboardsuperComponent,
     DashboarduserComponent,
-    DashboardadminComponent
+    DashboardadminComponent,
+    RegisteradminComponent
   ],
   imports: [
     BrowserModule,

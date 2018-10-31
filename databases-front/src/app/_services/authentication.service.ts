@@ -15,6 +15,12 @@ export class AuthenticationService {
 
     constructor(private http: HttpClient) { }
 
+    // Store user info in local storage
+    storeUser(user){
+        sessionStorage.setItem('user', JSON.stringify(user));
+        this.user = user;
+    }
+
     loginUser(user){
         return this.http.post('http://localhost:8080/api/users/student-login', user, {headers:this.headers});
     }

@@ -12,9 +12,10 @@
 	                <nav>
 	                	<table>
 	                		<tr>
-	                			<th>Search Events</th>
-	                			<th>Manage Events</th>
-	                			<th><a [routerLink] = "['/login']">Logout</a></th>
+	                		<div class="form-group">
+              				<input placeholder="Enter Event to Search" name="inputString" [(ngModel)] = "inputString" class="form-control" style="max-width:450px">
+         					</div>
+	                			<th><a style="font-size:1.2em; padding-left:10em" [routerLink] = "['/login']">Logout</a></th>
 	                		</tr>
 	                	</table>
 	                </nav>

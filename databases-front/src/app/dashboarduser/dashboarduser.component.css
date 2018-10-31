@@ -47,18 +47,32 @@ color: white;
 text-align: center; 
 }
 
-.event-calendar {
+.card-header a {
+	color: white;
+	text-decoration: none; 
+}
+
+.card-header nav {
+	text-align: center;
+}
+
+.card-header nav a {
+	color: white;
+}
+
+.event-list {
 	padding-top: 20px;
 	display: block; 
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.event-calendar table { 
+.event-list table { 
     width: 100%;
+    background-color: black;
 }
 
-.event-calendar th{
+.event-list th{
 	color: white;
 	font-size: .8em;
 	border-style: solid; 
@@ -68,7 +82,7 @@ text-align: center;
 	text-align: center;
 }
 
-.event-calendar td {
+.event-list td {
 	color: white;
 	font-size: 0.7em;
 	border-style: solid; 

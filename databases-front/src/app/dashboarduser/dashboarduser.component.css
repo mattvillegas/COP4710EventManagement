@@ -38,13 +38,25 @@ background-color: rgba(0,0,0,0.5) !important;
 	text-align: center;
 }
 
-.card-header h3{
+.card-header h1, h2, h3{
 color: white;
+text-align: center;
 }
 
-.card-header h2{
-color: white;
-text-align: center; 
+.card-header nav {
+	display: block; 
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.card-header nav table th {
+	width: 350px;
+	color: white;
+	text-shadow: 0.5px 0.5px white; 
+}
+
+.card-header nav table {
+	width: 100%;
 }
 
 .card-header a {
@@ -89,6 +101,12 @@ text-align: center;
 	border-color: gold; 
 	border-width: 1px;
 	padding: 5px;
+	max-width: 250px;
+}
+
+.event-list img {
+	height: 50px;
+	width: 50px;
 }
 
 .input-group-prepend span{

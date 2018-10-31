@@ -8,11 +8,15 @@
 	    <div class="d-flex justify-content-center h-100">
 	        <div class="card">
 	            <div class="card-header">
-	                <h2><a [routerLink] = "['/dashboarduser']">Your Dashboard</a></h2>
+	                <h1><a [routerLink] = "['/dashboarduser']">Your Dashboard</a></h1>
 	                <nav>
-	                	<a>Search Events</a>&nbsp;&nbsp;&nbsp;&nbsp;
-	                	<a>Manage Events</a>&nbsp;&nbsp;&nbsp;&nbsp;
-	                	<a>Logout</a>
+	                	<table>
+	                		<tr>
+	                			<th>Search Events</th>
+	                			<th>Manage Events</th>
+	                			<th><a [routerLink] = "['/login']">Logout</a></th>
+	                		</tr>
+	                	</table>
 	                </nav>
 	            </div>
 	            <div class="card-body">
@@ -26,6 +30,7 @@
 	                			<th>Location</th>
 	                			<th>Start Time</th>
 	                			<th>End Time</th>
+	                			<th>Share on Social Media</th>
 	                		</tr>
 	                		<tr>
 	                			<td>Trick or Treat on Greek Street (TOTOGS)</td>
@@ -33,6 +38,9 @@
 	                			<td>Greek Park</td>
 	                			<td>Time</td>
 	                			<td>Time</td>
+	                			<td>
+	                				<img src="../assets/FacebookLogo.png">
+	                			</td>
 	                		</tr>
 	                	</table>
 	                </div>
@@ -45,6 +53,7 @@
 		                			<th>Location</th>
 		                			<th>Start Time</th>
 		                			<th>End Time</th>
+		                			<th>Share on Social Media</th>
 		                		</tr>
 		                		<tr>
 		                			<td>Trick or Treat on Greek Street (TOTOGS)</td>
@@ -52,6 +61,7 @@
 		                			<td>Greek Park</td>
 		                			<td>Time</td>
 		                			<td>Time</td>
+		                			<td>Share Button</td>
 		                		</tr>
 		                	</table>
 		                </div>

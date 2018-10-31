@@ -359,6 +359,34 @@ app.post("/api/:id/create-rso", function(req, res)
 	})
 });
 
+app.post("/api/create-rso-event", function(req, res)
+{
+	var checkMembers = 'SELECT COUNT(uid) FROM is_in WHERE rso_id = VALUES($1)'
+	var queryValues = [req.params.id]
+	
+	client.query(queryString, queryValues, (err, insert) =>
+	{
+		if(err)
+		{
+			handleError(res, "Not enough members in rso")
+		}
+		else
+		{
+			var createString = 'INSERT INTO rso_event(time, location, description, name, contact_email, contact_phone, event_category, rso_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8)'
+			var createValues = [req.body.time, req.body.loc, req.body.desc, req.body.name, req.body.contact_email, req.body.contact_phone, req.body.event_category]
+			
+			if(err)
+			{
+				handleError("Couldn't create rso event")
+			}
+			else
+			{
+				res.status(201).json("Created the rso event")
+			}
+		}
+	})
+});
+
 /*app.get("/api/users/:id/fetchevents", function(req,res)
 {
 	var queryString = 'SELECT RSO_EVENT.time, RSO_EVENT.description, RSO_event.name, RSO_event. FROM STUDENT, IS_IN, RSO, RSO_EVENT WHERE student.uid = \'' + req.params.id + '\' AND student.uid = is_in.uid and is_in.rso_id = rso.rso_id'

@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       }
       else {
         const user = data['user'];
-        //this.authService.storeUser(user)
+        this.authService.storeUser(user)
         this.router.navigate(['/dashboard'])// TO DO success
       }
 

@@ -364,8 +364,9 @@ app.post("/api/:id/create-rso-event", function(req, res)
 	var checkMembers = 'SELECT COUNT(uid) FROM is_in WHERE rso_id = VALUES($1)'
 	var queryValues = [req.params.id]
 	
-	client.query(queryString, queryValues, (err, insert) =>
+	client.query(checkMembers, queryValues, (err, insert) =>
 	{
+		console.log(insert)
 		if(err)
 		{
 			handleError(res, "Not enough members in rso")
@@ -386,7 +387,7 @@ app.post("/api/:id/create-rso-event", function(req, res)
 		}
 		else
 		{
-			// i dont know
+			res.status(201).json("Not enough members")
 		}
 	})
 });

@@ -105,7 +105,7 @@ app.post("/api/users/student-create", function(req,res)
 *   Return string "Success" if superadmin is created, "couldn't approve admin" otherwise
 */
 
-app.post("/api/users/login", function(req,res)
+app.post("/api/users/superadmin-create", function(req,res)
 {
 	req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
 	
@@ -174,7 +174,7 @@ app.post("/api/users/admin-create", function(req,res)
 *   Return string "Success" if superadmin is found, "SuperAdmin not found" otherwise
 */
 
-app.post("/api/users/superadmin-login", function(req, res) 
+app.post("/api/users/login", function(req, res) 
 {
 	console.log("req body = ", req.body)
     req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');

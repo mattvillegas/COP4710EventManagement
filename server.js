@@ -361,7 +361,7 @@ app.post("/api/:id/create-rso", function(req, res)
 
 app.post("/api/:id/join-rso", function(req, res)
 {
-	var queryString = 'INSERT INTO is_in(rso_id, uid) VALUES($1, $2)'
+	var insertIntoIsIn = 'INSERT INTO is_in(rso_id, uid) VALUES($1, $2)'
 	var queryVales = [req.body.rso_id, req.params.id]
 	
 	client.query(queryString, queryVales, (err, insert) =>
@@ -391,12 +391,39 @@ app.post("/api/:id/create-rso-event", function(req, res)
 		}
 		else if(insert > 4)
 		{
+			var insertIntoEvent = 'INSERT INTO event (time, location, description)'
+			var eventTableValues = [req.body.time, req.body.loc, req.body.desc]
 			var createString = 'INSERT INTO rso_event(time, location, description, name, contact_email, contact_phone, event_category, rso_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8)'
 			var createValues = [req.body.time, req.body.loc, req.body.desc, req.body.name, req.body.contact_email, req.body.contact_phone, req.body.event_category]
 			
+			client.query(insertIntoEvent, eventTableValues, (err, eventTable) => 
+			{
+				if(err)
+				{
+					handleError(res, "Didn't insert into event table")
+				}
+				else
+				{
+					client.query(createString, createValues, (err, rso) => 
+					{
+						if(err)
+						{
+							handleError(res, "I dont know what this error is")
+						}
+						else
+						{
+							res.status(201).json("Entered into all the tables")
+						}
+						
+						
+					})
+					
+				}
+			})
+			
 			if(err)
 			{
-				handleError("Couldn't create rso event")
+				handleError(res, "Couldn't create rso event")
 			}
 			else
 			{

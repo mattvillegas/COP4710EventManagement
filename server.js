@@ -316,7 +316,7 @@ app.post("/api/users/student-delete/:id", function(req, res)
 app.get("/api/:id/get-events", function(req, res)
 {
 	var isInQueryString = 'SELECT rso_id FROM is_in i WHERE i.uid = \'' + req.params.id + '\'';
-	var findRSOQueryString = 'SELECT * FROM rso_event r WHERE r.rso_id = \'' + isIn.rows[0] + '\''
+	
 	
 	client.query(isInQueryString, (err, isIn) =>
 	{
@@ -326,15 +326,24 @@ app.get("/api/:id/get-events", function(req, res)
 		}
 		else
 		{
+			console.log(isIn)
+			var findRSOQueryString = 'SELECT * FROM rso_event r WHERE r.rso_id = \'' + isIn.rows[0]['rso_id'] + '\''
 			client.query(findRSOQueryString, (err, events) =>
 			{
 				if(err)
 				{
-					handleError(res, "Something went wrong")
+					handleError(res, err.stack)
 				}
 				else
 				{
-					res.status(201).json(events)
+					if(events.rows.length >= 1)
+					{
+						res.status(201).json(events.rows)
+					}
+					else
+					{
+						res.status(201).json("not in an rso")
+					}
 				}
 			})
 		}
@@ -379,6 +388,9 @@ app.post("/api/:id/join-rso", function(req, res)
 
 app.post("/api/:id/create-rso-event", function(req, res)
 {
+	console.log("made it to create")
+	console.log(req.body)
+	console.log(req.params.id)
 	var checkMembers = 'SELECT COUNT(uid) FROM is_in WHERE rso_id = \'' + req.params.id + '\'';
 	
 	client.query(checkMembers, (err, insert) =>
@@ -386,7 +398,7 @@ app.post("/api/:id/create-rso-event", function(req, res)
 		console.log(insert)
 		if(err)
 		{
-			handleError(res, "Some database error")
+			handleError(res, err.stack)
 		}
 		else if(insert.rows[0]["count"] > 4)
 		{
@@ -413,10 +425,12 @@ app.post("/api/:id/create-rso-event", function(req, res)
 						{
 							if(rso == null)
 							{
+								console.log("No rso found")
 								res.status(201).json("Error")
 							}
 							else
 							{
+								console.log("succesfully added event")
 								res.status(201).json("Entered into all the tables")
 							}
 						}

@@ -16,7 +16,7 @@ export class AuthenticationService {
     constructor(private http: HttpClient) { }
 
     loginUser(user){
-        return this.http.post('http://localhost:8080/api/users/student-login', user, {headers:this.headers});
+        return this.http.post('http://localhost:8080/api/users/login', user, {headers:this.headers});
     }
 
     registerStudent(user){

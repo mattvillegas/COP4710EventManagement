@@ -359,6 +359,24 @@ app.post("/api/:id/create-rso", function(req, res)
 	})
 });
 
+app.post("/api/:id/join-rso", function(req, res)
+{
+	var queryString = 'INSERT INTO is_in(rso_id, uid) VALUES($1, $2)'
+	var queryVales = [req.body.rso_id, req.params.id]
+	
+	client.query(queryString, queryVales, (err, insert) =>
+	{
+		if(err)
+		{
+			handleError(res, "Unable to join rso")
+		}
+		else
+		{
+			res.status(201).json(insert)
+		}
+	})
+});
+
 app.post("/api/:id/create-rso-event", function(req, res)
 {
 	var checkMembers = 'SELECT COUNT(uid) FROM is_in WHERE rso_id = VALUES($1)'

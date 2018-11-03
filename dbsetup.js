@@ -38,3 +38,7 @@ client.query('CREATE TABLE rso (name VARCHAR(20), rso_id SERIAL PRIMARY KEY, adm
 client.query('CREATE TABLE is_in (rso_id INTEGER, uid INTEGER, PRIMARY KEY (rso_id, uid), FOREIGN KEY (rso_id) REFERENCES rso(rso_id), FOREIGN KEY (uid) REFERENCES student(uid))')
 .then(res => console.log("created table!"))
 .catch(e => console.log(e.stack))
+
+client.query('CREATE TABLE comments(uid INTEGER, time timestamp, location VARCHAR(300), comment VARCHAR(10000), FOREIGN KEY (time, location) REFERENCES event(time,location), FOREIGN KEY (uid) REFERENCES student(uid))')
+.then(res => console.log("created table!"))
+.catch(e => console.log(e.stack))

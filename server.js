@@ -193,7 +193,7 @@ app.post("/api/users/login", function(req, res)
         console.log(superadmin.rows)
         if(superadmin.rows.length > 0)
         {
-			var resString = "uid:" + superadmin.rows[0].uid + "accountType:superadmin"
+			var resString = {uid:superadmin.rows[0].uid, accountType:superadmin}
 			found = true
 			res.status(201).json(resString)
         }
@@ -214,7 +214,7 @@ app.post("/api/users/login", function(req, res)
         console.log(admin.rows)
         if(admin.rows.length > 0)
         { 
-			var resString = "uid:" + admin.rows[0].uid + " accountType:admin"
+			var resString = {uid:admin.rows[0].uid, accountType:admin}
 			found = true
             res.status(201).json(resString)
         }
@@ -235,7 +235,7 @@ app.post("/api/users/login", function(req, res)
         console.log(student.rows)
         if(student.rows.length > 0)
         {
-			var resString = "uid:" + student.rows[0].uid + " accountType:student"
+			var resString = {uid:student.rows[0].uid , accountType:student}
 			found = true
             res.status(201).json(resString)
         }

@@ -362,9 +362,9 @@ app.post("/api/:id/create-rso", function(req, res)
 app.post("/api/:id/join-rso", function(req, res)
 {
 	var insertIntoIsIn = 'INSERT INTO is_in(rso_id, uid) VALUES($1, $2)'
-	var queryVales = [req.body.rso_id, req.params.id]
+	var queryValues = [req.body.rso_id, req.params.id]
 	
-	client.query(queryString, queryVales, (err, insert) =>
+	client.query(insertIntoIsIn, queryValues, (err, insert) =>
 	{
 		if(err)
 		{
@@ -379,10 +379,9 @@ app.post("/api/:id/join-rso", function(req, res)
 
 app.post("/api/:id/create-rso-event", function(req, res)
 {
-	var checkMembers = 'SELECT COUNT(uid) FROM is_in WHERE rso_id = VALUES($1)'
-	var queryValues = [req.params.id]
+	var checkMembers = 'SELECT COUNT(uid) FROM is_in WHERE rso_id = \'' + req.params.id + '\'';
 	
-	client.query(checkMembers, queryValues, (err, insert) =>
+	client.query(checkMembers, (err, insert) =>
 	{
 		console.log(insert)
 		if(err)

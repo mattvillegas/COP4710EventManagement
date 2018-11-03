@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
+import { Publicevent } from '../_services/publicevent';
+import { Privateevent } from '../_services/privateevent';
+import { Rsoevent } from '../_services/rsoevent';
+import 'rxjs/add/operator/map';
 
 @Injectable({
     providedIn: 'root'
@@ -21,6 +24,10 @@ export class AuthenticationService {
         this.user = user;
     }
 
+    getEvents(){
+        return this.http.get('http://localhost:8080/api/users/get-events'+this.user.id, {headers:this.headers});
+    }
+
     loginUser(user){
         return this.http.post('http://localhost:8080/api/users/login', user, {headers:this.headers});
     }
@@ -37,16 +44,16 @@ export class AuthenticationService {
         return this.http.post('http://localhost:8080/api/users/admin-create', user, {headers:this.headers});
     }
 
-    createPublicEvent(user){
-        return this.http.post('http://localhost:8080/api/users/create-rso-event', user, {headers:this.headers});
+    createPublicEvent(event: Publicevent){
+        return this.http.post('http://localhost:8080/api/users/create-rso-event'+this.user.id, event, {headers:this.headers});
     }
 
-    createPrivateEvent(user){
-        return this.http.post('http://localhost:8080/api/users/create-rso-event', user, {headers:this.headers});
+    createPrivateEvent(event: Privateevent){
+        return this.http.post('http://localhost:8080/api/users/create-rso-event'+this.user.id, event, {headers:this.headers});
     }
 
-    createRSOEvent(user){
-        return this.http.post('http://localhost:8080/api/users/create-rso-event', user, {headers:this.headers});
+    createRSOEvent(event: Rsoevent){
+        return this.http.post('http://localhost:8080/api/users/create-rso-event'+this.user.id, event, {headers:this.headers});
     }
 
     login(username: string, password: string) {

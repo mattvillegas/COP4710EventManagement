@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, Route } from '@angular/router';
 import { AuthenticationService } from '../_services/authentication.service';
+import { Publicevent } from '../_services/publicevent';
+import { Privateevent } from '../_services/privateevent';
+import { Rsoevent } from '../_services/rsoevent';
 
 @Component({
   selector: 'app-dashboardsuper',
@@ -8,6 +11,13 @@ import { AuthenticationService } from '../_services/authentication.service';
   styleUrls: ['./dashboardsuper.component.css']
 })
 export class DashboardsuperComponent implements OnInit {
+
+  inputString: string;
+  user : Object;
+  user_id : String;
+  _id: string = null;
+  CreatedByUserID : string;
+  eventlist : any;
 
   type: String;
   time: String; 
@@ -22,10 +32,20 @@ export class DashboardsuperComponent implements OnInit {
   constructor(private router: Router, public authService: AuthenticationService) { }
 
   ngOnInit() {
+      this.loadPage();
+  }
+
+  loadPage(){
+   var temp = sessionStorage.getItem('user');
+   this.user = JSON.parse(temp);
+   this.authService.storeUser(this.user);
+   this.user_id = this.user['id'];
+   //this.getEventList();
   }
 
   onAddButton(){
     const event = { 
+      _id: this._id,
       type : this.type,
       time : this.time,
       location : this.location,
@@ -54,6 +74,12 @@ export class DashboardsuperComponent implements OnInit {
       this.email = undefined; 
       this.phone = undefined; 
       this.category = undefined; 
+  }
+
+  getEventList(){
+    this.authService.getEvents().subscribe(data =>{
+    this.eventlist = data;
+    })
   }
 
   AddPublicEvent(NewEvent){

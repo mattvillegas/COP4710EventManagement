@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, Route } from '@angular/router';
 import { AuthenticationService } from '../_services/authentication.service';
+import { Publicevent } from '../_services/publicevent';
+import { Privateevent } from '../_services/privateevent';
+import { Rsoevent } from '../_services/rsoevent';
 
 @Component({
   selector: 'app-dashboardadmin',
@@ -8,6 +11,13 @@ import { AuthenticationService } from '../_services/authentication.service';
   styleUrls: ['./dashboardadmin.component.css']
 })
 export class DashboardadminComponent implements OnInit {
+
+  inputString: string;
+  user : Object;
+  user_id : String;
+  _id: string = null;
+  CreatedByUserID : string;
+  eventlist : any;
 
   type: String;
   time: String; 
@@ -25,10 +35,20 @@ export class DashboardadminComponent implements OnInit {
   constructor(private router: Router, public authService: AuthenticationService) { }
 
   ngOnInit() {
+    this.loadPage();
+  }
+
+  loadPage(){
+   var temp = sessionStorage.getItem('user');
+   this.user = JSON.parse(temp);
+   this.authService.storeUser(this.user);
+   this.user_id = this.user['id'];
+   //this.getEventList();
   }
 
   onAddButton(){
     const event = { 
+      _id: this._id,
       type : this.type,
       time : this.time,
       location : this.location,
@@ -37,8 +57,7 @@ export class DashboardadminComponent implements OnInit {
       title : this.title,
       email : this.email,
       phone : this.phone,
-      category : this.category,
-      rsoid : this.rsoid
+      category : this.category
     }
 
     if(this.type === "RSO")
@@ -61,6 +80,12 @@ export class DashboardadminComponent implements OnInit {
       this.phone = undefined; 
       this.category = undefined; 
       this.rsoid = undefined; 
+  }
+
+  getEventList(){
+    this.authService.getEvents().subscribe(data =>{
+    this.eventlist = data;
+    })
   }
 
    AddRSOEvent(NewEvent){

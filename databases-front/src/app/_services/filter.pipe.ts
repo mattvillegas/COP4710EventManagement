@@ -5,13 +5,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(contactlist: any, inputString: string): any {
+  transform(eventlist: any, inputString: string): any {
     // Check if the search inputString is empty/undefined
     if(inputString === undefined){
-      return contactlist;
+      return eventlist;
     }
     // If there is input string to search:
-    return contactlist.filter(function(retVal){
+    return eventlist.filter(function(retVal){
       return retVal.name.toLowerCase().includes(inputString.toLowerCase());
     });
   }

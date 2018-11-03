@@ -15,9 +15,14 @@ export class DashboardadminComponent implements OnInit {
   inputString: string;
   user : Object;
   user_id : String;
+
+  publicevent : Publicevent;
+  privateevent : Privateevent;
+  rsoevent : Rsoevent;
+  eventlist : any;
+
   _id: string = null;
   CreatedByUserID : string;
-  eventlist : any;
 
   type: String;
   time: String; 
@@ -57,7 +62,8 @@ export class DashboardadminComponent implements OnInit {
       title : this.title,
       email : this.email,
       phone : this.phone,
-      category : this.category
+      category : this.category,
+      CreatedByUserID : this.user["id"]
     }
 
     if(this.type === "RSO")

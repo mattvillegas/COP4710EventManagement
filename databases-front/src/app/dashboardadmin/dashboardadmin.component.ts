@@ -9,7 +9,8 @@ import { AuthenticationService } from '../_services/authentication.service';
 })
 export class DashboardadminComponent implements OnInit {
 
-  time: String;
+  type: String;
+  time: String; 
   location: String;
   description: String;
   name: String;
@@ -28,6 +29,7 @@ export class DashboardadminComponent implements OnInit {
 
   onAddButton(){
   	const event = { 
+      type : this.type,
   		time : this.time,
   		location : this.location,
   		description : this.description,

@@ -37,6 +37,14 @@ export class AuthenticationService {
         return this.http.post('http://localhost:8080/api/users/admin-create', user, {headers:this.headers});
     }
 
+    adminCreateEvent(user){
+        return this.http.post('http://localhost:8080/api/users/create-rso-event', user, {headers:this.headers});
+    }
+
+    superAdminCreateEvent(user){
+        return this.http.post('http://localhost:8080/api/users/create-rso-event', user, {headers:this.headers});
+    }
+
     login(username: string, password: string) {
         return this.http.post<any>('/api/authenticate', { username: username, password: password })
             .map(user => {

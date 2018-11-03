@@ -1,3 +1,93 @@
-<p>
-  dashboardadmin works!
-</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+</head>
+<body>
+	<div class="container">
+	    <div class="d-flex justify-content-center h-100">
+	        <div class="card">
+	            <div class="card-header">
+	                <h1><a [routerLink] = "['/dashboarduser']">Your Dashboard</a></h1>
+	                <nav>
+	                	<table>
+	                		<tr>
+	                		<div class="form-group">
+              				<input placeholder="Enter Event to Search" name="inputString" [(ngModel)] = "inputString" class="form-control" style="max-width:450px">
+         					</div>
+	                			<th><a style="font-size:1.2em; padding-left:10em" [routerLink] = "['/login']">Logout</a></th>
+	                		</tr>
+	                	</table>
+	                </nav>
+	            </div>
+	            <div class="card-body">
+	                <p> This is the official dashboard for students like you to find events to attend here at UCF. </p>
+	                <h3> Happening on Campus </h3>
+	                <div class="event-list">
+	                	<table>
+	                		<tr>
+	                			<th>Title</th>
+	                			<th>Description</th>
+	                			<th>Location</th>
+	                			<th>Start Time</th>
+	                			<th>End Time</th>
+	                			<th>Share on Social Media</th>
+	                		</tr>
+	                		<tr>
+	                			<td>Trick or Treat on Greek Street (TOTOGS)</td>
+	                			<td>Held around the same time as Halloween, Trick or Treat on Greek Street (TOTOGS) is a community wide event in which fraternities and sororities host a variety of Halloween events for students, staff, and families in the central Orlando area.</td>
+	                			<td>Greek Park</td>
+	                			<td>Time</td>
+	                			<td>Time</td>
+	                			<td>
+	                				<img src="../assets/FacebookLogo.png">
+	                			</td>
+	                		</tr>
+	                	</table>
+	                </div>
+	                <h3> Your Created Events </h3>
+		                <div class="event-list">
+		                	<table>
+		                		<tr>
+		                			<th>Title</th>
+		                			<th>Description</th>
+		                			<th>Location</th>
+		                			<th>Start Time</th>
+		                			<th>End Time</th>
+		                			<th>Share on Social Media</th>
+		                		</tr>
+		                		<tr>
+		                			<td>Trick or Treat on Greek Street (TOTOGS)</td>
+		                			<td>Held around the same time as Halloween, Trick or Treat on Greek Street (TOTOGS) is a community wide event in which fraternities and sororities host a variety of Halloween events for students, staff, and families in the central Orlando area.</td>
+		                			<td>Greek Park</td>
+		                			<td>Time</td>
+		                			<td>Time</td>
+		                			<img src="../assets/FacebookLogo.png">
+		                		</tr>
+		                	</table>
+		                </div>
+		            <h3> Add New Event </h3>
+		            <table class="table">
+              			<tbody>
+                			<tr><h3 class="text-center" id="addtitle" style="color:#779ECB;">{{addTitle}}</h3></tr>
+                			<tr><input placeholder="Enter Event Type" name="type" [(ngModel)] = "type" class="form-control" style="margin: 5px;"></tr>
+                			<tr><input placeholder="Enter Event Title" type="text" name="title" [(ngModel)] = "title" class="form-control" style="margin: 5px;"></tr>
+                			<tr><input placeholder="Enter Time (Month/Day/Year)" type="text" name="time" [(ngModel)] = "time" class="form-control" style="margin: 5px;"></tr>
+                			<tr><input placeholder="Enter Location" type="text" name="location" [(ngModel)] = "location" class="form-control" style="margin: 5px;"></tr>
+                			<tr><input placeholder="Enter Event Description" type="text" name="description" [(ngModel)] = "description" class="form-control" style="margin: 5px;"></tr>
+                			<tr><input placeholder="Enter Your Name" type="text" name="name" [(ngModel)] = "name" class="form-control" style="margin: 5px;"></tr>
+                			<tr><input placeholder="Enter Your Email" type="text" name="email" [(ngModel)] = "email" class="form-control" style="margin: 5px;"></tr>
+                			<tr><input placeholder="Enter Your Phone Number" type="text" name="phone" [(ngModel)] = "phone" class="form-control" style="margin: 5px;"></tr>
+                			<tr><input placeholder="Enter Event Category" type="text" name="category" [(ngModel)] = "category" class="form-control" style="margin: 5px;"></tr>
+                			<tr><input placeholder="Enter RSO ID" type="text" name="rsoid" [(ngModel)] = "rsoid" class="form-control" style="margin: 5px;"></tr>
+                			<tr><button class="btn btn-success" (click)="onAddButton()" style="background-color:#779ECB; border-color:#779ECB; margin-top:10px; margin-left: 5px;  ">Submit</button><button class="btn btn-success" (click)="clearFields()" style="background-color:#c23b22; border-color:#c23b22; margin-top:10px; margin-left: 5px;  ">Clear</button></tr>
+              			</tbody>
+            		</table> 
+	            </div>
+	            <div class="card-footer">
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</body>
+</html>

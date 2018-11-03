@@ -386,14 +386,14 @@ app.post("/api/:id/create-rso-event", function(req, res)
 		console.log(insert)
 		if(err)
 		{
-			handleError(res, "Not enough members in rso")
+			handleError(res, "Some database error")
 		}
-		else if(insert > 4)
+		else if(parseInt(insert.rows[count], 10) > 4)
 		{
-			var insertIntoEvent = 'INSERT INTO event (time, location, description)'
-			var eventTableValues = [req.body.time, req.body.loc, req.body.desc]
-			var createString = 'INSERT INTO rso_event(time, location, description, name, contact_email, contact_phone, event_category, rso_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8)'
-			var createValues = [req.body.time, req.body.loc, req.body.desc, req.body.name, req.body.contact_email, req.body.contact_phone, req.body.event_category]
+			var insertIntoEvent = 'INSERT INTO event (time, location, description, event_name) VALUES($1, $2, $3, $4, $5)'
+			var eventTableValues = [req.body.time, req.body.loc, req.body.desc, req.body.event_name]
+			var createString = 'INSERT INTO rso_event(event_name, time, location, description, name, contact_email, contact_phone, event_category, rso_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)'
+			var createValues = [req.body.event_name, req.body.time, req.body.loc, req.body.desc, req.body.contact_name, req.body.contact_email, req.body.contact_phone, req.body.event_category]
 			
 			client.query(insertIntoEvent, eventTableValues, (err, eventTable) => 
 			{

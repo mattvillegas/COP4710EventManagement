@@ -29,9 +29,14 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/login']);
       }
       else {
-        const user = data['user'];
-        this.authService.storeUser(user)
-        this.router.navigate(['/dashboard'])// TO DO success
+        const user = data['accountType'];
+        this.authService.storeUser(data['uid'])
+        if(user === "student")
+          this.router.navigate(['/dashboarduser'])
+        else if(user === "superadmin")
+          this.router.navigate(['/dashboardsuper'])
+        else
+          this.router.navigate(['/dashboardadmin'])
       }
 
       }

@@ -105,7 +105,7 @@ app.post("/api/users/student-create", function(req,res)
 *   Return string "Success" if superadmin is created, "couldn't approve admin" otherwise
 */
 
-app.post("/api/users/superadmin-create", function(req,res)
+app.post("/api/users/login", function(req,res)
 {
 	req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
 	
@@ -176,11 +176,13 @@ app.post("/api/users/admin-create", function(req,res)
 
 app.post("/api/users/superadmin-login", function(req, res) 
 {
+	console.log("req body = ", req.body)
     req.body.password = crypto.createHash('sha256').update(JSON.stringify(req.body.password)).digest('hex');
 	var superadminQueryString = 'SELECT * FROM superadmin S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\''
 	var studentQueryString = 'SELECT * FROM student S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';
     var adminQueryString = 'SELECT * FROM admin S WHERE S.email = \'' + req.body.email + '\' AND S.password = \'' + req.body.password + '\'';
 	
+	found = false 
 	client.query(superadminQueryString, (err, superadmin) => {
     if(err)
     {
@@ -189,14 +191,15 @@ app.post("/api/users/superadmin-login", function(req, res)
     else 
     {
         console.log(superadmin.rows)
-        if(superadmin.rows.length < 1)
+        if(superadmin.rows.length > 0)
         {
-            res.status(201).json("SuperAdmin not found")
+			var resString = "uid:" + superadmin.rows[0].uid + "accountType:superadmin"
+			found = true
+			res.status(201).json(resString)
         }
         else
         {
-			var resString = "uid:" + superadmin.rows[0].uid + "accountType:superadmin"
-			res.status(201).json(resString)
+			//res.status(201).json("Logged in")
         }
     }
    })
@@ -209,14 +212,15 @@ app.post("/api/users/superadmin-login", function(req, res)
     else 
     {
         console.log(admin.rows)
-        if(admin.rows.length < 1)
-        {
-            res.status(201).json("Admin not found")
+        if(admin.rows.length > 0)
+        { 
+			var resString = "uid:" + admin.rows[0].uid + " accountType:admin"
+			found = true
+            res.status(201).json(resString)
         }
         else
         {
-			var resString = "uid:" + admin.rows[0].uid + " accountType:admin"
-            res.status(201).json(resString)
+			//res.status(201).json("Admin not found")
         }
     }
    })
@@ -229,16 +233,24 @@ app.post("/api/users/superadmin-login", function(req, res)
     else 
     {
         console.log(student.rows)
-        if(student.rows.length < 1)
+        if(student.rows.length > 0)
         {
-            res.status(201).json("Student not found")
+			var resString = "uid:" + student.rows[0].uid + " accountType:student"
+			found = true
+            res.status(201).json(resString)
         }
         else
         {
-			var resString = "uid:" + student.rows[0].uid + " accountType:student"
-            res.status(201).json(resString)
+			//res.status(201).json("Student not found")
         }
     }
+	
+	// Only reach here if none of the account types could be found.
+	if(!found) 
+	{
+		res.status(201).json("Account not found")
+	}
+	
    })
 });
 
@@ -332,9 +344,9 @@ app.get("/api/:id/get-events", function(req, res)
 app.post("/api/:id/create-rso", function(req, res)
 {
 	var queryString = "INSERT INTO rso(name, adminid) VALUES($1, $2)"
-	var queryValues = [req.body.name, req.body.id]
+	var queryValues = [req.body.name, req.params.id]
 	
-	client.query(queryString, (err, insert) =>
+	client.query(queryString, queryValues, (err, insert) =>
 	{
 		if(err)
 		{
@@ -343,6 +355,84 @@ app.post("/api/:id/create-rso", function(req, res)
 		else
 		{
 			res.status(201).json(insert)
+		}
+	})
+});
+
+app.post("/api/:id/join-rso", function(req, res)
+{
+	var insertIntoIsIn = 'INSERT INTO is_in(rso_id, uid) VALUES($1, $2)'
+	var queryValues = [req.body.rso_id, req.params.id]
+	
+	client.query(insertIntoIsIn, queryValues, (err, insert) =>
+	{
+		if(err)
+		{
+			handleError(res, "Unable to join rso")
+		}
+		else
+		{
+			res.status(201).json(insert)
+		}
+	})
+});
+
+app.post("/api/:id/create-rso-event", function(req, res)
+{
+	var checkMembers = 'SELECT COUNT(uid) FROM is_in WHERE rso_id = \'' + req.params.id + '\'';
+	
+	client.query(checkMembers, (err, insert) =>
+	{
+		console.log(insert)
+		if(err)
+		{
+			handleError(res, "Some database error")
+		}
+		else if(insert.rows[0]["count"] > 4)
+		{
+			var insertIntoEvent = 'INSERT INTO event (time, location, description, event_name) VALUES($1, $2, $3, $4)'
+			var eventTableValues = [req.body.time, req.body.loc, req.body.desc, req.body.event_name]
+			var createString = 'INSERT INTO rso_event(event_name, time, location, description, name, contact_email, contact_phone, event_category, rso_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)'
+			var createValues = [req.body.event_name, req.body.time, req.body.loc, req.body.desc, req.body.contact_name, req.body.contact_email, req.body.contact_phone, req.body.event_category, req.params.id]
+			
+			client.query(insertIntoEvent, eventTableValues, (err, eventTable) => 
+			{
+				if(err)
+				{
+					handleError(res, err.stack)
+				}
+				else
+				{
+					client.query(createString, createValues, (err, rso) => 
+					{
+						if(err)
+						{
+							handleError(res, err.stack)
+						}
+						else
+						{
+							if(rso == null)
+							{
+								res.status(201).json("Error")
+							}
+							else
+							{
+								res.status(201).json("Entered into all the tables")
+							}
+						}
+						
+						
+					})
+					
+				}
+			})
+			
+			
+		}
+		else
+		{
+			console.log(insert.rows[0]["count"])
+			res.status(201).json("Not enough members")
 		}
 	})
 });

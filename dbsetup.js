@@ -22,11 +22,11 @@ client.query('CREATE TABLE admin (name VARCHAR(20), uid SERIAL PRIMARY KEY, emai
 .then(res => console.log("created table!"))
 .catch(e => console.log(e.stack))
 
-client.query('CREATE TABLE event (time timestamp, location VARCHAR(300), description VARCHAR(1000), PRIMARY KEY (time, location))')
+client.query('CREATE TABLE event (event_name VARCHAR(200), time timestamp, location VARCHAR(300), description VARCHAR(10000), PRIMARY KEY (time, location))')
 .then(res => console.log("created table!"))
 .catch(e => console.log(e.stack))
 
-client.query('CREATE TABLE rso_event (time timestamp, location VARCHAR(300), description VARCHAR(1000), name VARCHAR(50), contact_email VARCHAR(50), contact_phone VARCHAR(30), event_category VARCHAR(50), rso_id INTEGER, PRIMARY KEY (time, location), FOREIGN KEY (time, location) REFERENCES event(time, location), FOREIGN KEY (rso_id) REFERENCES rso(rso_id))')
+client.query('CREATE TABLE rso_event (event_name VARCHAR(200), time timestamp, location VARCHAR(300), description VARCHAR(10000), name VARCHAR(100), contact_email VARCHAR(100), contact_phone VARCHAR(50), event_category VARCHAR(50), rso_id INTEGER, PRIMARY KEY (time, location), FOREIGN KEY (time, location) REFERENCES event(time, location), FOREIGN KEY (rso_id) REFERENCES rso(rso_id))')
 .then(res => console.log("created table!"))
 .catch(e => console.log(e.stack))
 
@@ -36,5 +36,9 @@ client.query('CREATE TABLE rso (name VARCHAR(20), rso_id SERIAL PRIMARY KEY, adm
 
 
 client.query('CREATE TABLE is_in (rso_id INTEGER, uid INTEGER, PRIMARY KEY (rso_id, uid), FOREIGN KEY (rso_id) REFERENCES rso(rso_id), FOREIGN KEY (uid) REFERENCES student(uid))')
+.then(res => console.log("created table!"))
+.catch(e => console.log(e.stack))
+
+client.query('CREATE TABLE comments(uid INTEGER, time timestamp, location VARCHAR(300), comment VARCHAR(10000), FOREIGN KEY (time, location) REFERENCES event(time,location), FOREIGN KEY (uid) REFERENCES student(uid))')
 .then(res => console.log("created table!"))
 .catch(e => console.log(e.stack))

@@ -37,16 +37,21 @@ export class DashboardadminComponent implements OnInit {
   		phone : this.phone,
   		category : this.category,
   		rsoid : this.rsoid
-  	};
+  	}
 
-  	this.authService.adminCreateEvent(event).subscribe( 
-  	  data => {
-  	    //alert('You are registered as a student and can now log in');
-        this.router.navigate(['/login']); 
-      }, error => {
-        //alert('Couldn't create student account, please try again');
-        this.router.navigate(['/register']);
-      });
-     } 
+  	this.AddEvent(event);
+
+    } 
+
+   AddEvent(NewEvent){
+    this.authService.adminCreateEvent(NewEvent).subscribe(data=>{
+      this.clearFields();
+    }, err=>{
+      alert('Failed to add event.');
+    });
+    //this.getEventList();
+    //this.getEventList();
+
+  }
 
 }

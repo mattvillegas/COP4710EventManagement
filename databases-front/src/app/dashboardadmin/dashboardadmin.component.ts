@@ -26,16 +26,15 @@ export class DashboardadminComponent implements OnInit {
 
   type: String;
   time: String; 
-  location: String;
-  description: String;
-  name: String;
-  title: String;
-  email: String;
-  phone: String;
-  category: String;
-  rsoid: String;
+  loc: String;
+  desc: String;
+  contact_name: String;
+  event_name: String;
+  contact_email: String;
+  contact_phone: String;
+  event_category: String;
 
-  //RSO: timestamp, location, description, name of person, title of event, contact email, contact phone, event category, id of rso
+  //RSO: timestamp, location, description, name of person, title of event, contact email, contact phone, event category
 
   constructor(private router: Router, public authService: AuthenticationService) { }
 
@@ -56,13 +55,13 @@ export class DashboardadminComponent implements OnInit {
       _id: this._id,
       type : this.type,
       time : this.time,
-      location : this.location,
-      description : this.description,
-      name : this.name,
-      title : this.title,
-      email : this.email,
-      phone : this.phone,
-      category : this.category,
+      loc : this.loc,
+      desc : this.desc,
+      contact_name : this.contact_name,
+      event_name : this.event_name,
+      contact_email : this.contact_email,
+      contact_phone : this.contact_phone,
+      event_category : this.event_category,
       CreatedByUserID : this.user["id"]
     }
 
@@ -78,14 +77,13 @@ export class DashboardadminComponent implements OnInit {
   clearFields() {
       this.type = undefined; 
       this.time = undefined; 
-      this.location = undefined; 
-      this.description = undefined; 
-      this.name = undefined;       
-      this.title = undefined; 
-      this.email = undefined; 
-      this.phone = undefined; 
-      this.category = undefined; 
-      this.rsoid = undefined; 
+      this.loc = undefined; 
+      this.desc = undefined; 
+      this.contact_name = undefined;       
+      this.event_name = undefined; 
+      this.contact_email = undefined; 
+      this.contact_phone = undefined; 
+      this.event_category = undefined; 
   }
 
   getEventList(){

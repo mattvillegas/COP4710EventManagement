@@ -1,12 +1,12 @@
 export class Rsoevent {
     public _id?: string;
-    public timestamp: string;
-    public location: string;
-    public description: string;
-    public name: string;
-    public title: string;
-    public email: string;
-    public phone: string;
-    public category: string;
+    public time: string;
+    public loc: string;
+    public desc: string;
+    public contact_name: string;
+    public event_name: string;
+    public contact_email: string;
+    public contact_phone: string;
+    public event_category: string;
     public CreatedByUserID: string;
 }

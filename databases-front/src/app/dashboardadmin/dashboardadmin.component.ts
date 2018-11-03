@@ -47,7 +47,7 @@ export class DashboardadminComponent implements OnInit {
    this.user = JSON.parse(temp);
    this.authService.storeUser(this.user);
    this.user_id = this.user['id'];
-   //this.getEventList();
+   this.getEventList();
   }
 
   onAddButton(){
@@ -101,8 +101,8 @@ export class DashboardadminComponent implements OnInit {
     }, err=>{
       alert('Failed to add RSO event.');
     });
-    //this.getEventList();
-    //this.getEventList();
+    this.getEventList();
+    this.getEventList();
   }
 
    AddPublicEvent(NewEvent){
@@ -111,8 +111,8 @@ export class DashboardadminComponent implements OnInit {
     }, err=>{
       alert('Failed to add public event.');
     });
-    //this.getEventList();
-    //this.getEventList();
+    this.getEventList();
+    this.getEventList();
   }
 
    AddPrivateEvent(NewEvent){
@@ -121,8 +121,8 @@ export class DashboardadminComponent implements OnInit {
     }, err=>{
       alert('Failed to add private event.');
     });
-    //this.getEventList();
-    //this.getEventList();
+    this.getEventList();
+    this.getEventList();
   }
 
 }

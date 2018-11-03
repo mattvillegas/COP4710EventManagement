@@ -25,7 +25,7 @@ export class AuthenticationService {
     }
 
     getEvents(){
-        return this.http.get('http://localhost:8080/api/users/get-events'+this.user.id, {headers:this.headers});
+        return this.http.get('http://localhost:8080/api/' + this.user + '/get-events', {headers:this.headers});
     }
 
     loginUser(user){

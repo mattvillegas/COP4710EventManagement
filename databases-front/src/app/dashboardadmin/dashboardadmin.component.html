@@ -74,6 +74,28 @@
 			                	</table>
 			                </div>
 			        </div>
+
+			<table>
+            <thead>
+              <tr>
+              	<th><h6>Event Name</h6></th>
+                <th><h6>Time</h6></th>
+                <th><h6>Location</h6></th>
+                <th><h6>Description</h6></th>
+				<th><h6><strong></strong></h6></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="word-break: break-all">
+                 <tr *ngFor="let event of eventlist | filter : inputString;">
+                  <td>{{event.event_name}}</td>
+                  <td>{{event.time}}</td>
+                  <td>{{event.loc}}</td>
+                  <td>{{event.desc}}</td>
+              </tr>
+            </tbody>
+          </table>
+
 			        <div class="element">
 			            <h3> Add New RSO, Public, or Private Event </h3>
 			            <table class="add-event">

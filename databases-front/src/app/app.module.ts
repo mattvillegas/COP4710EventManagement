@@ -15,6 +15,9 @@ import { DashboarduserComponent } from './dashboarduser/dashboarduser.component'
 import { DashboardadminComponent } from './dashboardadmin/dashboardadmin.component';
 import { RegisteradminComponent } from './registeradmin/registeradmin.component';
 
+import { AuthenticationService } from './_services/authentication.service';
+import { FilterPipe } from './_services/filter.pipe';
+
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
@@ -37,7 +40,8 @@ const appRoutes: Routes = [
     DashboardsuperComponent,
     DashboarduserComponent,
     DashboardadminComponent,
-    RegisteradminComponent
+    RegisteradminComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -45,6 +49,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

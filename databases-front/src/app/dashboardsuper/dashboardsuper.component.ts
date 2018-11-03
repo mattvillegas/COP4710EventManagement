@@ -9,6 +9,7 @@ import { AuthenticationService } from '../_services/authentication.service';
 })
 export class DashboardsuperComponent implements OnInit {
 
+  type: String;
   time: String; 
   location: String;
   description: String;
@@ -17,8 +18,6 @@ export class DashboardsuperComponent implements OnInit {
   email: String;
   phone: String;
   category: String;
-  end : String; 
-  start : String; 
 
   constructor(private router: Router, public authService: AuthenticationService) { }
 
@@ -26,35 +25,55 @@ export class DashboardsuperComponent implements OnInit {
   }
 
   onAddButton(){
-  	const event = { 
-      title : this.title, 
-  		description : this.description,
-  		location : this.location,
-  		start : this.start,
-  		end : this.end,
-  	}
+    const event = { 
+      type : this.type,
+      time : this.time,
+      location : this.location,
+      description : this.description,
+      name : this.name,
+      title : this.title,
+      email : this.email,
+      phone : this.phone,
+      category : this.category
+    }
 
-  	this.AddEvent(event);
+    if(this.type === "Public")
+       this.AddPublicEvent(event);
+    else
+       this.AddPrivateEvent(event);
 
     } 
 
-    clearFields(){
-      this.title = undefined;
-      this.location = undefined;
+  clearFields() {
+      this.type = undefined; 
+      this.time = undefined; 
+      this.location = undefined; 
       this.description = undefined; 
-      this.start = undefined; 
-      this.end = undefined; 
-    }
+      this.name = undefined;       
+      this.title = undefined; 
+      this.email = undefined; 
+      this.phone = undefined; 
+      this.category = undefined; 
+  }
 
-   AddEvent(NewEvent){
-    this.authService.superAdminCreateEvent(NewEvent).subscribe(data=>{
+  AddPublicEvent(NewEvent){
+    this.authService.createPublicEvent(NewEvent).subscribe(data=>{
       this.clearFields();
     }, err=>{
-      alert('Failed to add event.');
+      alert('Failed to add public event.');
     });
     //this.getEventList();
     //this.getEventList();
+  }
 
+   AddPrivateEvent(NewEvent){
+    this.authService.createPrivateEvent(NewEvent).subscribe(data=>{
+      this.clearFields();
+    }, err=>{
+      alert('Failed to add private event.');
+    });
+    //this.getEventList();
+    //this.getEventList();
   }
 
 }

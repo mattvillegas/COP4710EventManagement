@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 
 @Injectable({
-	providedIn: 'root'
+    providedIn: 'root'
 })
 
 export class AuthenticationService {
@@ -22,7 +22,7 @@ export class AuthenticationService {
     }
 
     loginUser(user){
-        return this.http.post('http://localhost:8080/api/users/student-login', user, {headers:this.headers});
+        return this.http.post('http://localhost:8080/api/users/login', user, {headers:this.headers});
     }
 
     registerStudent(user){
@@ -37,11 +37,15 @@ export class AuthenticationService {
         return this.http.post('http://localhost:8080/api/users/admin-create', user, {headers:this.headers});
     }
 
-    adminCreateEvent(user){
+    createPublicEvent(user){
         return this.http.post('http://localhost:8080/api/users/create-rso-event', user, {headers:this.headers});
     }
 
-    superAdminCreateEvent(user){
+    createPrivateEvent(user){
+        return this.http.post('http://localhost:8080/api/users/create-rso-event', user, {headers:this.headers});
+    }
+
+    createRSOEvent(user){
         return this.http.post('http://localhost:8080/api/users/create-rso-event', user, {headers:this.headers});
     }
 

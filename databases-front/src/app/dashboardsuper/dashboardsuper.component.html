@@ -75,18 +75,21 @@
 			                </div>
 			        </div>
 			        <div class="element">
-			            <h3> Add New Event </h3>
+			            <h3> Add New Public or Private Event </h3>
 			            <table class="add-event">
 	              			<tbody>
-	                			<tr><input placeholder="Enter Title" type="text" name="name" [(ngModel)] = "title" class="form-control"></tr>
-	                			<tr><input placeholder="Enter Description" type="text" name="description" [(ngModel)] = "description" class="form-control"></tr>
+	                			<tr><input placeholder="Enter Event Type ('Public' or 'Private')" name="type" [(ngModel)] = "type" class="form-control"></tr>
+	                			<tr><input placeholder="Enter Event Title" type="text" name="title" [(ngModel)] = "title" class="form-control"></tr>
+	                			<tr><input placeholder="Enter Time ('1991-01-08 04:05:06')" type="text" name="time" [(ngModel)] = "time" class="form-control"></tr>
 	                			<tr><input placeholder="Enter Location" type="text" name="location" [(ngModel)] = "location" class="form-control"></tr>
-	                			<tr><input placeholder="Enter Start Time" type="text" name="start" [(ngModel)] = "start" class="form-control"></tr>
-	                			<tr><input placeholder="Enter End Time" type="text" name="end" [(ngModel)] = "end" class="form-control"></tr>
-	                			<tr><button class="btn btn-success" (click)="onAddButton()" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Submit</button>
-	                				<button class="btn btn-success" (click)="clearFields()" style="background-color:gold; border-color:black; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Clear</button></tr>
+	                			<tr><input placeholder="Enter Event Description" type="text" name="description" [(ngModel)] = "description" class="form-control"></tr>
+	                			<tr><input placeholder="Enter Your Name" type="text" name="name" [(ngModel)] = "name" class="form-control"></tr>
+	                			<tr><input placeholder="Enter Your Email" type="text" name="email" [(ngModel)] = "email" class="form-control"></tr>
+	                			<tr><input placeholder="Enter Your Phone Number" type="text" name="phone" [(ngModel)] = "phone" class="form-control"></tr>
+	                			<tr><input placeholder="Enter Event Category" type="text" name="category" [(ngModel)] = "category" class="form-control"></tr>
+	                			<tr><button class="btn btn-success" (click)="onAddButton()" style="background-color:gold; border-color:black; margin-top:10px; margin-left: 5px;  ">Submit</button><button class="btn btn-success" (click)="clearFields()" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px;  ">Clear</button></tr>
 	              			</tbody>
-	            		</table>
+	            		</table> 
 	            	</div> 
 		        </div>
 	            <div class="card-footer">

@@ -388,18 +388,18 @@ app.post("/api/:id/create-rso-event", function(req, res)
 		{
 			handleError(res, "Some database error")
 		}
-		else if(parseInt(insert.rows[count], 10) > 4)
+		else if(insert.rows[0]["count"] > 4)
 		{
-			var insertIntoEvent = 'INSERT INTO event (time, location, description, event_name) VALUES($1, $2, $3, $4, $5)'
+			var insertIntoEvent = 'INSERT INTO event (time, location, description, event_name) VALUES($1, $2, $3, $4)'
 			var eventTableValues = [req.body.time, req.body.loc, req.body.desc, req.body.event_name]
 			var createString = 'INSERT INTO rso_event(event_name, time, location, description, name, contact_email, contact_phone, event_category, rso_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)'
-			var createValues = [req.body.event_name, req.body.time, req.body.loc, req.body.desc, req.body.contact_name, req.body.contact_email, req.body.contact_phone, req.body.event_category]
+			var createValues = [req.body.event_name, req.body.time, req.body.loc, req.body.desc, req.body.contact_name, req.body.contact_email, req.body.contact_phone, req.body.event_category, req.params.id]
 			
 			client.query(insertIntoEvent, eventTableValues, (err, eventTable) => 
 			{
 				if(err)
 				{
-					handleError(res, "Didn't insert into event table")
+					handleError(res, err.stack)
 				}
 				else
 				{
@@ -407,11 +407,18 @@ app.post("/api/:id/create-rso-event", function(req, res)
 					{
 						if(err)
 						{
-							handleError(res, "I dont know what this error is")
+							handleError(res, err.stack)
 						}
 						else
 						{
-							res.status(201).json("Entered into all the tables")
+							if(rso == null)
+							{
+								res.status(201).json("Error")
+							}
+							else
+							{
+								res.status(201).json("Entered into all the tables")
+							}
 						}
 						
 						
@@ -420,17 +427,11 @@ app.post("/api/:id/create-rso-event", function(req, res)
 				}
 			})
 			
-			if(err)
-			{
-				handleError(res, "Couldn't create rso event")
-			}
-			else
-			{
-				res.status(201).json("Created the rso event")
-			}
+			
 		}
 		else
 		{
+			console.log(insert.rows[0]["count"])
 			res.status(201).json("Not enough members")
 		}
 	})

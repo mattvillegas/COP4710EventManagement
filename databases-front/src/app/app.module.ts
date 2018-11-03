@@ -13,6 +13,7 @@ import { RegistersuperComponent } from './registersuper/registersuper.component'
 import { DashboardsuperComponent } from './dashboardsuper/dashboardsuper.component';
 import { DashboarduserComponent } from './dashboarduser/dashboarduser.component';
 import { DashboardadminComponent } from './dashboardadmin/dashboardadmin.component';
+import { RegisteradminComponent } from './registeradmin/registeradmin.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -22,7 +23,8 @@ const appRoutes: Routes = [
   { path: 'dashboardsuper', component: DashboardsuperComponent },
   { path: 'dashboardadmin', component: DashboardadminComponent },
   { path: 'dashboarduser', component: DashboarduserComponent },
-  { path: 'registersuper', component: RegistersuperComponent }
+  { path: 'registersuper', component: RegistersuperComponent },
+  { path: 'registeradmin', component: RegisteradminComponent }
 ];
 
 @NgModule({
@@ -34,7 +36,8 @@ const appRoutes: Routes = [
     RegistersuperComponent,
     DashboardsuperComponent,
     DashboarduserComponent,
-    DashboardadminComponent
+    DashboardadminComponent,
+    RegisteradminComponent
   ],
   imports: [
     BrowserModule,

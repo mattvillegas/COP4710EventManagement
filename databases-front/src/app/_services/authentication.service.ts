@@ -45,15 +45,15 @@ export class AuthenticationService {
     }
 
     createPublicEvent(event: Publicevent){
-        return this.http.post('http://localhost:8080/api/' + this.user.id + '/create-rso-event', event, {headers:this.headers});
+        return this.http.post('http://localhost:8080/api/' + this.user + '/create-rso-event', event, {headers:this.headers});
     }
 
     createPrivateEvent(event: Privateevent){
-        return this.http.post('http://localhost:8080/api/' + this.user.id + '/create-rso-event', event, {headers:this.headers});
+        return this.http.post('http://localhost:8080/api/' + this.user + '/create-rso-event', event, {headers:this.headers});
     }
 
     createRSOEvent(event: Rsoevent){
-        return this.http.post('http://localhost:8080/api/' + this.user.id + '/create-rso-event', event, {headers:this.headers});
+        return this.http.post('http://localhost:8080/api/' + this.user + '/create-rso-event', event, {headers:this.headers});
     }
 
     login(username: string, password: string) {

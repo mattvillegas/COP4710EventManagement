@@ -19,6 +19,8 @@ export class DashboardadminComponent implements OnInit {
   phone: String;
   category: String;
   rsoid: String;
+  start : String;
+  end : String; 
 
   //RSO: timestamp, location, description, name of person, title of event, contact email, contact phone, event category, id of rso
 
@@ -33,17 +35,26 @@ export class DashboardadminComponent implements OnInit {
   		time : this.time,
   		location : this.location,
   		description : this.description,
-  		name : this.name,
   		title : this.title,
   		email : this.email,
   		phone : this.phone,
   		category : this.category,
-  		rsoid : this.rsoid
+  		rsoid : this.rsoid,
+      start : this.start,
+      end : this.end
   	}
 
   	this.AddEvent(event);
 
     } 
+
+  clearFields() {
+      this.title = undefined;
+      this.location = undefined;
+      this.description = undefined; 
+      this.start = undefined;
+      this.end = undefined; 
+  }
 
    AddEvent(NewEvent){
     this.authService.adminCreateEvent(NewEvent).subscribe(data=>{

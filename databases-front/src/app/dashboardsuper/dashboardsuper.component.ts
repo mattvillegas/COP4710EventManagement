@@ -17,6 +17,8 @@ export class DashboardsuperComponent implements OnInit {
   email: String;
   phone: String;
   category: String;
+  end : String; 
+  start : String; 
 
   constructor(private router: Router, public authService: AuthenticationService) { }
 
@@ -25,19 +27,24 @@ export class DashboardsuperComponent implements OnInit {
 
   onAddButton(){
   	const event = { 
-  		time : this.time,
-  		location : this.location,
+      title : this.title, 
   		description : this.description,
-  		name : this.name,
-  		title : this.title,
-  		email : this.email,
-  		phone : this.phone,
-  		category : this.category
+  		location : this.location,
+  		start : this.start,
+  		end : this.end,
   	}
 
   	this.AddEvent(event);
 
     } 
+
+    clearFields(){
+      this.title = undefined;
+      this.location = undefined;
+      this.description = undefined; 
+      this.start = undefined; 
+      this.end = undefined; 
+    }
 
    AddEvent(NewEvent){
     this.authService.superAdminCreateEvent(NewEvent).subscribe(data=>{

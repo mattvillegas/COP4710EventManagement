@@ -114,13 +114,13 @@ text-align: center;
 	float: left;
 }
 
+.form-control {
+	margin: 5px;
+}
+
 .add-event {
 	margin-left: auto;
 	margin-right: auto;
-}
-
-.form-control {
-	margin: 5px;
 }
 
 .input-group-prepend span{

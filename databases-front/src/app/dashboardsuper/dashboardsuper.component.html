@@ -79,14 +79,14 @@
 			            <table class="add-event">
 	              			<tbody>
 	                			<tr><input placeholder="Enter Event Type ('Public' or 'Private')" name="type" [(ngModel)] = "type" class="form-control"></tr>
-	                			<tr><input placeholder="Enter Event Title" type="text" name="title" [(ngModel)] = "title" class="form-control"></tr>
+	                			<tr><input placeholder="Enter Event Title" type="text" name="event_name" [(ngModel)] = "event_name" class="form-control"></tr>
 	                			<tr><input placeholder="Enter Time ('1991-01-08 04:05:06')" type="text" name="time" [(ngModel)] = "time" class="form-control"></tr>
-	                			<tr><input placeholder="Enter Location" type="text" name="location" [(ngModel)] = "location" class="form-control"></tr>
-	                			<tr><input placeholder="Enter Event Description" type="text" name="description" [(ngModel)] = "description" class="form-control"></tr>
-	                			<tr><input placeholder="Enter Your Name" type="text" name="name" [(ngModel)] = "name" class="form-control"></tr>
-	                			<tr><input placeholder="Enter Your Email" type="text" name="email" [(ngModel)] = "email" class="form-control"></tr>
-	                			<tr><input placeholder="Enter Your Phone Number" type="text" name="phone" [(ngModel)] = "phone" class="form-control"></tr>
-	                			<tr><input placeholder="Enter Event Category" type="text" name="category" [(ngModel)] = "category" class="form-control"></tr>
+	                			<tr><input placeholder="Enter Location" type="text" name="loc" [(ngModel)] = "loc" class="form-control"></tr>
+	                			<tr><input placeholder="Enter Event Description" type="text" name="desc" [(ngModel)] = "desc" class="form-control"></tr>
+	                			<tr><input placeholder="Enter Your Name" type="text" name="contact_name" [(ngModel)] = "contact_name" class="form-control"></tr>
+	                			<tr><input placeholder="Enter Your Email" type="text" name="contact_email" [(ngModel)] = "contact_email" class="form-control"></tr>
+	                			<tr><input placeholder="Enter Your Phone Number" type="text" name="contact_phone" [(ngModel)] = "contact_phone" class="form-control"></tr>
+	                			<tr><input placeholder="Enter Event Category" type="text" name="event_category" [(ngModel)] = "event_category" class="form-control"></tr>
 	                			<tr><button class="btn btn-success" (click)="onAddButton()" style="background-color:gold; border-color:black; margin-top:10px; margin-left: 5px;  ">Submit</button><button class="btn btn-success" (click)="clearFields()" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px;  ">Clear</button></tr>
 	              			</tbody>
 	            		</table> 

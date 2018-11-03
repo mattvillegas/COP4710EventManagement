@@ -21,31 +21,12 @@
 	                </nav>
 	            </div>
 	            <div class="card-body">
-	                <p> This is the official dashboard for students like you to find events to attend here at UCF. </p>
-	                <h3> Happening on Campus </h3>
-	                <div class="event-list">
-	                	<table>
-	                		<tr>
-	                			<th>Title</th>
-	                			<th>Description</th>
-	                			<th>Location</th>
 	                			<th>Start Time</th>
-	                			<th>End Time</th>
-	                			<th>Share on Social Media</th>
-	                		</tr>
-	                		<tr>
-	                			<td>Trick or Treat on Greek Street (TOTOGS)</td>
-	                			<td>Held around the same time as Halloween, Trick or Treat on Greek Street (TOTOGS) is a community wide event in which fraternities and sororities host a variety of Halloween events for students, staff, and families in the central Orlando area.</td>
-	                			<td>Greek Park</td>
-	                			<td>Time</td>
-	                			<td>Time</td>
-	                			<td>
-	                				<img src="../assets/FacebookLogo.png">
-	                			</td>
-	                		</tr>
-	                	</table>
+	            	<div class="element">
+	                	<p> This is the official dashboard for students like you to find events to attend here at UCF. </p>
 	                </div>
-	                <h3> Your Created Events </h3>
+	                <div class="element">
+	                	<h3> Happening on Campus </h3>
 		                <div class="event-list">
 		                	<table>
 		                		<tr>
@@ -62,21 +43,51 @@
 		                			<td>Greek Park</td>
 		                			<td>Time</td>
 		                			<td>Time</td>
-		                			<img src="../assets/FacebookLogo.png">
+		                			<td>
+		                				<img src="../assets/FacebookLogo.png">
+		                			</td>
 		                		</tr>
 		                	</table>
-		                </div>
-		            <h3> Add New Event </h3>
-		            <table class="table">
-              			<tbody>
-                			<tr><h3 class="text-center" id="addtitle" style="color:#779ECB;">{{addTitle}}</h3></tr>
-                			<tr><input placeholder="Enter Name" type="text" name="name" [(ngModel)] = "name" class="form-control" style="margin: 5px;"></tr>
-                			<tr><input placeholder="Enter Phone #" type="text" name="phone" [(ngModel)] = "phone" class="form-control" style="margin: 5px;"></tr>
-                			<tr><input placeholder="Enter Email" type="text" name="email" [(ngModel)] = "email" class="form-control" style="margin: 5px;"></tr>
-                			<tr><input placeholder="Enter Address" type="text" name="address" [(ngModel)] = "address" class="form-control" style="margin: 5px;"></tr>
-                			<tr><button class="btn btn-success" (click)="onAddButton()" style="background-color:#779ECB; border-color:#779ECB; margin-top:10px; margin-left: 5px;  ">Submit</button><button class="btn btn-success" (click)="clearFields()" style="background-color:#c23b22; border-color:#c23b22; margin-top:10px; margin-left: 5px;  ">Clear</button></tr>
-              			</tbody>
-            		</table> 
+	                	</div>
+	                </div>
+	                <div class="element">
+		                <h3> Your Created Events </h3>
+			                <div class="event-list">
+			                	<table>
+			                		<tr>
+			                			<th>Title</th>
+			                			<th>Description</th>
+			                			<th>Location</th>
+			                			<th>Start Time</th>
+			                			<th>End Time</th>
+			                			<th>Share on Social Media</th>
+			                		</tr>
+			                		<tr>
+			                			<td>Trick or Treat on Greek Street (TOTOGS)</td>
+			                			<td>Held around the same time as Halloween, Trick or Treat on Greek Street (TOTOGS) is a community wide event in which fraternities and sororities host a variety of Halloween events for students, staff, and families in the central Orlando area.</td>
+			                			<td>Greek Park</td>
+			                			<td>Time</td>
+			                			<td>Time</td>
+			                			<td>
+			                				<img src="../assets/FacebookLogo.png">
+			                			</td>
+			                		</tr>
+			                	</table>
+			                </div>
+			        </div>
+			        <div class="element">
+			            <h3> Add New Event </h3>
+			            <table class="add-event">
+	              			<tbody>
+	                			<tr><input placeholder="Enter Title" type="text" name="name" [(ngModel)] = "title" class="form-control"></tr>
+	                			<tr><input placeholder="Enter Description" type="text" name="description" [(ngModel)] = "description" class="form-control"></tr>
+	                			<tr><input placeholder="Enter Location" type="text" name="location" [(ngModel)] = "location" class="form-control"></tr>
+	                			<tr><input placeholder="Enter Start Time" type="text" name="start" [(ngModel)] = "start" class="form-control"></tr>
+	                			<tr><input placeholder="Enter End Time" type="text" name="end" [(ngModel)] = "end" class="form-control"></tr>
+	                			<tr><button class="btn btn-success" (click)="onAddButton()" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Submit</button></tr>
+	              			</tbody>
+	            		</table>
+	            	</div> 
 	            </div>
 	            <div class="card-footer">
 	            </div>

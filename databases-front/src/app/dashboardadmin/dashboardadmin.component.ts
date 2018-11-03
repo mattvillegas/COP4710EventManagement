@@ -94,6 +94,9 @@ export class DashboardadminComponent implements OnInit {
 
    AddRSOEvent(NewEvent){
     this.authService.createRSOEvent(NewEvent).subscribe(data=>{
+    if(data === "Not enough members")
+      alert('Not enough members to add RSO event.');
+    else
       this.clearFields();
     }, err=>{
       alert('Failed to add RSO event.');

@@ -88,9 +88,9 @@
             <tbody>
               <tr style="word-break: break-all">
                  <tr *ngFor="let event of eventlist | filter : inputString;">
-                  <td>{{event.event_name}}</td>
-                  <td>{{event.time}}</td>
                   <td>{{event.loc}}</td>
+                  <td>{{event.desc}}</td>
+                  <td>{{event.time}}</td>
                   <td>{{event.desc}}</td>
               </tr>
             </tbody>

@@ -377,6 +377,23 @@ app.post("/api/:id/join-rso", function(req, res)
 	})
 });
 
+app.post("/api/:id/join-rso", function(req, res)
+{
+	var getAllRSO = 'SELECT * FROM rso'
+	
+	client.query(getAllRSO, (err, rso) =>
+	{
+		if(err)
+		{
+			handleError(res, e.stack)
+		}
+		else
+		{
+			res.status(201).json(rso)
+		}
+	})
+});
+
 app.post("/api/:id/create-rso-event", function(req, res)
 {
 	var checkMembers = 'SELECT COUNT(uid) FROM is_in WHERE rso_id = \'' + req.params.id + '\'';

@@ -380,6 +380,7 @@ app.post("/api/:id/join-rso", function(req, res)
 app.get("/api/list-all-rso", function(req, res)
 {
 	var getAllRSO = 'SELECT * FROM rso'
+	var items = []
 	
 	client.query(getAllRSO, (err, rso) =>
 	{
@@ -389,6 +390,26 @@ app.get("/api/list-all-rso", function(req, res)
 		}
 		else
 		{
+			//res.status(201).json(rso.rows)
+			
+			for (let i = 0; i <rso.rows.length; i++)
+			{
+				var adminID = rso.rows[i]["adminid"]
+				var query = 'SELECT name FROM admin WHERE uid = \'' + adminID + '\''
+				
+				client.query(query, (err, admin) =>
+				{
+					if(err)
+					{
+						handleError(res, e.stack)
+					}
+					else
+					{
+						rso.rows[i]["adminName"] = admin.rows[0]
+					}
+				})
+			}
+			
 			res.status(201).json(rso.rows)
 		}
 	})

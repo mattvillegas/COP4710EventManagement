@@ -17,7 +17,7 @@ export class EventComponent implements OnInit {
   ngOnInit() {
   }
 
-  onAddButton(){
+  onAddCommentButton(){
     const comment = { 
       name : this.name,
       title : this.title,

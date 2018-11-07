@@ -14,6 +14,7 @@ import { DashboardsuperComponent } from './dashboardsuper/dashboardsuper.compone
 import { DashboarduserComponent } from './dashboarduser/dashboarduser.component';
 import { DashboardadminComponent } from './dashboardadmin/dashboardadmin.component';
 import { RegisteradminComponent } from './registeradmin/registeradmin.component';
+import { EventComponent } from './event/event.component';
 
 import { AuthenticationService } from './_services/authentication.service';
 import { FilterPipe } from './_services/filter.pipe';
@@ -27,7 +28,8 @@ const appRoutes: Routes = [
   { path: 'dashboardadmin', component: DashboardadminComponent },
   { path: 'dashboarduser', component: DashboarduserComponent },
   { path: 'registersuper', component: RegistersuperComponent },
-  { path: 'registeradmin', component: RegisteradminComponent }
+  { path: 'registeradmin', component: RegisteradminComponent },
+  { path: 'event', component: EventComponent },
 ];
 
 @NgModule({
@@ -41,6 +43,7 @@ const appRoutes: Routes = [
     DashboarduserComponent,
     DashboardadminComponent,
     RegisteradminComponent,
+    EventComponent,
     FilterPipe
   ],
   imports: [

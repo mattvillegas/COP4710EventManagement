@@ -28,6 +28,14 @@ export class AuthenticationService {
         return this.http.get('http://localhost:8080/api/' + this.user + '/get-events', {headers:this.headers});
     }
 
+    getAllRSOs(){
+        return this.http.get('http://localhost:8080/api/' + this.user + '/get-rsos', {headers:this.headers});
+    }
+
+    getYourRSOs(){
+        return this.http.get('http://localhost:8080/api/' + this.user + '/get-rsos', this.user, {headers:this.headers});
+    }
+
     loginUser(user){
         return this.http.post('http://localhost:8080/api/users/login', user, {headers:this.headers});
     }
@@ -54,6 +62,10 @@ export class AuthenticationService {
 
     createRSOEvent(event: Rsoevent){
         return this.http.post('http://localhost:8080/api/' + this.user + '/create-rso-event', event, {headers:this.headers});
+    }
+
+    createRSO(rso){
+        return this.http.post('http://localhost:8080/api/' + this.user + '/create-rso', rso, {headers:this.headers});
     }
 
     login(username: string, password: string) {

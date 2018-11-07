@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registered Student Organizations (RSOs)</title>
+</head>
+<body>
+	<div class="container">
+	    <div class="d-flex justify-content-center h-100">
+	        <div class="card">
+	            <div class="card-header">
+	                <h1><a [routerLink] = "['/rso']">Registered Student Organizations (RSOs)</a></h1>
+	                <nav>
+	                	<table>
+	                		<tr>
+	                		<div class="form-group">
+              				<input placeholder="Enter RSO to Search" name="inputString" [(ngModel)] = "inputString" class="form-control" style="max-width:450px">
+         					</div>
+	                			<th><a style="font-size:1.2em; padding-left:10em" [routerLink] = "['/login']">Logout</a></th>
+	                		</tr>
+	                	</table>
+	                </nav>
+	            </div>
+	            <div class="card-body">
+	            	<div class="element">
+	                	<p> This is where you can find all RSOs on campus and your RSOs.</p>
+	                </div>
+	                <div class="element">
+	                	<h3> All RSOs </h3>
+		                <div class="rso-list">
+		                	<table>
+		                		<tr>
+		                			<th>Name</th>
+		                			<th>Admin</th>
+		                			<th>Join</th>
+		                			<th>Leave</th>
+		                		</tr>
+		                		<tr *ngFor="let rso of rsolist | filter : inputString;">
+                  					<td>{{rso.rso_name}}</td>
+                  					<td>{{rso.admin}}</td>
+                  					<td>
+                  						<button class="btn btn-success" (click)="onJoinButton()" style="background-color:green; border-color:green; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block;
+	                					">Join
+	                					</button>
+	                				</td>
+                  					<td>
+                  						<button class="btn btn-success" (click)="onLeaveButton()" style="background-color:red; border-color:red; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block;
+	                					">Leave
+	                					</button>
+	                				</td>
+	                			</tr>
+		                	</table>
+	                	</div>
+	                </div>
+	                <div class="element">
+		                <h3> Your RSOs </h3>
+			                <div class="rso-list">
+			                	<table>
+		                		<tr>
+		                			<th>Name</th>
+		                			<th>Admin</th>
+		                			<th>Join</th>
+		                			<th>Leave</th>
+		                		</tr>
+		                		<tr *ngFor="let rso of yourrsolist | filter : inputString;">
+                  					<td>{{rso.rso_name}}</td>
+                  					<td>{{rso.admin_name}}</td>
+                  					<td>
+                  						<button class="btn btn-success" (click)="onJoinButton()" style="background-color:green; border-color:green; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block;
+	                					">Join
+	                					</button>
+	                				</td>
+                  					<td>
+                  						<button class="btn btn-success" (click)="onLeaveButton()" style="background-color:red; border-color:red; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block;
+	                					">Leave
+	                					</button>
+	                				</td>
+	                			</tr>
+		                	</table>
+			                </div>
+			        </div>
+			        <div class="element">
+			            <h3> Add New RSO</h3>
+			            <table class="add-rso">
+	              			<tbody>
+                			<tr><input placeholder="Enter RSO Name" name="type" [(ngModel)] = "rso_name" class="form-control"></tr>
+                			<tr><input placeholder="Enter Your Name" type="text" name="contact_name" [(ngModel)] = "admin_name" class="form-control"></tr>
+	                			<tr>
+	                				<button class="btn btn-success" (click)="onAddButton()" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block;
+	                					">Submit
+	                				</button>
+	                				<button class="btn btn-success" (click)="clearFields()" style="background-color:gold; border-color:black; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Clear
+	                				</button>
+	                			</tr>
+	              			</tbody>
+	            		</table>
+	            	</div> 
+		        </div>
+	            <div class="card-footer">
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</body>
+</html>

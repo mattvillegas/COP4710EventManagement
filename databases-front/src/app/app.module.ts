@@ -15,9 +15,10 @@ import { DashboarduserComponent } from './dashboarduser/dashboarduser.component'
 import { DashboardadminComponent } from './dashboardadmin/dashboardadmin.component';
 import { RegisteradminComponent } from './registeradmin/registeradmin.component';
 import { EventComponent } from './event/event.component';
+import { RsoComponent } from './rso/rso.component';
 
 import { AuthenticationService } from './_services/authentication.service';
-import { FilterPipe } from './_services/filterpipe';
+import { FilterPipe } from './_services/filter.pipe';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -30,6 +31,7 @@ const appRoutes: Routes = [
   { path: 'registersuper', component: RegistersuperComponent },
   { path: 'registeradmin', component: RegisteradminComponent },
   { path: 'event', component: EventComponent },
+  { path: 'rso', component: RsoComponent },
 ];
 
 @NgModule({
@@ -44,7 +46,8 @@ const appRoutes: Routes = [
     DashboardadminComponent,
     RegisteradminComponent,
     EventComponent,
-    FilterPipe
+    FilterPipe,
+    RsoComponent
   ],
   imports: [
     BrowserModule,

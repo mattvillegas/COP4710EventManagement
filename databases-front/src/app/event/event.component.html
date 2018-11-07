@@ -30,10 +30,18 @@
 	                <div class="element">
 	                	<table class="leave-comment">
 	              			<tbody>
-	                			<tr><input placeholder="Enter Name" name="name" [(ngModel)] = "name" class="form-control"></tr>
-	                			<tr><input placeholder="Enter Title" type="text" name="title" [(ngModel)] = "title" class="form-control"></tr>
-	                			<tr><div id="comment"><input placeholder="Enter Comment" type="text" name="comment" [(ngModel)] = "time" class="form-control"></div></tr>
-	                			<tr><button class="btn btn-success" (click)="onAddButton()" style="background-color:gold; border-color:black; margin-top:10px; margin-left: 5px;  ">Submit</button>
+	                			<tr>
+	                				<input placeholder="Enter Name" name="name" [(ngModel)] = "name" class="form-control">
+	                			</tr>
+	                			<tr>
+	                				<input placeholder="Enter Title" type="text" name="title" [(ngModel)] = "title" class="form-control">
+	                			</tr>
+	                			<tr>
+	                				<div id="comment"><input placeholder="Enter Comment" type="text" name="comment" [(ngModel)] = "comment" class="form-control"></div>
+	                			</tr>
+	                			<tr>
+	                				<button class="btn btn-success" (click)="onAddCommentButton()" style="background-color:gold; border-color:black; margin-top:10px; margin-left: 5px;  ">Submit</button>
+	                			</tr>
 	              			</tbody>
 	            		</table> 
 	                </div>

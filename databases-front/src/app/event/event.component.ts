@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, Route } from '@angular/router';
 
 @Component({
   selector: 'app-event',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventComponent implements OnInit {
 
-  constructor() { }
+	name : string;
+	title : string;
+	comment : string; 
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
+
+  onAddButton(){
+    const comment = { 
+      name : this.name,
+      title : this.title,
+      comment : this.comment
+    }
+
+    } 
 
 }

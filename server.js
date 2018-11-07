@@ -377,7 +377,7 @@ app.post("/api/:id/join-rso", function(req, res)
 	})
 });
 
-app.post("/api/:id/join-rso", function(req, res)
+app.post("/api/:id/list-all-rso", function(req, res)
 {
 	var getAllRSO = 'SELECT * FROM rso'
 	

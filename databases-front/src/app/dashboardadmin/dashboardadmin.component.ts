@@ -12,7 +12,7 @@ import { Rsoevent } from '../_services/rsoevent';
 })
 export class DashboardadminComponent implements OnInit {
 
-  inputString: string;
+  inputString: String;
   user : Object;
   user_id : String;
 
@@ -90,6 +90,13 @@ export class DashboardadminComponent implements OnInit {
     this.authService.getEvents().subscribe(data =>{
     this.eventlist = data;
     })
+  }
+
+  search_event(){
+    if(this.inputString == undefined){
+      // alert('Empty, so nothing found.');
+      return false;
+    }
   }
 
    AddRSOEvent(NewEvent){

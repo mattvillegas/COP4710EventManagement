@@ -121,6 +121,7 @@ text-align: center;
 .add-event {
 	margin-left: auto;
 	margin-right: auto;
+	width: 450px;
 }
 
 .input-group-prepend span{

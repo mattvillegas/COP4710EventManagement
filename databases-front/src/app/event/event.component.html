@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trick or Treat on Greek Street</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="jquery.js"></script> 
+</head>
+<body>
+	<div class="container">
+	    <div class="d-flex justify-content-center h-100">
+	        <div class="card">
+	            <div class="card-header">
+	                <h1>Trick or Treat on Greek Street</h1>
+	                <nav>
+	                	<a style="font-size:1.2em; padding-left:10em" [routerLink] = "['/login']">Logout</a>
+	                </nav>
+	            </div>
+	            <div class="card-body">
+	            	<div class="element">
+	                	<h4>Description:</h4> <p> Held around the same time as Halloween, Trick or Treat on Greek Street (TOTOGS) is a community wide event in which fraternities and sororities host a variety of Halloween events for students, staff, and families in the central Orlando area. </p>
+	                	<h4>Location:</h4> <p> Greek Park </p>
+	                	<h4>Time:</h4> <p> Time </p>
+	                	<h4>Contact:</h4> <p> Email Phone </p>
+	             		<h4>Category:</h4> <p> Greek </p>
+	                	<h4> Share on Social Media </h4>
+	                </div>
+	                <div class="element">
+	                	<h2> Leave a Comment </h2>
+	                </div>
+	                <div class="element">
+	                	<table class="leave-comment">
+	              			<tbody>
+	                			<tr><input placeholder="Enter Name" name="name" [(ngModel)] = "name" class="form-control"></tr>
+	                			<tr><input placeholder="Enter Title" type="text" name="title" [(ngModel)] = "title" class="form-control"></tr>
+	                			<tr><div id="comment"><input placeholder="Enter Comment" type="text" name="comment" [(ngModel)] = "time" class="form-control"></div></tr>
+	                			<tr><button class="btn btn-success" (click)="onAddButton()" style="background-color:gold; border-color:black; margin-top:10px; margin-left: 5px;  ">Submit</button>
+	              			</tbody>
+	            		</table> 
+	                </div>
+	                <div class="element">
+	                	<h2> Comments </h2>
+	                </div>
+	                
+		        </div>
+	            <div class="card-footer">
+	            </div>
+	        </div>
+	    </div>
+	</div>
+</body>
+</html>

@@ -32,13 +32,11 @@
 		                	<table>
 		                		<tr>
 		                			<th>Name</th>
-		                			<th>Admin</th>
 		                			<th>Join</th>
 		                			<th>Leave</th>
 		                		</tr>
 		                		<tr *ngFor="let rso of rsolist | filter : inputString;">
-                  					<td>{{rso.rso_name}}</td>
-                  					<td>{{rso.admin}}</td>
+                  					<td>{{rso.name}}</td>
                   					<td>
                   						<button class="btn btn-success" (click)="onJoinButton()" style="background-color:green; border-color:green; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block;
 	                					">Join
@@ -59,13 +57,11 @@
 			                	<table>
 		                		<tr>
 		                			<th>Name</th>
-		                			<th>Admin</th>
 		                			<th>Join</th>
 		                			<th>Leave</th>
 		                		</tr>
 		                		<tr *ngFor="let rso of yourrsolist | filter : inputString;">
-                  					<td>{{rso.rso_name}}</td>
-                  					<td>{{rso.admin_name}}</td>
+                  					<td>{{rso.name}}</td>
                   					<td>
                   						<button class="btn btn-success" (click)="onJoinButton()" style="background-color:green; border-color:green; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block;
 	                					">Join

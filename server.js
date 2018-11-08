@@ -380,7 +380,7 @@ app.post("/api/:id/join-rso", function(req, res)
 app.get("/api/list-all-rso", function(req, res)
 {
 	var getAllRSO = 'SELECT * FROM rso'
-	var items = []
+	
 	
 	client.query(getAllRSO, (err, rso) =>
 	{
@@ -391,7 +391,7 @@ app.get("/api/list-all-rso", function(req, res)
 		else
 		{
 			//res.status(201).json(rso.rows)
-			
+			var items = []
 			for (let i = 0; i <rso.rows.length; i++)
 			{
 				var adminID = rso.rows[i]["adminid"]
@@ -405,15 +405,28 @@ app.get("/api/list-all-rso", function(req, res)
 					}
 					else
 					{
-						rso.rows[i]["adminName"] = admin.rows[0]
+						rso.rows[i].adminName = admin.rows[0].name
+						items.push(rso.rows[i])
+						
 					}
 				})
+				if(i == rso.rows.length -1)
+				{
+					return_call(items, res);
+				}
 			}
+			//console.log(items)
 			
-			res.status(201).json(rso.rows)
 		}
 	})
 });
+
+function return_call(items, res)
+{
+	console.log("entered return call")
+	console.log(items)
+	res.status(201).json(items)
+}
 
 app.post("/api/:id/leave-rso", function(req, res)
 {

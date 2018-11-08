@@ -33,7 +33,7 @@ export class AuthenticationService {
     }
 
     getYourRSOs(){
-        return this.http.get('http://localhost:8080/api/' + this.user.id + '/get-my-rso', {headers:this.headers});
+        return this.http.get('http://localhost:8080/api/' + this.user.uid + '/get-my-rso', {headers:this.headers});
     }
 
     loginUser(user){

@@ -38,9 +38,7 @@ export class RsoComponent implements OnInit {
 
   onAddButton() {
     const rso = { 
-      _id: this._id,
       name : this.name,
-      CreatedByUserID : this.user["id"]
     }
 
     this.AddRSO(rso); 

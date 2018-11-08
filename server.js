@@ -432,7 +432,7 @@ app.get("/api/:id/get-my-rso", function(req, res)
 		}
 		else
 		{
-			var myRSOs = 'SELECT * FROM rso WHERE rso_id = \'' + 
+			res.status(201).json(myRSOs)
 		}
 	})
 });

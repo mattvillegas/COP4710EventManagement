@@ -12,9 +12,9 @@ export class RsoComponent implements OnInit {
 
 	inputString: string;
 	user : Object;
-  	user_id : String;
-  	_id: string = null;
-  	CreatedByUserID : string;
+  user_id : String;
+  _id: string = null;
+  CreatedByUserID : string;
 
 	rsolist: any; 
 	yourrsolist: any; 
@@ -76,8 +76,6 @@ export class RsoComponent implements OnInit {
 
   goBack() {
     this.location.back();
-
-    console.log( 'goBack()...' );
   }
 
  }

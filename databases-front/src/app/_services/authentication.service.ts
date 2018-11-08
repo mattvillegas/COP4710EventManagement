@@ -29,11 +29,11 @@ export class AuthenticationService {
     }
 
     getAllRSOs(){
-        return this.http.get('http://localhost:8080/api/' + this.user + '/get-rsos', {headers:this.headers});
+        return this.http.get('http://localhost:8080/api/' + this.user + '/list-all-rso', {headers:this.headers});
     }
 
     getYourRSOs(){
-        return this.http.get('http://localhost:8080/api/' + this.user + '/get-rsos', {headers:this.headers});
+        return this.http.get('http://localhost:8080/api/' + this.user.id + '/get-my-rso', {headers:this.headers});
     }
 
     loginUser(user){

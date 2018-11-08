@@ -392,6 +392,7 @@ app.get("/api/list-all-rso", function(req, res)
 		{
 			//res.status(201).json(rso.rows)
 			var items = []
+			var count = 0
 			for (let i = 0; i <rso.rows.length; i++)
 			{
 				var adminID = rso.rows[i]["adminid"]
@@ -410,7 +411,8 @@ app.get("/api/list-all-rso", function(req, res)
 						
 					}
 				})
-				if(i == rso.rows.length -1)
+				count++
+				if(count == rso.rows.length -1)
 				{
 					return_call(items, res);
 				}

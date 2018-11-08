@@ -420,6 +420,23 @@ app.post("/api/:id/leave-rso", function(req, res)
 	})
 });
 
+app.get("/api/:id/get-my-rso", function(req, res)
+{
+	var getMyRSOs = 'SELECT name FROM rso, is_in WHERE rso.rso_id = \'' + req.body.rsoId + '\' AND is_in.uid = \'' + req.params.id + '\' AND is_in.rso_id = \'' + req.body.rsoId + '\''
+	
+	client.query(getMyRSOs, (err, myRSOs) =>
+	{
+		if(err)
+		{
+			handleError(res, e.stack)
+		}
+		else
+		{
+			var myRSOs = 'SELECT * FROM rso WHERE rso_id = \'' + 
+		}
+	})
+});
+
 app.post("/api/:id/create-rso-event", function(req, res)
 {
 	var checkMembers = 'SELECT COUNT(uid) FROM is_in WHERE rso_id = \'' + req.params.id + '\'';

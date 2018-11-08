@@ -19,8 +19,7 @@ export class RsoComponent implements OnInit {
 	rsolist: any; 
 	yourrsolist: any; 
 
-	rso_name: String; 
-	admin_name: String;
+	name: String; 
 
 
   constructor(private router: Router, public authService: AuthenticationService, private location: Location) { }
@@ -40,8 +39,7 @@ export class RsoComponent implements OnInit {
   onAddButton() {
     const rso = { 
       _id: this._id,
-      admin_name : this.admin_name,
-      rso_name : this.rso_name,
+      name : this.name,
       CreatedByUserID : this.user["id"]
     }
 
@@ -49,7 +47,7 @@ export class RsoComponent implements OnInit {
   }
 
   clearFields() {
-      this.rso_name = undefined; 
+      this.name = undefined; 
       this.admin_name = undefined; 
   }
 

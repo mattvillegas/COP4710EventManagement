@@ -6,6 +6,7 @@ html,body {
 	background-blend-mode: lighten;
 	background-size: cover;
 	background-repeat: repeat-y;
+	background-repeat: repeat-x;
 	height: 100%;
 	width: 100%;
 	font-family: 'Numans', sans-serif;
@@ -13,7 +14,7 @@ html,body {
 
 .container {
 	height: 100%;
-	width: auto;
+	width: 100%;
 	align-content: center;
 }
 
@@ -21,8 +22,8 @@ html,body {
 	height: 100%;
 	margin-top: auto;
 	margin-bottom: auto;
-	width: 100%;
 	background-color: rgba(0,0,0,0.5) !important;
+	width: auto;
 }
 
 .element {
@@ -107,7 +108,7 @@ text-align: center;
 	border-color: gold; 
 	border-width: 1px;
 	padding: 5px;
-	max-width: 250px;
+	max-width: 90px;
 }
 
 .event-list img {

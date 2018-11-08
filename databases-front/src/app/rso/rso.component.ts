@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, Route } from '@angular/router';
 import { AuthenticationService } from '../_services/authentication.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-rso',
@@ -22,7 +23,7 @@ export class RsoComponent implements OnInit {
 	admin_name: String;
 
 
-  constructor(private router: Router, public authService: AuthenticationService) { }
+  constructor(private router: Router, public authService: AuthenticationService, private location: Location) { }
 
   ngOnInit() {
   	this.loadPage(); 
@@ -71,6 +72,12 @@ export class RsoComponent implements OnInit {
       alert('Failed to RSO.');
     });
     this.getFullRSOList();
+  }
+
+  goBack() {
+    this.location.back();
+
+    console.log( 'goBack()...' );
   }
 
  }

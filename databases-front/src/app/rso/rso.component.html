@@ -8,14 +8,16 @@
 	    <div class="d-flex justify-content-center h-100">
 	        <div class="card">
 	            <div class="card-header">
-	                <h1><a [routerLink] = "['/rso']">Registered Student Organizations (RSOs)</a></h1>
+	                <h1><a href="javascript:void(0)" (click)="goBack()">Your Dashboard</a></h1>
 	                <nav>
 	                	<table>
 	                		<tr>
-	                		<div class="form-group">
-              				<input placeholder="Enter RSO to Search" name="inputString" [(ngModel)] = "inputString" class="form-control" style="max-width:450px">
-         					</div>
-	                			<th><a style="font-size:1.2em; padding-left:10em" [routerLink] = "['/login']">Logout</a></th>
+	                			<div class="form-group">
+              						<input placeholder="Enter RSO to Search" name="inputString" [(ngModel)] = "inputString" class="form-control" style="max-width:450px">
+         						</div>
+         						<th><a style="font-size:1.2em; margin-left:auto; margin-right:auto;" [routerLink] = "['/rso']">RSOs</a></th>
+	                			<th><a style="font-size:1.2em; padding-left:10em" [routerLink] = "['/login']">Logout</a>
+	                			</th>
 	                		</tr>
 	                	</table>
 	                </nav>

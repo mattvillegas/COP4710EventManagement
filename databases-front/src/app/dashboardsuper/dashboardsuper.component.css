@@ -10,12 +10,12 @@ html,body {
 	font-family: 'Numans', sans-serif;
 }
 
-.container{
+.container {
 	height: 100%;
 	align-content: center;
 }
 
-.card{
+.card {
 	height: 100%;
 	margin-top: auto;
 	margin-bottom: auto;
@@ -119,6 +119,12 @@ text-align: center;
 }
 
 .add-event {
+	margin-left: auto;
+	margin-right: auto;
+	width: 450px;
+}
+
+.social {
 	margin-left: auto;
 	margin-right: auto;
 }

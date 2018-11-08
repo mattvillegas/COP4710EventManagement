@@ -8,7 +8,7 @@
 	    <div class="d-flex justify-content-center h-100">
 	        <div class="card">
 	            <div class="card-header">
-	                <h1><a [routerLink] = "['/dashboarduser']">Your Dashboard</a></h1>
+	                <h1><a [routerLink] = "['/dashboardadmin']">Your Dashboard</a></h1>
 	                <nav>
 	                	<table>
 	                		<tr>
@@ -34,6 +34,10 @@
                 		<th><h5>Time</h5></th>
                 		<th><h5>Location</h5></th>
                 		<th><h5>Description</h5></th>
+                		<th><h5>Contact Name</h5></th>
+                		<th><h5>Contact Email</h5></th>
+                		<th><h5>Contact Phone</h5></th>
+                		<th><h5>Event Category</h5></th>
                 		<th><h5>Share</h5></th>
               		</tr>
               	<tr style="word-break: break-all">
@@ -42,6 +46,10 @@
                   <td>{{event.time}}</td>
                   <td>{{event.location}}</td>
                   <td>{{event.description}}</td>
+                  <td>{{event.name}}</td>
+                  <td>{{event.contact_email}}</td>
+                  <td>{{event.contact_phone}}</td>
+                  <td>{{event.event_category}}</td>
                   <td>
 		          	<div id="social">
 		            	<fb-like></fb-like>
@@ -55,10 +63,10 @@
       	  	</div>
 
 			        <div class="element">
-			            <h3> Add New RSO, Public, or Private Event </h3>
+			            <h3> Add New RSO or Private Event </h3>
 			            <table class="add-event">
 	              			<tbody>
-                			<tr><input placeholder="Enter Event Type ('RSO', Public', or 'Private')" name="type" [(ngModel)] = "type" class="form-control"></tr>
+                			<tr><input placeholder="Enter Event Type ('RSO' or 'Private')" name="type" [(ngModel)] = "type" class="form-control"></tr>
                 			<tr><input placeholder="Enter Event Title" type="text" name="event_name" [(ngModel)] = "event_name" class="form-control"></tr>
                 			<tr><input placeholder="Enter Time ('1991-01-08 04:05:06')" type="text" name="time" [(ngModel)] = "time" class="form-control"></tr>
                 			<tr><input placeholder="Enter Location" type="text" name="loc" [(ngModel)] = "loc" class="form-control"></tr>

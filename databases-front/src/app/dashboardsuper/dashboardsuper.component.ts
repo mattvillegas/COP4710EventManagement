@@ -12,7 +12,7 @@ import { Rsoevent } from '../_services/rsoevent';
 })
 export class DashboardsuperComponent implements OnInit {
 
-  inputString: string;
+  inputString: String;
   user : Object;
   user_id : String;
 
@@ -45,7 +45,7 @@ export class DashboardsuperComponent implements OnInit {
    this.user = JSON.parse(temp);
    this.authService.storeUser(this.user);
    this.user_id = this.user['id'];
-   //this.getEventList();
+   this.getEventList();
   }
 
   onAddButton(){
@@ -63,7 +63,9 @@ export class DashboardsuperComponent implements OnInit {
       CreatedByUserID : this.user["id"]
     }
 
-    if(this.type === "Public")
+    if(this.type === "RSO")
+       this.AddRSOEvent(event);
+    else if(this.type === "Public")
        this.AddPublicEvent(event);
     else
        this.AddPrivateEvent(event);
@@ -88,14 +90,34 @@ export class DashboardsuperComponent implements OnInit {
     })
   }
 
-  AddPublicEvent(NewEvent){
+  search_event(){
+    if(this.inputString == undefined){
+      // alert('Empty, so nothing found.');
+      return false;
+    }
+  }
+
+   AddRSOEvent(NewEvent){
+    this.authService.createRSOEvent(NewEvent).subscribe(data=>{
+    if(data === "Not enough members")
+      alert('Not enough members to add RSO event.');
+    else
+      this.clearFields();
+    }, err=>{
+      alert('Failed to add RSO event.');
+    });
+    this.getEventList();
+    this.getEventList();
+  }
+
+   AddPublicEvent(NewEvent){
     this.authService.createPublicEvent(NewEvent).subscribe(data=>{
       this.clearFields();
     }, err=>{
       alert('Failed to add public event.');
     });
-    //this.getEventList();
-    //this.getEventList();
+    this.getEventList();
+    this.getEventList();
   }
 
    AddPrivateEvent(NewEvent){
@@ -104,8 +126,8 @@ export class DashboardsuperComponent implements OnInit {
     }, err=>{
       alert('Failed to add private event.');
     });
-    //this.getEventList();
-    //this.getEventList();
+    this.getEventList();
+    this.getEventList();
   }
 
 }

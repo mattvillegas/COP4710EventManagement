@@ -124,6 +124,11 @@ text-align: center;
 	width: 450px;
 }
 
+.social {
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .input-group-prepend span{
 width: 50px;
 background-color: #FFC312;

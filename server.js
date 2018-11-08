@@ -390,35 +390,7 @@ app.get("/api/list-all-rso", function(req, res)
 		}
 		else
 		{
-			//res.status(201).json(rso.rows)
-			var items = []
-			var count = 0
-			for (let i = 0; i <rso.rows.length; i++)
-			{
-				var adminID = rso.rows[i]["adminid"]
-				var query = 'SELECT name FROM admin WHERE uid = \'' + adminID + '\''
-				
-				client.query(query, (err, admin) =>
-				{
-					if(err)
-					{
-						handleError(res, e.stack)
-					}
-					else
-					{
-						rso.rows[i].adminName = admin.rows[0].name
-						items.push(rso.rows[i])
-						
-					}
-				})
-				count++
-				if(count == rso.rows.length -1)
-				{
-					return_call(items, res);
-				}
-			}
-			//console.log(items)
-			
+			res.status(201).json(rso.rows)
 		}
 	})
 });

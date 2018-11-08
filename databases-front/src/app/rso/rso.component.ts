@@ -48,7 +48,6 @@ export class RsoComponent implements OnInit {
 
   clearFields() {
       this.name = undefined; 
-      this.admin_name = undefined; 
   }
 
   getFullRSOList(){

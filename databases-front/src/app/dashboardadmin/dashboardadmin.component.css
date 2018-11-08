@@ -7,11 +7,13 @@ html,body {
 	background-size: cover;
 	background-repeat: repeat-y;
 	height: 100%;
+	width: 100%;
 	font-family: 'Numans', sans-serif;
 }
 
 .container {
 	height: 100%;
+	width: auto;
 	align-content: center;
 }
 

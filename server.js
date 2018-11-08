@@ -386,7 +386,7 @@ app.get("/api/list-all-rso", function(req, res)
 	{
 		if(err)
 		{
-			handleError(res, e.stack)
+			handleError(res, err.stack)
 		}
 		else
 		{
@@ -411,7 +411,7 @@ app.post("/api/:id/leave-rso", function(req, res)
 	{
 		if(err)
 		{
-			handleError(res, e.stack)
+			handleError(res, err.stack)
 		}
 		else
 		{
@@ -422,17 +422,17 @@ app.post("/api/:id/leave-rso", function(req, res)
 
 app.get("/api/:id/get-my-rso", function(req, res)
 {
-	var getMyRSOs = 'SELECT name FROM rso, is_in WHERE rso.rso_id = \'' + req.body.rsoId + '\' AND is_in.uid = \'' + req.params.id + '\' AND is_in.rso_id = \'' + req.body.rsoId + '\''
+	var getMyRSOs = 'SELECT rso.name FROM rso, is_in WHERE is_in.uid = \'' + req.params.id + '\' AND is_in.rso_id = rso.rso_id'
 	
 	client.query(getMyRSOs, (err, myRSOs) =>
 	{
 		if(err)
 		{
-			handleError(res, e.stack)
+			handleError(res, err.stack)
 		}
 		else
 		{
-			res.status(201).json(myRSOs)
+			res.status(201).json(myRSOs.rows)
 		}
 	})
 });

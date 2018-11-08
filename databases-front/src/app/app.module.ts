@@ -18,7 +18,7 @@ import { EventComponent } from './event/event.component';
 import { RsoComponent } from './rso/rso.component';
 
 import { AuthenticationService } from './_services/authentication.service';
-import { FilterPipe } from './_services/filter.pipe';
+import { FilterPipe } from './_services/filterpipe';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },

@@ -34,6 +34,7 @@ export class RsoComponent implements OnInit {
    	this.authService.storeUser(this.user);
    	this.user_id = this.user['id'];
   	this.getFullRSOList(); 
+    this.getYourRSOList(); 
   }
 
   onAddButton() {

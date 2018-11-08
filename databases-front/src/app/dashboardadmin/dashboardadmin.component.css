@@ -1,26 +1,26 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
-html,body{
-background-image: url('../../assets/homebg.jpg');
-background-color: rgba(255, 255, 255, 0.5);
-background-blend-mode: lighten;
-background-size: cover;
-background-repeat: no-repeat;
-height: 1500px;
-font-family: 'Numans', sans-serif;
+html,body {
+	background-image: url('../../assets/homebg.jpg');
+	background-color: rgba(255, 255, 255, 0.5);
+	background-blend-mode: lighten;
+	background-size: cover;
+	background-repeat: repeat-y;
+	height: 100%;
+	font-family: 'Numans', sans-serif;
 }
 
-.container{
-height: 100%;
-align-content: center;
+.container {
+	height: 100%;
+	align-content: center;
 }
 
-.card{
-height: 1500px;
-margin-top: auto;
-margin-bottom: auto;
-width: 1700px;
-background-color: rgba(0,0,0,0.5) !important;
+.card {
+	height: 100%;
+	margin-top: auto;
+	margin-bottom: auto;
+	width: 100%;
+	background-color: rgba(0,0,0,0.5) !important;
 }
 
 .element {

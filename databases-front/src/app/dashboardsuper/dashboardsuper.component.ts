@@ -117,6 +117,8 @@ export class DashboardsuperComponent implements OnInit {
     });
     this.getEventList();
     this.getEventList();
+    this.getPublicEventList();
+    this.getPublicEventList();
   }
 
    AddPublicEvent(NewEvent){
@@ -127,6 +129,8 @@ export class DashboardsuperComponent implements OnInit {
     });
     this.getEventList();
     this.getEventList();
+    this.getPublicEventList();
+    this.getPublicEventList();
   }
 
    AddPrivateEvent(NewEvent){
@@ -137,6 +141,8 @@ export class DashboardsuperComponent implements OnInit {
     });
     this.getEventList();
     this.getEventList();
+    this.getPublicEventList();
+    this.getPublicEventList();
   }
 
 }

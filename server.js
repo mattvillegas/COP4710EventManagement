@@ -402,6 +402,7 @@ app.post("/api/:id/create-rso", function(req, res)
 app.post("/api/:id/join-rso", function(req, res)
 {
 	console.log("joining rso")
+	console.log(req.body)
 	var insertIntoIsIn = 'INSERT INTO is_in(rso_id, uid) VALUES($1, $2)'
 	var queryValues = [req.body.rso_id, req.params.id]
 	
@@ -409,7 +410,7 @@ app.post("/api/:id/join-rso", function(req, res)
 	{
 		if(err)
 		{
-			handleError(res, "Unable to join rso")
+			handleError(res, err.stack, "Unable to join rso")
 		}
 		else
 		{
@@ -458,7 +459,7 @@ app.post("/api/:id/delete-comment", function(req, res)
 
 app.post("/api/:id/edit-comment", function(req, res)
 {
-	var editComment = 'UPDATE comments SET comment = \'' + req.body.comment + '\' WHERE time = \'' + req.body.time + '\' AND location = \'' + req.body.loc + '\''
+	var editComment = 'UPDATE comments SET comment = \'' + req.body.comment + 'WHERE location = \'' + req.body.loc + '\' AND uid = \'' + req.params.id + '\''
 	
 	client.query(editComment, (err, comment) =>
 	{
@@ -492,6 +493,7 @@ app.get("/api/get-comments", function (req,res) {
 
 app.get("/api/list-all-rso", function(req, res)
 {
+	console.log("In rso lists")
 	var getAllRSO = 'SELECT * FROM rso'
 	
 	
@@ -519,7 +521,7 @@ app.post("/api/:id/leave-rso", function(req, res)
 {
 	//var findUser = 'SELECT * FROM is_in WHERE rso_id = \'' + req.body.rsoId + '\' AND uid = \'' + req.params.id + '\''
 	var removeUser = 'DELETE FROM is_in WHERE rso_id = \'' + req.body.rsoId + '\' AND uid = \'' + req.params.id + '\''
-	
+	console.log("in leave rso")
 	client.query(removeUser, (err, remove) =>
 	{
 		if(err)
@@ -536,7 +538,7 @@ app.post("/api/:id/leave-rso", function(req, res)
 app.get("/api/:id/get-my-rso", function(req, res)
 {
 	var getMyRSOs = 'SELECT rso.name FROM rso, is_in WHERE is_in.uid = \'' + req.params.id + '\' AND is_in.rso_id = rso.rso_id'
-	
+	console.log("in get my rsos uid = " + req.params.id)
 	client.query(getMyRSOs, (err, myRSOs) =>
 	{
 		if(err)

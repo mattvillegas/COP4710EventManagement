@@ -38,7 +38,7 @@
 		                		<tr *ngFor="let rso of rsolist | filter : inputString;">
                   					<td>{{rso.name}}</td>
                   					<td>
-                  						<button class="btn btn-success" (click)="onJoinButton()" style="background-color:green; border-color:green; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block;
+                  						<button class="btn btn-success" (click)="onJoinButton(rso)" style="background-color:green; border-color:green; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block;
 	                					">Join
 	                					</button>
 	                				</td>

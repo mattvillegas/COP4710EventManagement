@@ -52,6 +52,11 @@ export class AuthenticationService {
         return this.http.post('http://localhost:8080/api/users/login', user, {headers:this.headers});
     }
 
+    joinRSO(rso_id){
+        alert(rso_id)
+        return this.http.post('http://localhost:8080/api/' + this.user + '/join-rso', {rso_id: rso_id}, {headers:this.headers});
+    }
+
     registerStudent(user){
         return this.http.post('http://localhost:8080/api/users/student-create', user, {headers:this.headers});
     }

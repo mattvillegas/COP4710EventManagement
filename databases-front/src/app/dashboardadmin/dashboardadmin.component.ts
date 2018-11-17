@@ -22,6 +22,8 @@ export class DashboardadminComponent implements OnInit {
   eventlist : any;
   commentlist : any; 
 
+  publiceventlist : any;
+
   _id: string = null;
   CreatedByUserID : string;
 
@@ -47,6 +49,7 @@ export class DashboardadminComponent implements OnInit {
    this.user = JSON.parse(temp);
    this.authService.storeUser(this.user);
    this.user_id = this.user['id'];
+   this.getPublicEventList();
    this.getEventList();
    this.getCommentList(); 
   }
@@ -93,6 +96,12 @@ export class DashboardadminComponent implements OnInit {
     })
   }
 
+    getPublicEventList(){
+    this.authService.getPublicEvents().subscribe(data =>{
+    this.publiceventlist = data;
+    })
+  }
+
   getCommentList(){
     this.authService.getComments().subscribe(data =>{
     this.commentlist = data;
@@ -126,6 +135,8 @@ export class DashboardadminComponent implements OnInit {
     });
     this.getEventList();
     this.getEventList();
+    this.getPublicEventList();
+    this.getPublicEventList();
   }
 
    AddPublicEvent(NewEvent){
@@ -136,6 +147,8 @@ export class DashboardadminComponent implements OnInit {
     });
     this.getEventList();
     this.getEventList();
+    this.getPublicEventList();
+    this.getPublicEventList();
   }
 
    AddPrivateEvent(NewEvent){
@@ -146,6 +159,8 @@ export class DashboardadminComponent implements OnInit {
     });
     this.getEventList();
     this.getEventList();
+    this.getPublicEventList();
+    this.getPublicEventList();
   }
 
 }

@@ -53,6 +53,34 @@
           		</table>
           		</div>
       	  	</div>
+      	  	<div class="element">
+		    	<h2> All Public Events </h2>
+		    	<div class="event-list">
+				<table>
+              		<tr>
+              			<th><h5>Event Name</h5></th>
+                		<th><h5>Time</h5></th>
+                		<th><h5>Location</h5></th>
+                		<th><h5>Description</h5></th>
+                		<th><h5>Share</h5></th>
+              		</tr>
+              	<tr style="word-break: break-all">
+                 <tr *ngFor="let pubevent of publiceventlist | filter : inputString;">
+                  <td>{{pubevent.event_name}}</td>
+                  <td>{{pubevent.time}}</td>
+                  <td>{{pubevent.location}}</td>
+                  <td>{{pubevent.description}}</td>
+                  <td>
+		          	<div id="social">
+		            	<fb-like></fb-like>
+		            		<br /><br />
+		                <tweet></tweet>
+		            </div>
+		          </td>
+              	</tr>
+          		</table>
+          		</div>
+      	  	</div>
 		        </div>
 	            <div class="card-footer">
 	            </div>

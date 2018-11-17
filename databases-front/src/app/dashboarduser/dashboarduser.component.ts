@@ -21,6 +21,8 @@ export class DashboarduserComponent implements OnInit {
   rsoevent : Rsoevent;
   eventlist : any;
 
+  publiceventlist : any;
+
   _id: string = null;
   CreatedByUserID : string;
 
@@ -47,6 +49,7 @@ export class DashboarduserComponent implements OnInit {
    this.user = JSON.parse(temp);
    this.authService.storeUser(this.user);
    this.user_id = this.user['id'];
+   this.getPublicEventList();
    this.getEventList();
   }
 
@@ -92,6 +95,12 @@ export class DashboarduserComponent implements OnInit {
     })
   }
 
+  getPublicEventList(){
+    this.authService.getPublicEvents().subscribe(data =>{
+    this.publiceventlist = data;
+    })
+  }
+
   search_event(){
     if(this.inputString == undefined){
       // alert('Empty, so nothing found.');
@@ -110,6 +119,8 @@ export class DashboarduserComponent implements OnInit {
     });
     this.getEventList();
     this.getEventList();
+    this.getPublicEventList();
+    this.getPublicEventList();
   }
 
    AddPublicEvent(NewEvent){
@@ -120,6 +131,8 @@ export class DashboarduserComponent implements OnInit {
     });
     this.getEventList();
     this.getEventList();
+    this.getPublicEventList();
+    this.getPublicEventList();
   }
 
    AddPrivateEvent(NewEvent){
@@ -130,6 +143,8 @@ export class DashboarduserComponent implements OnInit {
     });
     this.getEventList();
     this.getEventList();
+    this.getPublicEventList();
+    this.getPublicEventList();
   }
 
 }

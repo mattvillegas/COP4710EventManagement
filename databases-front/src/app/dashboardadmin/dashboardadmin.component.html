@@ -97,9 +97,9 @@
 						<table>
 		              		<tr style="word-break: break-all">
 		              			<tr *ngFor="let comment of commentlist | filter : inputString;">
-		              				<td>{{comment.event_name}}</td>
-		              				<td>
-		              					{{comment.comment}}
+		              				<td><div contenteditable>{{comment.event_name}}</div></td>
+		              				<td><div contenteditable>
+		              					{{comment.comment}}</div>
 		              					<button class="btn btn-success" (click)="onEditButton()" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Edit
 	                					</button>
 		              					<button class="btn btn-success" (click)="onDeleteButton(comment)" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Delete

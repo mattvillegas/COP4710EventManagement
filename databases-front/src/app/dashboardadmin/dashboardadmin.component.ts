@@ -117,6 +117,15 @@ export class DashboardadminComponent implements OnInit {
     })
   }
 
+  onEditButton(comment){
+    this.authService.editComment(comment.comment, comment.location).subscribe(data =>{
+    if(data === "updated comment"){
+        this.getCommentList();
+        this.getCommentList();
+      }
+    })
+  }
+
   search_event(){
     if(this.inputString == undefined){
       // alert('Empty, so nothing found.');

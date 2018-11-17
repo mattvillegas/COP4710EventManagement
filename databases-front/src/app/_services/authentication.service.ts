@@ -40,6 +40,10 @@ export class AuthenticationService {
         return this.http.post('http://localhost:8080/api/' + this.user + '/delete-comment', {time: time, loc: location}, {headers:this.headers});
     }
 
+    editComment(comment, location){
+        return this.http.post('http://localhost:8080/api/' + this.user + '/edit-comment', {comment: comment, loc: location}, {headers:this.headers});
+    }
+
     getAllRSOs(){
         return this.http.get('http://localhost:8080/api/list-all-rso', {headers:this.headers});
     }

@@ -415,6 +415,18 @@ app.post("api/:id/delete-comment", function(req, res)
 app.post("api/:id/edit-comment", function(req, res)
 {
 	var editComment = 'UPDATE comments SET comment = \'' + req.body.comment + '\' WHERE time = \'' + req.body.time + '\' AND location = \'' + req.body.loc + '\''
+	
+	client.query(editComment, (err, res) =>
+	{
+		if(err)
+		{
+			handleError(res, err.stack)
+		}
+		else
+		{
+			res.status(201).json(res)
+		}
+	})
 });
 
 app.get("/api/list-all-rso", function(req, res)

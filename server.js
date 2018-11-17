@@ -386,6 +386,135 @@ app.post("/api/:id/join-rso", function(req, res)
 	})
 });
 
+app.post("/api/:id/add-comment", function(req, res)
+{
+	var addComment = 'INSERT INTO comments(uid, time, location, comment) VALUES($1, $2, $3, $4)'
+	var queryValues = [req.params.id, req.body.time, req.body.loc, req.body.comment]
+	
+	client.query(addComment, queryValues, (err, comment) =>
+	{
+		if(err)
+		{
+			handleError(res, err.stack)
+		}
+		else
+		{
+			res.status(201).json(comment)
+		}
+	})
+});
+
+app.post("/api/:id/delete-comment", function(req, res)
+{
+	var deleteComment = 'DELETE FROM comments WHERE uid = \'' + req.params.id + '\' AND time = \'' + req.body.time + '\' AND location = \'' + req.body.loc + '\''
+	
+	client.query(deleteComment, (err, res) =>
+	{
+		if(err)
+		{
+			handleError(res, err.stack)
+		}
+		else
+		{
+			res.status(201).json(res)
+		}
+	})
+});
+
+app.post("/api/:id/edit-comment", function(req, res)
+{
+	var editComment = 'UPDATE comments SET comment = \'' + req.body.comment + '\' WHERE time = \'' + req.body.time + '\' AND location = \'' + req.body.loc + '\''
+	
+	client.query(editComment, (err, res) =>
+	{
+		if(err)
+		{
+			handleError(res, err.stack)
+		}
+		else
+		{
+			res.status(201).json(res)
+		}
+	})
+});
+
+app.post("/api/get-comments", function (req,res) {
+	var find_comment = 'SELECT C.comment from comments C WHERE C.time = \'' + req.body.time + '\' AND location = \'' + req.body.location + '\''
+	client.query(find_comment, (err,comments) => 
+	{
+		if(err)
+		{
+			handleError(res, "Database Error")
+		}
+		else
+		{
+			res.status(201).json(comments.rows)
+		}
+
+	})
+
+});
+
+app.get("/api/list-all-rso", function(req, res)
+{
+	var getAllRSO = 'SELECT * FROM rso'
+	
+	
+	client.query(getAllRSO, (err, rso) =>
+	{
+		if(err)
+		{
+			handleError(res, err.stack)
+		}
+		else
+		{
+			res.status(201).json(rso.rows)
+		}
+	})
+});
+
+function return_call(items, res)
+{
+	console.log("entered return call")
+	console.log(items)
+	res.status(201).json(items)
+}
+
+app.post("/api/:id/leave-rso", function(req, res)
+{
+	//var findUser = 'SELECT * FROM is_in WHERE rso_id = \'' + req.body.rsoId + '\' AND uid = \'' + req.params.id + '\''
+	var removeUser = 'DELETE FROM is_in WHERE rso_id = \'' + req.body.rsoId + '\' AND uid = \'' + req.params.id + '\''
+	
+	client.query(removeUser, (err, remove) =>
+	{
+		if(err)
+		{
+			handleError(res, err.stack)
+		}
+		else
+		{
+			res.status(201).json(remove)
+		}
+	})
+});
+
+app.get("/api/:id/get-my-rso", function(req, res)
+{
+	var getMyRSOs = 'SELECT rso.name FROM rso, is_in WHERE is_in.uid = \'' + req.params.id + '\' AND is_in.rso_id = rso.rso_id'
+	
+	client.query(getMyRSOs, (err, myRSOs) =>
+	{
+		if(err)
+		{
+			handleError(res, err.stack)
+		}
+		else
+		{
+			res.status(201).json(myRSOs.rows)
+		}
+	})
+});
+
 app.post("/api/:id/create-rso-event", function(req, res)
 {
 	console.log("made it to create")

@@ -42,3 +42,9 @@ client.query('CREATE TABLE is_in (rso_id INTEGER, uid INTEGER, PRIMARY KEY (rso_
 client.query('CREATE TABLE comments(uid INTEGER, time timestamp, location VARCHAR(300), comment VARCHAR(10000), FOREIGN KEY (time, location) REFERENCES event(time,location), FOREIGN KEY (uid) REFERENCES student(uid))')
 .then(res => console.log("created table!"))
 .catch(e => console.log(e.stack))
+
+client.query('CREATE TABLE pub_event (event_name VARCHAR(200), time timestamp, location VARCHAR(300), description VARCHAR(10000), name VARCHAR(100), contact_email VARCHAR(100), contact_phone VARCHAR(50), event_category VARCHAR(50), PRIMARY KEY (time, location), FOREIGN KEY (time, location) REFERENCES event(time, location))')
+.then(res => console.log("created table!"))
+.catch(e => console.log(e.stack))
+
+client.query('CREATE TABLE private_event (event_name VARCHAR(200), time timestamp, location VARCHAR(300), description VARCHAR(10000), name VARCHAR(100), contact_email VARCHAR(100), contact_phone VARCHAR(50), event_category VARCHAR(50), university VARCHAR(50), PRIMARY KEY (time, location), FOREIGN KEY (time, location) REFERENCES event(time, location))')

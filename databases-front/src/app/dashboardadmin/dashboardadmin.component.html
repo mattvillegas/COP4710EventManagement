@@ -25,43 +25,61 @@
 	            	<div class="element">
 	                	<p align="center"> This is the official dashboard for students like you to find events to attend here at UCF!</p>
 	                </div>
-			<div class="element">
-		    	<h2> Your Events </h2>
-		    	<div class="event-list">
-				<table>
-              		<tr>
-              			<th><h5>Event Name</h5></th>
-                		<th><h5>Time</h5></th>
-                		<th><h5>Location</h5></th>
-                		<th><h5>Description</h5></th>
-                		<th><h5>Contact Name</h5></th>
-                		<th><h5>Contact Email</h5></th>
-                		<th><h5>Contact Phone</h5></th>
-                		<th><h5>Event Category</h5></th>
-                		<th><h5>Share</h5></th>
-              		</tr>
-              	<tr style="word-break: break-all">
-                 <tr *ngFor="let event of eventlist | filter : inputString;">
-                  <td>{{event.event_name}}</td>
-                  <td>{{event.time}}</td>
-                  <td>{{event.location}}</td>
-                  <td>{{event.description}}</td>
-                  <td>{{event.name}}</td>
-                  <td>{{event.contact_email}}</td>
-                  <td>{{event.contact_phone}}</td>
-                  <td>{{event.event_category}}</td>
-                  <td>
-		          	<div id="social">
-		            	<fb-like></fb-like>
-		            		<br /><br />
-		                <tweet></tweet>
-		            </div>
-		          </td>
-              	</tr>
-          		</table>
-          		</div>
-      	  	</div>
+					<div class="element">
+				    	<h2> Your Events </h2>
+				    	<div class="event-list">
+						<table>
+		              		<tr>
+		              			<th><h5>Event Name</h5></th>
+		                		<th><h5>Time</h5></th>
+		                		<th><h5>Location</h5></th>
+		                		<th><h5>Description</h5></th>
+		                		<th><h5>Contact Name</h5></th>
+		                		<th><h5>Contact Email</h5></th>
+		                		<th><h5>Contact Phone</h5></th>
+		                		<th><h5>Event Category</h5></th>
+		                		<th><h5>Share</h5></th>
+		              		</tr>
+		              	<tr style="word-break: break-all">
+		                 <tr *ngFor="let event of eventlist | filter : inputString;">
+		                  <td>{{event.event_name}}</td>
+		                  <td>{{event.time}}</td>
+		                  <td>{{event.location}}</td>
+		                  <td>{{event.description}}</td>
+		                  <td>{{event.name}}</td>
+		                  <td>{{event.contact_email}}</td>
+		                  <td>{{event.contact_phone}}</td>
+		                  <td>{{event.event_category}}</td>
+		                  <td>
+				          	<div id="social">
+				            	<fb-like></fb-like>
+				            		<br /><br />
+				                <tweet></tweet>
+				            </div>
+				          </td>
+		              	</tr>
+		          		</table>
+		          		</div>
+		      	  	</div>
 
+	      	  	<div class="element">
+	      	  		<div class="discussion">
+				    	<h2> Event Discussion </h2>
+				    	<div class="event-list">
+						<table>
+		              		<tr style="word-break: break-all">
+		              			<tr *ngFor="let event of eventlist | filter : inputString;">
+		              				<th><h5>{{event.event_name}}</h5></th>
+		              			</tr>
+		              		<tr style="word-break: break-all">
+		                 		<tr *ngFor="let comment of commentlist | filter : inputString;">
+		                  			<td>{{comment.text}}</td>
+		              			</tr>
+		          		</table>
+	          			</div>
+	      	  		</div>
+	      	  	</div>
+      	  	
 			        <div class="element">
 			            <h3> Add New RSO or Private Event </h3>
 			            <table class="add-event">

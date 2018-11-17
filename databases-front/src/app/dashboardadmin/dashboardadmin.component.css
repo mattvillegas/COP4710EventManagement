@@ -64,6 +64,16 @@ text-align: center;
 	width: 100%;
 }
 
+.discussion table {
+	display: table;
+}
+.discussion table tr {
+	display: table-cell;
+}
+.discussion table tr td {
+	display: block;
+}
+
 .card-header a {
 	color: white;
 	text-decoration: none; 

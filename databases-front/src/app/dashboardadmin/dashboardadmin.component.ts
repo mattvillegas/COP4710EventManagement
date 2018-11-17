@@ -20,6 +20,7 @@ export class DashboardadminComponent implements OnInit {
   privateevent : Privateevent;
   rsoevent : Rsoevent;
   eventlist : any;
+  commentlist : any; 
 
   _id: string = null;
   CreatedByUserID : string;
@@ -33,8 +34,10 @@ export class DashboardadminComponent implements OnInit {
   contact_email: String;
   contact_phone: String;
   event_category: String;
+  text: String; 
 
-  //RSO: timestamp, location, description, name of person, title of event, contact email, contact phone, event category
+  //RSO: timestamp, location, description, name of person, title of event, contact email, contact phone, event category, comment
+  s text 
 
   constructor(private router: Router, public authService: AuthenticationService) { }
 
@@ -48,6 +51,7 @@ export class DashboardadminComponent implements OnInit {
    this.authService.storeUser(this.user);
    this.user_id = this.user['id'];
    this.getEventList();
+   this.getCommentList(); 
   }
 
   onAddButton(){
@@ -62,7 +66,8 @@ export class DashboardadminComponent implements OnInit {
       contact_email : this.contact_email,
       contact_phone : this.contact_phone,
       event_category : this.event_category,
-      CreatedByUserID : this.user["id"]
+      CreatedByUserID : this.user["id"], 
+      text : this.text
     }
 
     if(this.type === "RSO")
@@ -89,6 +94,12 @@ export class DashboardadminComponent implements OnInit {
   getEventList(){
     this.authService.getEvents().subscribe(data =>{
     this.eventlist = data;
+    })
+  }
+
+  getCommentList(){
+    this.authService.getComments(event).subscribe(data =>{
+    this.commentlist = data;
     })
   }
 

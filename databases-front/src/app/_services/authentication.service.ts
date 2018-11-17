@@ -28,6 +28,10 @@ export class AuthenticationService {
         return this.http.get('http://localhost:8080/api/' + this.user + '/get-events', {headers:this.headers});
     }
 
+    getComments(){
+        return this.http.get('http://localhost:8080/api/' + this.event_name + '/get-comments', {headers:this.headers});
+    }
+
     getAllRSOs(){
         return this.http.get('http://localhost:8080/api/list-all-rso', {headers:this.headers});
     }

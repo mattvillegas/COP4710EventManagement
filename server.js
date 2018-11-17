@@ -392,7 +392,24 @@ app.post("api/:id/add-comment", function(req, res)
 		{
 			res.status(201).json(comment)
 		}
-	}
+	})
+});
+
+app.post("api/:id/delete-comment", function(req, res)
+{
+	var deleteComment = 'DELETE FROM Comments WHERE uid = \'' + req.params.id + '\' AND time = \'' + req.body.time + '\' AND location = \'' + req.body.loc + '\''
+	
+	client.query(deleteComment, (err, res) =>
+	{
+		if(err)
+		{
+			handleError(res, err.stack)
+		}
+		else
+		{
+			res.status(201).json(res)
+		}
+	})
 });
 
 app.get("/api/list-all-rso", function(req, res)

@@ -100,7 +100,7 @@ export class DashboardadminComponent implements OnInit {
   }
 
   onDeleteButton(comment){
-    this.authService.deleteComment(comment).subscribe(data =>{
+    this.authService.deleteComment(comment.time, comment.location).subscribe(data =>{
     if(data === "deleted comment"){
         this.getCommentList();
         this.getCommentList();

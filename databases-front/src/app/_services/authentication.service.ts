@@ -36,8 +36,8 @@ export class AuthenticationService {
         return this.http.get('http://localhost:8080/api/get-comments', {headers:this.headers});
     }
 
-    deleteComment(comment){
-        return this.http.post('http://localhost:8080/api/' + this.user + '/delete-comment', comment, {headers:this.headers});
+    deleteComment(time, location){
+        return this.http.post('http://localhost:8080/api/' + this.user + '/delete-comment', {time: time, loc: location}, {headers:this.headers});
     }
 
     getAllRSOs(){

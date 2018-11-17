@@ -190,7 +190,7 @@ app.post("/api/users/login", function(req, res)
     }
     else 
     {
-        console.log(superadmin.rows)
+		console.log(superadmin.rows)
         if(superadmin.rows.length > 0)
         {
 			var resString = {uid:superadmin.rows[0].uid, accountType:superadmin}
@@ -434,8 +434,9 @@ app.post("/api/:id/add-comment", function(req, res)
 
 app.post("/api/:id/delete-comment", function(req, res)
 {
-	var deleteComment = 'DELETE FROM comments WHERE uid = \'' + req.params.id + '\' AND time = \'' + req.body.time + '\' AND location = \'' + req.body.loc + '\''
-	
+	var deleteComment = 'DELETE FROM comments WHERE uid = \'' + req.params.id + '\' AND location = \'' + req.body.loc + '\''
+
+	console.log("req is " + req.body.loc)
 	client.query(deleteComment, (err, deleted) =>
 	{
 		if(err)
@@ -445,6 +446,7 @@ app.post("/api/:id/delete-comment", function(req, res)
 		else
 		{
 			console.log(deleted)
+			console.log("We are deleting a comment")
 			res.status(201).json("deleted comment")
 		}
 	})

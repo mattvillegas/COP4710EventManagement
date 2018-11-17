@@ -317,6 +317,8 @@ app.get("/api/:id/get-events", function(req, res)
 {
 	var isInQueryString = 'SELECT rso_id FROM is_in i WHERE i.uid = \'' + req.params.id + '\'';
 	var findRSOQueryString = 'SELECT * FROM rso_event r WHERE r.rso_id = \'' + isIn.rows[0] + '\''
+	var pubEvents = 'SELECT * FROM pub_event p'
+	var jsonObject = []
 	
 	client.query(isInQueryString, (err, isIn) =>
 	{
@@ -334,11 +336,24 @@ app.get("/api/:id/get-events", function(req, res)
 				}
 				else
 				{
-					res.status(201).json(events)
+					jsonObject.push(events.rows)
 				}
 			})
 		}
 	})
+	
+	client.query(pubEvents, (err, pub) =>
+	{
+		if(err)
+		{
+			handleError(res, err.stack)
+		}
+		else
+		{
+			jsonObject.push(pub.rows)
+		}
+	})
+		
 });
 
 app.post("/api/:id/create-rso", function(req, res)

@@ -36,9 +36,6 @@ export class DashboardadminComponent implements OnInit {
   event_category: String;
   text: String; 
 
-  //RSO: timestamp, location, description, name of person, title of event, contact email, contact phone, event category, comment
-  s text 
-
   constructor(private router: Router, public authService: AuthenticationService) { }
 
   ngOnInit() {

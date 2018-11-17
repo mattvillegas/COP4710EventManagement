@@ -453,7 +453,7 @@ app.post("/api/:id/edit-comment", function(req, res)
 {
 	var editComment = 'UPDATE comments SET comment = \'' + req.body.comment + '\' WHERE time = \'' + req.body.time + '\' AND location = \'' + req.body.loc + '\''
 	
-	client.query(editComment, (err, res) =>
+	client.query(editComment, (err, comment) =>
 	{
 		if(err)
 		{
@@ -461,7 +461,7 @@ app.post("/api/:id/edit-comment", function(req, res)
 		}
 		else
 		{
-			res.status(201).json(res)
+			res.status(201).json("updated comment")
 		}
 	})
 });

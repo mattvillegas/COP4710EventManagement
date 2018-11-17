@@ -316,7 +316,6 @@ app.post("/api/users/student-delete/:id", function(req, res)
 app.get("/api/:id/get-events", function(req, res)
 {
 	var isInQueryString = 'SELECT rso_id FROM is_in i WHERE i.uid = \'' + req.params.id + '\'';
-	var findRSOQueryString = 'SELECT * FROM rso_event r WHERE r.rso_id = \'' + isIn.rows[0] + '\''
 	var pubEvents = 'SELECT * FROM pub_event p'
 	var jsonObject = []
 	
@@ -328,6 +327,7 @@ app.get("/api/:id/get-events", function(req, res)
 		}
 		else
 		{
+			var findRSOQueryString = 'SELECT * FROM rso_event r WHERE r.rso_id = \'' + isIn.rows[0] + '\''
 			client.query(findRSOQueryString, (err, events) =>
 			{
 				if(err)

@@ -28,8 +28,8 @@ export class AuthenticationService {
         return this.http.get('http://localhost:8080/api/' + this.user + '/get-events', {headers:this.headers});
     }
 
-    getComments(event){
-        return this.http.get('http://localhost:8080/api/' + event.time + event.loc + '/get-comments', {headers:this.headers});
+    getComments(){
+        return this.http.get('http://localhost:8080/api/get-comments', {headers:this.headers});
     }
 
     getAllRSOs(){

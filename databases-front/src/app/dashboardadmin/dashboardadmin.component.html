@@ -68,12 +68,9 @@
 				    	<div class="event-list">
 						<table>
 		              		<tr style="word-break: break-all">
-		              			<tr *ngFor="let event of eventlist | filter : inputString;">
-		              				<th><h5>{{event.event_name}}</h5></th>
-		              			</tr>
-		              		<tr style="word-break: break-all">
-		                 		<tr *ngFor="let comment of commentlist | filter : inputString;">
-		                  			<td>{{comment.text}}</td>
+		              			<tr *ngFor="let comment of commentlist | filter : inputString;">
+		              				<td>{{comment.event_name}}</td>
+		              				<td>{{comment.comment}}</td>
 		              			</tr>
 		          		</table>
 	          			</div>

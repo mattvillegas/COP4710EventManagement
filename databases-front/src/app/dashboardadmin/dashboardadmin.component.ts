@@ -34,7 +34,7 @@ export class DashboardadminComponent implements OnInit {
   contact_email: String;
   contact_phone: String;
   event_category: String;
-  text: String; 
+  comment: String; 
 
   constructor(private router: Router, public authService: AuthenticationService) { }
 
@@ -64,7 +64,7 @@ export class DashboardadminComponent implements OnInit {
       contact_phone : this.contact_phone,
       event_category : this.event_category,
       CreatedByUserID : this.user["id"], 
-      text : this.text
+      comment : this.comment
     }
 
     if(this.type === "RSO")
@@ -95,7 +95,7 @@ export class DashboardadminComponent implements OnInit {
   }
 
   getCommentList(){
-    this.authService.getComments(event).subscribe(data =>{
+    this.authService.getComments().subscribe(data =>{
     this.commentlist = data;
     })
   }

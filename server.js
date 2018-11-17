@@ -190,10 +190,11 @@ app.post("/api/users/login", function(req, res)
     }
     else 
     {
-		console.log(superadmin.rows)
+		
         if(superadmin.rows.length > 0)
         {
-			var resString = {uid:superadmin.rows[0].uid, accountType:superadmin}
+			console.log("logging in as superadmin")
+			var resString = {uid:superadmin.rows[0].uid, accountType:'superadmin'}
 			found = true
 			res.status(201).json(resString)
         }
@@ -211,10 +212,11 @@ app.post("/api/users/login", function(req, res)
     }
     else 
     {
-        console.log(admin.rows)
+        
         if(admin.rows.length > 0)
         { 
-			var resString = {uid:admin.rows[0].uid, accountType:admin}
+			console.log("logging in as admin")
+			var resString = {uid:admin.rows[0].uid, accountType:'admin'}
 			found = true
             res.status(201).json(resString)
         }
@@ -232,10 +234,11 @@ app.post("/api/users/login", function(req, res)
     }
     else 
     {
-        console.log(student.rows)
+       
         if(student.rows.length > 0)
         {
-			var resString = {uid:student.rows[0].uid , accountType:student}
+			console.log("logging in as student")
+			var resString = {uid:student.rows[0].uid , accountType:'student'}
 			found = true
             res.status(201).json(resString)
         }
@@ -398,6 +401,7 @@ app.post("/api/:id/create-rso", function(req, res)
 
 app.post("/api/:id/join-rso", function(req, res)
 {
+	console.log("joining rso")
 	var insertIntoIsIn = 'INSERT INTO is_in(rso_id, uid) VALUES($1, $2)'
 	var queryValues = [req.body.rso_id, req.params.id]
 	

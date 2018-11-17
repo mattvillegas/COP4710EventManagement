@@ -466,7 +466,7 @@ app.post("/api/:id/edit-comment", function(req, res)
 });
 
 app.get("/api/get-comments", function (req,res) {
-	var find_comment = 'SELECT C.comment, E.event_name From comments C, event E WHERE C.time = E.time AND C.location = E.location';
+	var find_comment = 'SELECT C.comment, E.event_name, C.time, C.location From comments C, event E WHERE C.time = E.time AND C.location = E.location';
 	client.query(find_comment, (err,comments) => 
 	{
 		if(err)

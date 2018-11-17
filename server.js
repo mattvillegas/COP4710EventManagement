@@ -327,15 +327,16 @@ app.get("/api/:id/get-events", function(req, res)
 		}
 		else
 		{
-			var findRSOQueryString = 'SELECT * FROM rso_event r WHERE r.rso_id = \'' + isIn.rows[0] + '\''
+			var findRSOQueryString = 'SELECT * FROM rso_event r WHERE r.rso_id = \'' + isIn.rows[0]['rso_id'] + '\''
 			client.query(findRSOQueryString, (err, events) =>
 			{
 				if(err)
 				{
-					handleError(res, "Something went wrong")
+					handleError(res, err.stack)
 				}
 				else
 				{
+					
 					jsonObject.push(events.rows)
 				}
 			})
@@ -350,9 +351,12 @@ app.get("/api/:id/get-events", function(req, res)
 		}
 		else
 		{
+			
 			jsonObject.push(pub.rows)
 		}
 	})
+	
+	
 		
 });
 

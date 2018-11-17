@@ -12,48 +12,47 @@
 	                <nav>
 	                	<table>
 	                		<tr>
-	                			<div class="form-group">
-              						<input placeholder="Enter Event to Search" name="inputString" [(ngModel)] = "inputString" class="form-control" style="max-width:450px">
-         						</div>
-         						<th><a style="font-size:1.2em; margin-left:auto; margin-right:auto;" [routerLink] = "['/rso']">RSOs</a></th>
-	                			<th><a style="font-size:1.2em; padding-left:10em" [routerLink] = "['/login']">Logout</a></th>
+	                		<div class="form-group">
+              				<th style="font-size:1.2em; padding-top: 10px; margin-left:auto; margin-right:auto;">Welcome!</th>
+         					</div>
+         					<th><a style="font-size:1.2em; margin-left:auto; margin-right:auto;" [routerLink] = "['/rso']">RSOs</a></th>
+	                		<th><a style="font-size:1.2em; padding-left:10em" [routerLink] = "['/login']">Logout</a></th>
 	                		</tr>
 	                	</table>
 	                </nav>
 	            </div>
 	            <div class="card-body">
 	            	<div class="element">
-	                	<p> This is the official dashboard for students like you to find events to attend here at UCF. </p>
+	                	<p align="center"> This is the official dashboard for students like you to find events to attend here at UCF!</p>
 	                </div>
-	                <div class="element">
-	                	<h3> Happening on Campus </h3>
-		                <div class="event-list">
-		                	<table>
-		                		<tr>
-		                			<th>Title</th>
-		                			<th>Description</th>
-		                			<th>Location</th>
-		                			<th>Start Time</th>
-		                			<th>End Time</th>
-		                			<th>Share on Social Media</th>
-		                		</tr>
-		                		<tr>
-		                			<td>Trick or Treat on Greek Street (TOTOGS)</td>
-		                			<td>Held around the same time as Halloween, Trick or Treat on Greek Street (TOTOGS) is a community wide event in which fraternities and sororities host a variety of Halloween events for students, staff, and families in the central Orlando area.</td>
-		                			<td>Greek Park</td>
-		                			<td>Time</td>
-		                			<td>Time</td>
-		                			<td>
-		                				<div id="social">
-		                					<fb-like></fb-like>
-		                						<br /><br />
-		                					<tweet></tweet>
-		                				</div>
-		                			</td>
-		                		</tr>
-		                	</table>
-	                	</div>
-	                </div>
+				<div class="element">
+		    	<h2> Your Events </h2>
+		    	<div class="event-list">
+				<table>
+              		<tr>
+              			<th><h5>Event Name</h5></th>
+                		<th><h5>Time</h5></th>
+                		<th><h5>Location</h5></th>
+                		<th><h5>Description</h5></th>
+                		<th><h5>Share</h5></th>
+              		</tr>
+              	<tr style="word-break: break-all">
+                 <tr *ngFor="let event of eventlist | filter : inputString;">
+                  <td>{{event.event_name}}</td>
+                  <td>{{event.time}}</td>
+                  <td>{{event.location}}</td>
+                  <td>{{event.description}}</td>
+                  <td>
+		          	<div id="social">
+		            	<fb-like></fb-like>
+		            		<br /><br />
+		                <tweet></tweet>
+		            </div>
+		          </td>
+              	</tr>
+          		</table>
+          		</div>
+      	  	</div>
 		        </div>
 	            <div class="card-footer">
 	            </div>

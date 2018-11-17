@@ -117,7 +117,7 @@ export class DashboardadminComponent implements OnInit {
     else
       this.clearFields();
     }, err=>{
-      alert('Failed to add RSO event.');
+      alert('Not the admin of this RSO, failed to add RSO event ' + event_name + ' at ' + time + ' and ' + location);
     });
     this.getEventList();
     this.getEventList();
@@ -127,7 +127,7 @@ export class DashboardadminComponent implements OnInit {
     this.authService.createPublicEvent(NewEvent).subscribe(data=>{
       this.clearFields();
     }, err=>{
-      alert('Failed to add public event.');
+      alert('Failed to add public event ' + event_name + ' at ' + time + ' and ' + location);
     });
     this.getEventList();
     this.getEventList();
@@ -137,7 +137,7 @@ export class DashboardadminComponent implements OnInit {
     this.authService.createPrivateEvent(NewEvent).subscribe(data=>{
       this.clearFields();
     }, err=>{
-      alert('Failed to add private event.');
+      alert('Failed to add private event ' + event_name + ' at ' + time + ' and ' + location);
     });
     this.getEventList();
     this.getEventList();

@@ -63,8 +63,7 @@ export class DashboardadminComponent implements OnInit {
       contact_email : this.contact_email,
       contact_phone : this.contact_phone,
       event_category : this.event_category,
-      CreatedByUserID : this.user["id"], 
-      comment : this.comment
+      CreatedByUserID : this.user["id"]
     }
 
     if(this.type === "RSO")
@@ -101,8 +100,11 @@ export class DashboardadminComponent implements OnInit {
   }
 
   onDeleteButton(){
-    this.authService.deleteComment().subscribe(data =>{
-    this.comment = data;
+    this.authService.deleteComment(this.time, this.loc).subscribe(data =>{
+    if(data === "deleted comment"){
+        this.getCommentList();
+        this.getCommentList();
+      }
     })
   }
 

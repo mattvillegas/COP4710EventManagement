@@ -377,6 +377,24 @@ app.post("/api/:id/join-rso", function(req, res)
 	})
 });
 
+app.post("api/:id/add-comment", function(req, res)
+{
+	var addComment = 'INSERT INTO comments(uid, time, location, comment) VALUES($1, $2, $3, $4)'
+	var queryValues = [req.params.id, req.body.time, req.body.loc, req.body.comment]
+	
+	client.query(addComment, queryValues, (err, comment) =>
+	{
+		if(err)
+		{
+			handleError(res, err.stack)
+		}
+		else
+		{
+			res.status(201).json(comment)
+		}
+	}
+});
+
 app.get("/api/list-all-rso", function(req, res)
 {
 	var getAllRSO = 'SELECT * FROM rso'

@@ -34,7 +34,7 @@ export class DashboardadminComponent implements OnInit {
   contact_email: String;
   contact_phone: String;
   event_category: String;
-  comment: String; 
+  comment: any; 
 
   constructor(private router: Router, public authService: AuthenticationService) { }
 
@@ -97,6 +97,12 @@ export class DashboardadminComponent implements OnInit {
   getCommentList(){
     this.authService.getComments().subscribe(data =>{
     this.commentlist = data;
+    })
+  }
+
+  onDeleteButton(){
+    this.authService.deleteComment().subscribe(data =>{
+    this.comment = data;
     })
   }
 

@@ -125,6 +125,44 @@ text-align: center;
 	float: left;
 }
 
+.comment-list {
+	padding-top: 20px;
+	display: block; 
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.comment-list table { 
+    width: auto;
+    background-color: black;
+}
+
+.comment-list th{
+	color: white;
+	font-size: .8em;
+	border-style: solid; 
+	border-color: gold; 
+	border-width: 1px;
+	padding: 5px;
+	text-align: center;
+}
+
+.comment-list td {
+	color: white;
+	font-size: 0.7em;
+	border-style: solid; 
+	border-color: gold; 
+	border-width: 1px;
+	padding: 5px;
+	max-width: 90px;
+}
+
+.comment-list img {
+	height: 50px;
+	width: 50px;
+	float: left;
+}
+
 .form-control {
 	margin: 5px;
 }

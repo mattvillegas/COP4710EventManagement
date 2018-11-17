@@ -114,7 +114,7 @@ export class DashboardadminComponent implements OnInit {
     else
       this.clearFields();
     }, err=>{
-      alert('Not the admin of this RSO, failed to add RSO event ' + this.event_name + ' at ' + this.time + ' and ' + this.loc);
+      alert('Failed to add RSO event ' + this.event_name + ' at ' + this.time + ' and ' + this.loc);
     });
     this.getEventList();
     this.getEventList();

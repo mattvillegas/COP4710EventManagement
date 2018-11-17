@@ -316,8 +316,7 @@ app.post("/api/users/student-delete/:id", function(req, res)
 app.get("/api/:id/get-events", function(req, res)
 {
 	var isInQueryString = 'SELECT rso_id FROM is_in i WHERE i.uid = \'' + req.params.id + '\'';
-	var pubEvents = 'SELECT * FROM pub_event p'
-	var jsonObject = []
+	
 	
 	client.query(isInQueryString, (err, isIn) =>
 	{
@@ -327,6 +326,7 @@ app.get("/api/:id/get-events", function(req, res)
 		}
 		else
 		{
+			console.log(isIn)
 			var findRSOQueryString = 'SELECT * FROM rso_event r WHERE r.rso_id = \'' + isIn.rows[0]['rso_id'] + '\''
 			client.query(findRSOQueryString, (err, events) =>
 			{
@@ -336,28 +336,18 @@ app.get("/api/:id/get-events", function(req, res)
 				}
 				else
 				{
-					
-					jsonObject.push(events.rows)
+					if(events.rows.length >= 1)
+					{
+						res.status(201).json(events.rows)
+					}
+					else
+					{
+						res.status(201).json("not in an rso")
+					}
 				}
 			})
 		}
 	})
-	
-	client.query(pubEvents, (err, pub) =>
-	{
-		if(err)
-		{
-			handleError(res, err.stack)
-		}
-		else
-		{
-			
-			jsonObject.push(pub.rows)
-		}
-	})
-	
-	
-		
 });
 
 app.post("/api/:id/create-rso", function(req, res)

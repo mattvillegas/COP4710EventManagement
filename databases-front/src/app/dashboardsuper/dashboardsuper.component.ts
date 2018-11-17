@@ -47,8 +47,8 @@ export class DashboardsuperComponent implements OnInit {
    this.user = JSON.parse(temp);
    this.authService.storeUser(this.user);
    this.user_id = this.user['id'];
-   this.getEventList();
    this.getPublicEventList();
+   this.getEventList();
   }
 
   onAddButton(){

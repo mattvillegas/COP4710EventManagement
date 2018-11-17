@@ -65,11 +65,11 @@
                 		<th><h5>Share</h5></th>
               		</tr>
               	<tr style="word-break: break-all">
-                 <tr *ngFor="let event of publiceventlist | filter : inputString;">
-                  <td>{{event.event_name}}</td>
-                  <td>{{event.time}}</td>
-                  <td>{{event.location}}</td>
-                  <td>{{event.description}}</td>
+                 <tr *ngFor="let pubevent of publiceventlist | filter : inputString;">
+                  <td>{{pubevent.event_name}}</td>
+                  <td>{{pubevent.time}}</td>
+                  <td>{{pubevent.location}}</td>
+                  <td>{{pubevent.description}}</td>
                   <td>
 		          	<div id="social">
 		            	<fb-like></fb-like>

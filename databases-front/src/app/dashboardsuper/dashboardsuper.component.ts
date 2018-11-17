@@ -21,6 +21,8 @@ export class DashboardsuperComponent implements OnInit {
   rsoevent : Rsoevent;
   eventlist : any;
 
+  publiceventlist : any;
+
   _id: string = null;
   CreatedByUserID : string;
 
@@ -46,6 +48,7 @@ export class DashboardsuperComponent implements OnInit {
    this.authService.storeUser(this.user);
    this.user_id = this.user['id'];
    this.getEventList();
+   this.getPublicEventList();
   }
 
   onAddButton(){
@@ -87,6 +90,12 @@ export class DashboardsuperComponent implements OnInit {
   getEventList(){
     this.authService.getEvents().subscribe(data =>{
     this.eventlist = data;
+    })
+  }
+
+  getPublicEventList(){
+    this.authService.getPublicEvents().subscribe(data =>{
+    this.publiceventlist = data;
     })
   }
 

@@ -357,6 +357,26 @@ app.get("/api/:id/get-events", function(req, res)
 	})
 });
 
+app.get("/api/get-pub-events", function(req,res)
+{
+	var pubevents = 'SELECT * FROM pub_event'
+	client.query(pubevents, function(err,events)
+	{
+		if(err)
+		{
+			handleError(res, "Database error")
+		}
+		
+		else 
+		{
+			res.status(201).json(events.rows)
+		}
+
+	})
+
+})
+
+
 app.post("/api/:id/create-rso", function(req, res)
 {
 	var queryString = "INSERT INTO rso(name, adminid) VALUES($1, $2)"

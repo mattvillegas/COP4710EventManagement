@@ -377,7 +377,7 @@ app.post("/api/:id/join-rso", function(req, res)
 	})
 });
 
-app.post("api/:id/add-comment", function(req, res)
+app.post("/api/:id/add-comment", function(req, res)
 {
 	var addComment = 'INSERT INTO comments(uid, time, location, comment) VALUES($1, $2, $3, $4)'
 	var queryValues = [req.params.id, req.body.time, req.body.loc, req.body.comment]
@@ -395,7 +395,7 @@ app.post("api/:id/add-comment", function(req, res)
 	})
 });
 
-app.post("api/:id/delete-comment", function(req, res)
+app.post("/api/:id/delete-comment", function(req, res)
 {
 	var deleteComment = 'DELETE FROM comments WHERE uid = \'' + req.params.id + '\' AND time = \'' + req.body.time + '\' AND location = \'' + req.body.loc + '\''
 	
@@ -412,7 +412,7 @@ app.post("api/:id/delete-comment", function(req, res)
 	})
 });
 
-app.post("api/:id/edit-comment", function(req, res)
+app.post("/api/:id/edit-comment", function(req, res)
 {
 	var editComment = 'UPDATE comments SET comment = \'' + req.body.comment + '\' WHERE time = \'' + req.body.time + '\' AND location = \'' + req.body.loc + '\''
 	
@@ -427,6 +427,23 @@ app.post("api/:id/edit-comment", function(req, res)
 			res.status(201).json(res)
 		}
 	})
+});
+
+app.post("/api/get-comments", function (req,res) {
+	var find_comment = 'SELECT C.comment from comments C WHERE C.time = \'' + req.body.time + '\' AND location = \'' + req.body.location + '\''
+	client.query(find_comment, (err,comments) => 
+	{
+		if(err)
+		{
+			handleError(res, "Database Error")
+		}
+		else
+		{
+			res.status(201).json(comments.rows)
+		}
+
+	})
+
 });
 
 app.get("/api/list-all-rso", function(req, res)

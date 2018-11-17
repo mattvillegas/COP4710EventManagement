@@ -359,6 +359,7 @@ app.get("/api/:id/get-events", function(req, res)
 
 app.get("/api/get-pub-events", function(req,res)
 {
+	console.log("sending pub events")
 	var pubevents = 'SELECT * FROM pub_event'
 	client.query(pubevents, function(err,events)
 	{
@@ -435,7 +436,7 @@ app.post("/api/:id/delete-comment", function(req, res)
 {
 	var deleteComment = 'DELETE FROM comments WHERE uid = \'' + req.params.id + '\' AND time = \'' + req.body.time + '\' AND location = \'' + req.body.loc + '\''
 	
-	client.query(deleteComment, (err, res) =>
+	client.query(deleteComment, (err, deleted) =>
 	{
 		if(err)
 		{
@@ -443,7 +444,8 @@ app.post("/api/:id/delete-comment", function(req, res)
 		}
 		else
 		{
-			res.status(201).json(res)
+			console.log(deleted)
+			res.status(201).json("deleted comment")
 		}
 	})
 });
@@ -452,7 +454,7 @@ app.post("/api/:id/edit-comment", function(req, res)
 {
 	var editComment = 'UPDATE comments SET comment = \'' + req.body.comment + '\' WHERE time = \'' + req.body.time + '\' AND location = \'' + req.body.loc + '\''
 	
-	client.query(editComment, (err, res) =>
+	client.query(editComment, (err, comment) =>
 	{
 		if(err)
 		{
@@ -460,7 +462,7 @@ app.post("/api/:id/edit-comment", function(req, res)
 		}
 		else
 		{
-			res.status(201).json(res)
+			res.status(201).json("updated comment")
 		}
 	})
 });

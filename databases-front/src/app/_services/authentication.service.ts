@@ -29,7 +29,7 @@ export class AuthenticationService {
     }
 
     getPublicEvents(){
-        return this.http.get('http://localhost:8080/api/' + this.user + '/get-pub-events', {headers:this.headers});
+        return this.http.get('http://localhost:8080/api/get-pub-events', {headers:this.headers});
     }
 
     getComments(){

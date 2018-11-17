@@ -359,6 +359,7 @@ app.get("/api/:id/get-events", function(req, res)
 
 app.get("/api/get-pub-events", function(req,res)
 {
+	console.log("sending pub events")
 	var pubevents = 'SELECT * FROM pub_event'
 	client.query(pubevents, function(err,events)
 	{

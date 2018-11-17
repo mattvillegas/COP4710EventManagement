@@ -435,7 +435,7 @@ app.post("/api/:id/delete-comment", function(req, res)
 {
 	var deleteComment = 'DELETE FROM comments WHERE uid = \'' + req.params.id + '\' AND time = \'' + req.body.time + '\' AND location = \'' + req.body.loc + '\''
 	
-	client.query(deleteComment, (err, res) =>
+	client.query(deleteComment, (err, deleted) =>
 	{
 		if(err)
 		{
@@ -443,7 +443,8 @@ app.post("/api/:id/delete-comment", function(req, res)
 		}
 		else
 		{
-			res.status(201).json(res)
+			console.log(deleted)
+			res.status(201).json("deleted comment")
 		}
 	})
 });

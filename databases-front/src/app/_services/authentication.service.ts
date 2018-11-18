@@ -53,11 +53,11 @@ export class AuthenticationService {
     }
 
     getYourRSOs(){
-        return this.http.get('http://localhost:8080/api/' + this.user + '/get-my-rso-admin', {headers:this.headers});
+        return this.http.get('http://localhost:8080/api/' + this.user + '/get-my-rso', {headers:this.headers});
     }
 
     getYourRSOsAdmin(){
-        return this.http.get('http://localhost:8080/api/' + this.user + '/get-my-rso', {headers:this.headers});
+        return this.http.get('http://localhost:8080/api/' + this.user + '/get-my-rso-admin', {headers:this.headers});
     }
 
     loginUser(user){

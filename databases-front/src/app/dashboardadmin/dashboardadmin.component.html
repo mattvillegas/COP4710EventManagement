@@ -138,7 +138,21 @@
 	                			</tr>
 	              			</tbody>
 	            		</table>
-	            	</div> -->
+					</div> -->
+					<div class="element">
+							<h3> Add comment to event </h3>
+							<table class="add-event">
+								  <tbody>
+								<tr><input placeholder="Name of Event" name="type" [(ngModel)] = "comment_event_name" class="form-control"></tr>
+								<tr><input placeholder="Comment" type="text" name="event_name" [(ngModel)] = "comment_text" class="form-control"></tr>
+									<tr>
+										<button class="btn btn-success" (click)="onAddComment()" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Add Comment
+										</button>
+									</tr>
+								  </tbody>
+							</table>
+						</div> 
+					
       	  	
 			        <div class="element">
 			            <h3> Add New RSO or Private Event </h3>

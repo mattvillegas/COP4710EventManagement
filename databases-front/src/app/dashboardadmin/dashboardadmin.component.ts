@@ -38,6 +38,8 @@ export class DashboardadminComponent implements OnInit {
   event_category: String;
   commenttext: String;
   openform = false;
+  comment_event_name: String;
+  comment_text: String;
 
   constructor(private router: Router, public authService: AuthenticationService) { }
 
@@ -175,5 +177,18 @@ export class DashboardadminComponent implements OnInit {
 
   showForm() {
     this.openform = true;
+  }
+
+  onAddComment(){
+    this.authService.addComment(this.comment_event_name, this.comment_text).subscribe(data => {
+      if(data === "success")
+      {
+        this.getCommentList();
+      } else {
+        alert("Failed to add comment");
+      }
+
+    });
+
   }
 }

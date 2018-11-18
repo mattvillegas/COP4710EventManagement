@@ -45,8 +45,8 @@ export class AuthenticationService {
         return this.http.post('http://localhost:8080/api/' + this.user + '/edit-comment', {comment: text, loc: location}, {headers:this.headers});
     }
 
-    addComment(){
-        return this.http.post('http://localhost:8080/api/' + this.user + '/add-comment', event, {headers:this.headers});
+    addComment(event_name, comment_text){
+        return this.http.post('http://localhost:8080/api/' + this.user + '/add-comment', {eventname: event_name, text: comment_text }, {headers:this.headers});
     }
 
     getAllRSOs(){

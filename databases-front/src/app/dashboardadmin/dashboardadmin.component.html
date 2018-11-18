@@ -107,7 +107,10 @@
 									<div [hidden]= "!openform">
 										<table class = "comment"> 
 											<tbody>
+											<tr>
 											<tr><input placeholder="Enter comment" name="comment" [(ngModel)] = "commenttext" class="form-control"></tr>
+											<tr>
+											<tr>
 											<tr>
 													<button class="btn btn-success" (click)="onEditButton(comment.time, comment.location)" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Submit Comment
 													</button>

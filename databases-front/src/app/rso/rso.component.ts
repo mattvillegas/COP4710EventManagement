@@ -43,7 +43,7 @@ export class RsoComponent implements OnInit {
     }
 
     this.AddRSO(rso); 
-    getYourRSOListAdmin();
+    this.getYourRSOListAdmin();
   }
 
   clearFields() {

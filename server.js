@@ -568,6 +568,23 @@ app.get("/api/:id/get-my-rso", function(req, res)
 	})
 });
 
+app.get("/api/:id/get-my-rso-admin", function(req, res)
+{
+	var getMyRSOs = 'SELECT rso.name, rso.rso_id FROM rso WHERE rso.adminid = \'' + req.params.id + '\''
+	console.log("in get my rsos uid = " + req.params.id)
+	client.query(getMyRSOs, (err, myRSOs) =>
+	{
+		if(err)
+		{
+			handleError(res, err.stack)
+		}
+		else
+		{
+			res.status(201).json(myRSOs.rows)
+		}
+	})
+});
+
 app.post("/api/:id/create-rso-event", function(req, res)
 {
 	console.log("made it to create")

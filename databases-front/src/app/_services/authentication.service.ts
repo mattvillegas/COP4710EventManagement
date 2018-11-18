@@ -41,7 +41,7 @@ export class AuthenticationService {
     }
 
     editComment(text, location){
-        return this.http.post('http://localhost:8080/api/' + this.user + '/edit-comment', {comment: "hiiii", loc: location}, {headers:this.headers});
+        return this.http.post('http://localhost:8080/api/' + this.user + '/edit-comment', {comment: text, loc: location}, {headers:this.headers});
     }
 
     addComment(){

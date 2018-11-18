@@ -103,9 +103,9 @@
 		              		<tr style="word-break: break-all">
 		              			<tr *ngFor="let comment of commentlist | filter : inputString;">
 		              				<td>{{comment.event_name}}</td>
-		              				<td><div contenteditable="true" id="editor">
+		              				<td><div contenteditable="true">
 		              					{{comment.comment}}</div>
-		              					<button class="btn btn-success" (click)="onEditButton(comment)" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Edit
+		              					<button class="btn btn-success" (click)="onEditButton(comment, comment.innerHTML)" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Edit
 	                					</button>
 		              					<button class="btn btn-success" (click)="onDeleteButton(comment)" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Delete
 	                				</button>
@@ -115,6 +115,22 @@
 	          			</div>
 	      	  		</div>
 	      	  	</div>
+
+	      	 <!-- 		<div class="element">
+			            <h3> Add a Comment </h3>
+			            <table class="add-event">
+	              			<tbody>
+                			<tr><input placeholder="Enter Event Name" name="type" [(ngModel)] = "type" class="form-control"></tr>
+                			<tr><input placeholder="Enter Your Comment" type="text" name="event_name" [(ngModel)] = "event_name" class="form-control"></tr>
+	                			<tr>
+	                				<button class="btn btn-success" (click)="onAddButton()" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Submit
+	                				</button>
+	                				<button class="btn btn-success" (click)="clearFields()" style="background-color:gold; border-color:black; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Clear
+	                				</button>
+	                			</tr>
+	              			</tbody>
+	            		</table>
+	            	</div> -->
       	  	
 			        <div class="element">
 			            <h3> Add New RSO or Private Event </h3>

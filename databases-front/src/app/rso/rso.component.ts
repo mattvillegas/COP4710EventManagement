@@ -43,6 +43,7 @@ export class RsoComponent implements OnInit {
     }
 
     this.AddRSO(rso); 
+    getYourRSOListAdmin();
   }
 
   clearFields() {
@@ -60,6 +61,12 @@ export class RsoComponent implements OnInit {
     this.yourrsolist = data;
     })
   }	
+
+  getYourRSOListAdmin(){
+    this.authService.getYourRSOsAdmin().subscribe(data =>{
+    this.yourrsolist = data;
+    })
+  } 
 
   AddRSO(NewRSO){
     this.authService.createRSO(NewRSO).subscribe(data=>{

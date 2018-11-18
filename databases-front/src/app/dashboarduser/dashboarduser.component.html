@@ -81,6 +81,51 @@
           		</table>
           		</div>
       	  	</div>
+
+      	  	<div class="element">
+	      	  		<div class="discussion">
+				    	<h2> Event Comments </h2>
+				    	<div class="comment-list">
+						<table>
+		              		<tr style="word-break: break-all">
+		              			<tr *ngFor="let comment of commentlist | filter : inputString;">
+		              				<td>{{comment.event_name}}</td>
+		              				<td><div id="mydiv" contenteditable="true">
+		              					{{comment.comment}}</div>
+		              					<button class="btn btn-success" (click)="showForm()" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Edit
+	                					</button>
+		              					<button class="btn btn-success" (click)="onDeleteButton(comment)" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Delete
+									</button>
+									<div [hidden]= "!openform">
+										<table class = "comment"> 
+											<tbody>
+											<tr><input placeholder="Enter comment" name="comment" [(ngModel)] = "commenttext" class="form-control" style="width: 120px;"></tr>
+											<button class="btn btn-success" (click)="onEditButton(comment.time, comment.location)" style="background-color:black; border-color:gold; margin-top:100px; margin-left: 5px; margin-left: 5px; margin-right: auto; display: block">Add
+											</button>
+											</tbody>
+										</table>
+									</div>
+		              				</td>
+		              			</tr>
+		          		</table>
+	          			</div>
+	      	  		</div>
+	      	  	</div>
+
+					<div class="element">
+							<h3> Add comment to event </h3>
+							<table class="add-event">
+								  <tbody>
+								<tr><input placeholder="Name of Event" name="type" [(ngModel)] = "comment_event_name" class="form-control"></tr>
+								<tr><input placeholder="Comment" type="text" name="event_name" [(ngModel)] = "comment_text" class="form-control"></tr>
+									<tr>
+										<button class="btn btn-success" (click)="onAddComment()" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Add Comment
+										</button>
+									</tr>
+								  </tbody>
+							</table>
+						</div> 
+						
 		        </div>
 	            <div class="card-footer">
 	            </div>

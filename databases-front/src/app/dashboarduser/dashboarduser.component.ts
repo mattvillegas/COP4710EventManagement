@@ -20,6 +20,7 @@ export class DashboarduserComponent implements OnInit {
   privateevent : Privateevent;
   rsoevent : Rsoevent;
   eventlist : any;
+  commentlist : any; 
 
   publiceventlist : any;
 
@@ -35,6 +36,10 @@ export class DashboarduserComponent implements OnInit {
   contact_email: String;
   contact_phone: String;
   event_category: String;
+  commenttext: String;
+  openform = false;
+  comment_event_name: String;
+  comment_text: String;
 
   //RSO: timestamp, location, description, name of person, title of event, contact email, contact phone, event category
 
@@ -51,6 +56,7 @@ export class DashboarduserComponent implements OnInit {
    this.user_id = this.user['id'];
    this.getPublicEventList();
    this.getEventList();
+   this.getCommentList(); 
   }
 
   onAddButton(){
@@ -101,6 +107,30 @@ export class DashboarduserComponent implements OnInit {
     })
   }
 
+  getCommentList(){
+    this.authService.getComments().subscribe(data =>{
+    this.commentlist = data;
+    })
+  }
+
+  onDeleteButton(comment){
+    this.authService.deleteComment(comment.time, comment.location).subscribe(data =>{
+    if(data === "deleted comment"){
+        this.getCommentList();
+        this.getCommentList();
+      }
+    })
+  }
+
+  onEditButton(time, location){
+    this.authService.editComment(this.commenttext, time, location).subscribe(data =>{
+    if(data === "updated comment"){
+        this.getCommentList();
+        this.getCommentList();
+      }
+    })
+  }
+
   search_event(){
     if(this.inputString == undefined){
       // alert('Empty, so nothing found.');
@@ -115,7 +145,7 @@ export class DashboarduserComponent implements OnInit {
     else
       this.clearFields();
     }, err=>{
-      alert('Failed to add RSO event.');
+       alert('Failed to add RSO event ' + this.event_name + ' at ' + this.time + ' and ' + this.loc);
     });
     this.getEventList();
     this.getEventList();
@@ -127,7 +157,7 @@ export class DashboarduserComponent implements OnInit {
     this.authService.createPublicEvent(NewEvent).subscribe(data=>{
       this.clearFields();
     }, err=>{
-      alert('Failed to add public event.');
+      alert('Failed to add public event ' + this.event_name + ' at ' + this.time + ' and ' + this.loc);
     });
     this.getEventList();
     this.getEventList();
@@ -139,12 +169,29 @@ export class DashboarduserComponent implements OnInit {
     this.authService.createPrivateEvent(NewEvent).subscribe(data=>{
       this.clearFields();
     }, err=>{
-      alert('Failed to add private event.');
+      alert('Failed to add private event ' + this.event_name + ' at ' + this.time + ' and ' + this.loc);
     });
     this.getEventList();
     this.getEventList();
     this.getPublicEventList();
     this.getPublicEventList();
+  }
+
+  showForm() {
+    this.openform = true;
+  }
+
+  onAddComment(){
+    this.authService.addComment(this.comment_event_name, this.comment_text).subscribe(data => {
+      if(data === "success")
+      {
+        this.getCommentList();
+      } else {
+        alert("Failed to add comment");
+      }
+
+    });
+
   }
 
 }

@@ -20,6 +20,7 @@ export class DashboardsuperComponent implements OnInit {
   privateevent : Privateevent;
   rsoevent : Rsoevent;
   eventlist : any;
+  commentlist : any; 
 
   publiceventlist : any;
 
@@ -35,6 +36,10 @@ export class DashboardsuperComponent implements OnInit {
   contact_email: String;
   contact_phone: String;
   event_category: String;
+  commenttext: String;
+  openform = false;
+  comment_event_name: String;
+  comment_text: String;
 
   constructor(private router: Router, public authService: AuthenticationService) { }
 
@@ -49,6 +54,7 @@ export class DashboardsuperComponent implements OnInit {
    this.user_id = this.user['id'];
    this.getPublicEventList();
    this.getEventList();
+   this.getCommentList(); 
   }
 
   onAddButton(){
@@ -99,6 +105,30 @@ export class DashboardsuperComponent implements OnInit {
     })
   }
 
+  getCommentList(){
+    this.authService.getComments().subscribe(data =>{
+    this.commentlist = data;
+    })
+  }
+
+  onDeleteButton(comment){
+    this.authService.deleteComment(comment.time, comment.location).subscribe(data =>{
+    if(data === "deleted comment"){
+        this.getCommentList();
+        this.getCommentList();
+      }
+    })
+  }
+
+  onEditButton(time, location){
+    this.authService.editComment(this.commenttext, time, location).subscribe(data =>{
+    if(data === "updated comment"){
+        this.getCommentList();
+        this.getCommentList();
+      }
+    })
+  }
+
   search_event(){
     if(this.inputString == undefined){
       // alert('Empty, so nothing found.');
@@ -143,6 +173,23 @@ export class DashboardsuperComponent implements OnInit {
     this.getEventList();
     this.getPublicEventList();
     this.getPublicEventList();
+  }
+
+  showForm() {
+    this.openform = true;
+  }
+
+  onAddComment(){
+    this.authService.addComment(this.comment_event_name, this.comment_text).subscribe(data => {
+      if(data === "success")
+      {
+        this.getCommentList();
+      } else {
+        alert("Failed to add comment");
+      }
+
+    });
+
   }
 
 }

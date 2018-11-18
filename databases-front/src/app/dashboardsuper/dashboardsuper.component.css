@@ -6,12 +6,13 @@ html,body {
 	background-blend-mode: lighten;
 	background-size: cover;
 	background-repeat: repeat-y;
-	height: 100%;
+	background-repeat: repeat-x;
 	font-family: 'Numans', sans-serif;
 }
 
 .container {
 	height: 100%;
+	width: 100%;
 	align-content: center;
 }
 
@@ -19,8 +20,8 @@ html,body {
 	height: 100%;
 	margin-top: auto;
 	margin-bottom: auto;
-	width: 100%;
 	background-color: rgba(0,0,0,0.5) !important;
+	width: auto;
 }
 
 .element {
@@ -61,6 +62,16 @@ text-align: center;
 
 .card-header nav table {
 	width: 100%;
+}
+
+.discussion table {
+	display: table;
+}
+.discussion table tr {
+	display: table-cell;
+}
+.discussion table tr td {
+	display: block;
 }
 
 .card-header a {
@@ -105,12 +116,50 @@ text-align: center;
 	border-color: gold; 
 	border-width: 1px;
 	padding: 5px;
-	max-width: 250px;
+	max-width: 90px;
 }
 
 .event-list img {
-	height: 50px;
+	height: 250px;
 	width: 50px;
+	float: left;
+}
+
+.comment-list {
+	padding-top: 20px;
+	display: block; 
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.comment-list table { 
+    width: 100%;
+    background-color: black;
+}
+
+.comment-list th{
+	color: white;
+	font-size: .8em;
+	border-style: solid; 
+	border-color: gold; 
+	border-width: 1px;
+	padding: 5px;
+	text-align: center;
+}
+
+.comment-list td {
+	color: white;
+	font-size: 0.7em;
+	border-style: solid; 
+	border-color: gold; 
+	border-width: 1px;
+	padding: 5px;
+	max-width: 290px;
+}
+
+.comment-list img {
+	height: 100%;
+	width: 100%;
 	float: left;
 }
 

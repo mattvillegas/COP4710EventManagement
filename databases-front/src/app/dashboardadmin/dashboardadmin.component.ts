@@ -36,7 +36,8 @@ export class DashboardadminComponent implements OnInit {
   contact_email: String;
   contact_phone: String;
   event_category: String;
-  comment: any; 
+  commenttext: String;
+  openform = false;
 
   constructor(private router: Router, public authService: AuthenticationService) { }
 
@@ -117,8 +118,8 @@ export class DashboardadminComponent implements OnInit {
     })
   }
 
-  onEditButton(comment, commenttext){
-    this.authService.editComment(commenttext, comment.location).subscribe(data =>{
+  onEditButton(time, location){
+    this.authService.editComment(this.commenttext, time, location).subscribe(data =>{
     if(data === "updated comment"){
         this.getCommentList();
         this.getCommentList();
@@ -172,4 +173,7 @@ export class DashboardadminComponent implements OnInit {
     this.getPublicEventList();
   }
 
+  showForm() {
+    this.openform = true;
+  }
 }

@@ -100,10 +100,21 @@
 		              				<td>{{comment.event_name}}</td>
 		              				<td><div id="mydiv" contenteditable="true">
 		              					{{comment.comment}}</div>
-		              					<button class="btn btn-success" (click)="onEditButton" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Edit
+		              					<button class="btn btn-success" (click)="showForm()" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Edit
 	                					</button>
 		              					<button class="btn btn-success" (click)="onDeleteButton(comment)" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Delete
-	                				</button>
+									</button>
+									<div [hidden]= "!openform">
+										<table class = "comment"> 
+											<tbody>
+											<tr><input placeholder="Enter comment" name="comment" [(ngModel)] = "commenttext" class="form-control"></tr>
+											<tr>
+													<button class="btn btn-success" (click)="onEditButton(comment.time, comment.location)" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Submit Comment
+													</button>
+												</tr>
+											</tbody>
+										</table>
+									</div>
 		              				</td>
 		              			</tr>
 		          		</table>

@@ -421,10 +421,9 @@ app.post("/api/:id/join-rso", function(req, res)
 
 app.post("/api/:id/add-comment", function(req, res)
 {
-	var addComment = 'INSERT INTO comments(uid, time, location, comment) VALUES($1, $2, $3, $4)'
-	var queryValues = [req.params.id, req.body.time, req.body.loc, req.body.comment]
-	
-	client.query(addComment, queryValues, (err, comment) =>
+	var findEvent = 'SELECT E.time, E.location FROM event E WHERE E.event_name = \'' + req.body.eventname + '\''
+		
+	client.query(findEvent, (err, event) =>
 	{
 		if(err)
 		{
@@ -432,7 +431,22 @@ app.post("/api/:id/add-comment", function(req, res)
 		}
 		else
 		{
-			res.status(201).json(comment)
+			if(event.rows.length >=1)
+			{
+				var insert = 'INSERT INTO comments(uid, time, location, comment) VALUES ($1, $2, $3, $4)'
+				var commentVals = [req.params.id, event.rows[0]['time'], event.rows[0]['location'], req.body.text]
+
+				client.query(insert, commentVals, (err, comment) =>{
+					if (err) 
+					{
+						handleError(res, err.stack, "Could not add comment")
+					}
+					else 
+					{
+						res.status(201).json("success")
+					}
+				})
+			}
 		}
 	})
 });
@@ -459,7 +473,7 @@ app.post("/api/:id/delete-comment", function(req, res)
 
 app.post("/api/:id/edit-comment", function(req, res)
 {
-	var editComment = 'UPDATE comments SET comment = \'' + req.body.comment + 'WHERE location = \'' + req.body.loc + '\' AND uid = \'' + req.params.id + '\''
+	var editComment = 'UPDATE comments SET comment = \'' + req.body.comment + '\' WHERE location = \'' + req.body.loc + '\' AND uid = \'' + req.params.id + '\''
 	console.log("in edit comment")
 	console.log(req.body)
 	console.log(req.params.id)

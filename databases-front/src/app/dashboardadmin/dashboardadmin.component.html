@@ -4,11 +4,6 @@
     <title>Student Dashboard</title>
 </head>
 <body>
-	<script>
-		function calledit(comment) {
-  			onEditButton(comment, "hello");
-		}
-	</script>
 	<div class="container">
 	    <div class="d-flex justify-content-center h-100">
 	        <div class="card">
@@ -105,7 +100,7 @@
 		              				<td>{{comment.event_name}}</td>
 		              				<td><div id="mydiv" contenteditable="true">
 		              					{{comment.comment}}</div>
-		              					<button class="btn btn-success" (click)="calledit(comment)" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Edit
+		              					<button class="btn btn-success" (click)="onEditButton" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Edit
 	                					</button>
 		              					<button class="btn btn-success" (click)="onDeleteButton(comment)" style="background-color:black; border-color:gold; margin-top:10px; margin-left: 5px; margin-left: auto; margin-right: auto; display: block">Delete
 	                				</button>

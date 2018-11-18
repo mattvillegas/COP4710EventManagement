@@ -154,12 +154,12 @@ text-align: center;
 	border-color: gold; 
 	border-width: 1px;
 	padding: 5px;
-	max-width: 90px;
+	max-width: 290px;
 }
 
 .comment-list img {
-	height: 50px;
-	width: 50px;
+	height: 100%;
+	width: 100%;
 	float: left;
 }
 

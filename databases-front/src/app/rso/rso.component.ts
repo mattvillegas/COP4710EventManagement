@@ -76,11 +76,22 @@ export class RsoComponent implements OnInit {
 
   onJoinButton(RSO) {
     this.authService.joinRSO(RSO.rso_id).subscribe(data =>{
-      if(data !== 'Unable to join rso')
-      {
+      if(data !== 'Unable to join rso') {
         this.getYourRSOList();
+      } else {
+        alert('You are already in that rso!');
       }
-      })
+    });
   }
 
- }
+  onLeaveButton(RSO) {
+    this.authService.leaveRSO(RSO.rso_id).subscribe(data => {
+      
+      if(data !== 'Unable to leave') {
+        this.getYourRSOList();
+      }
+
+
+    });
+  }
+}

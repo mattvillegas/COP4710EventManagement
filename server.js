@@ -460,7 +460,9 @@ app.post("/api/:id/delete-comment", function(req, res)
 app.post("/api/:id/edit-comment", function(req, res)
 {
 	var editComment = 'UPDATE comments SET comment = \'' + req.body.comment + 'WHERE location = \'' + req.body.loc + '\' AND uid = \'' + req.params.id + '\''
-	
+	console.log("in edit comment")
+	console.log(req.body)
+	console.log(req.params.id)
 	client.query(editComment, (err, comment) =>
 	{
 		if(err)
@@ -520,13 +522,13 @@ function return_call(items, res)
 app.post("/api/:id/leave-rso", function(req, res)
 {
 	//var findUser = 'SELECT * FROM is_in WHERE rso_id = \'' + req.body.rsoId + '\' AND uid = \'' + req.params.id + '\''
-	var removeUser = 'DELETE FROM is_in WHERE rso_id = \'' + req.body.rsoId + '\' AND uid = \'' + req.params.id + '\''
-	console.log("in leave rso")
+	var removeUser = 'DELETE FROM is_in WHERE rso_id = \'' + req.body.rso_id + '\' AND uid = \'' + req.params.id + '\''
+	console.log(req.body.rso_id)
 	client.query(removeUser, (err, remove) =>
 	{
 		if(err)
 		{
-			handleError(res, err.stack)
+			handleError(res, err.stack, "Unable to leave")
 		}
 		else
 		{
@@ -537,7 +539,7 @@ app.post("/api/:id/leave-rso", function(req, res)
 
 app.get("/api/:id/get-my-rso", function(req, res)
 {
-	var getMyRSOs = 'SELECT rso.name FROM rso, is_in WHERE is_in.uid = \'' + req.params.id + '\' AND is_in.rso_id = rso.rso_id'
+	var getMyRSOs = 'SELECT rso.name, rso.rso_id FROM rso, is_in WHERE is_in.uid = \'' + req.params.id + '\' AND is_in.rso_id = rso.rso_id'
 	console.log("in get my rsos uid = " + req.params.id)
 	client.query(getMyRSOs, (err, myRSOs) =>
 	{
